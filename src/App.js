@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import ReactMultiuseTable from './lib/index';
+
+const rmtHeaders = ['name', 'mobile', 'age', 'mobile', 'email']
+const rmtData = [{
+  name: "Nikhil",
+  age: 24,
+  gender: "Male",
+  mobile: "99876788776",
+  email: "nikhil@gmail.com"
+},
+{
+  age: 34,
+  gender: "Female",
+  mobile: "45645675673",
+  name: "Vaani",
+}]
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  return <ReactMultiuseTable
+    rmtHeaders={rmtHeaders}
+    rmtData={rmtData}
+  />
 }
 
 export default App;
