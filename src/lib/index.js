@@ -1,7 +1,5 @@
 import React from 'react';
 
-import './../App.css';
-
 const MyTable = (props) => {
     if (!props.rmtHeaders || !props.rmtData) {
         return "Loading..."
@@ -22,17 +20,37 @@ const MyTable = (props) => {
     });
 
 
-    return <table >
-        <thead>
-            <tr>
-                {props.rmtHeaders.map((h, i) => { return <th key={i}>{h.label}</th> })}
+    return <table style={{
+        margin: "0",
+        color: "#333",
+        background: "white",
+        border: "1px solid grey",
+        fontSize: "12pt",
+        fontFamily: "Verdana, sans-serif",
+        borderCollapse: "collapse"
+    }} >
+        <thead >
+            <tr >
+                {props.rmtHeaders.map((h, i) => {
+                    return <th
+                        style={{
+                            padding: ".5em",
+                            border: "1px solid lightgrey"
+                        }}
+                        key={i}>{h.label}</th>
+                })}
             </tr>
         </thead>
         <tbody>
             {mapData.map((d, i1) => {
                 return <tr key={i1}>
                     {d.map((m, i2) => {
-                        return <td key={i2}>
+                        return <td
+                            key={i2}
+                            style={{
+                                padding: ".5em",
+                                border: "1px solid lightgrey"
+                            }}>
                             {m}
                         </td>
                     })}
