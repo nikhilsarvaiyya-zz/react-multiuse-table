@@ -9,6 +9,8 @@ require("core-js/modules/web.dom-collections.iterator.js");
 
 var _react = _interopRequireDefault(require("react"));
 
+require("./../App.css");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const MyTable = props => {
@@ -21,7 +23,7 @@ const MyTable = props => {
     let selectedkey = [];
     props.rmtHeaders.forEach(h => {
       for (const [key, value] of Object.entries(d)) {
-        if (h === key) {
+        if (h.key === key) {
           selectedkey.push(value);
         }
       }
@@ -31,7 +33,7 @@ const MyTable = props => {
   return /*#__PURE__*/_react.default.createElement("table", null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, props.rmtHeaders.map((h, i) => {
     return /*#__PURE__*/_react.default.createElement("th", {
       key: i
-    }, h);
+    }, h.label);
   }))), /*#__PURE__*/_react.default.createElement("tbody", null, mapData.map((d, i1) => {
     return /*#__PURE__*/_react.default.createElement("tr", {
       key: i1
