@@ -1,6 +1,11 @@
 import ReactMultiuseTable from './lib/index';
 
-const rmtHeaders = ['name', 'mobile', 'age', 'mobile', 'email']
+const rmtHeaders = [
+  { key: 'name', label: "Full Name" },
+  { key: 'mobile', label: "Phone" },
+  { key: 'gender', label: "Sex" }
+]
+
 const rmtData = [{
   name: "Nikhil",
   age: 24,
@@ -17,6 +22,7 @@ const rmtData = [{
 
 function App() {
   return <ReactMultiuseTable
+    rmtClass="table"
     rmtHeaders={rmtHeaders}
     rmtData={rmtData}
   />

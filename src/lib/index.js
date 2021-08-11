@@ -1,8 +1,8 @@
 import React from 'react';
+
+import './../App.css';
+
 const MyTable = (props) => {
-
-
-
     if (!props.rmtHeaders || !props.rmtData) {
         return "Loading..."
     }
@@ -13,7 +13,7 @@ const MyTable = (props) => {
         let selectedkey = []
         props.rmtHeaders.forEach((h) => {
             for (const [key, value] of Object.entries(d)) {
-                if (h === key) {
+                if (h.key === key) {
                     selectedkey.push(value)
                 }
             }
@@ -22,10 +22,10 @@ const MyTable = (props) => {
     });
 
 
-    return <table>
+    return <table >
         <thead>
             <tr>
-                {props.rmtHeaders.map((h, i) => { return <th key={i}>{h}</th> })}
+                {props.rmtHeaders.map((h, i) => { return <th key={i}>{h.label}</th> })}
             </tr>
         </thead>
         <tbody>
@@ -41,5 +41,6 @@ const MyTable = (props) => {
         </tbody>
     </table >
 }
+
 export default MyTable;
 
