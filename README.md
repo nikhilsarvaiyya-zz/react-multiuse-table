@@ -8,12 +8,12 @@ $ npm install react-multiuse-table
 ```js
 import ReactMultiuseTable from 'react-multiuse-table'; 
 
-const rmtHeaders = [
+const headers = [
   { key: 'name', label: "Full Name" },
   { key: 'mobile', label: "Phone" },
 ]
 
-const rmtData = [{
+const data = [{
   name: "john",
   age: 28,
   gender: "Male",
@@ -26,5 +26,10 @@ const rmtData = [{
   mobile: "987-654-321",
   name: "Ricky",
 }]
+
+<ReactMultiuseTable
+    rmtHeaders={headers}
+    rmtData={data}
+/>
 ```
 
