@@ -8,9 +8,6 @@ function handleSortKey(sortBy, sortOrder, arr) {
 
 const TableBody = (props) => {
 
-    console.log(props.shortByKey)
-    console.log(props.shortOrder)
-
     if (!props.data) {
         return "Loading..."
     }

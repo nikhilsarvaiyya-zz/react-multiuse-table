@@ -1,23 +1,58 @@
 import React, { useState, useEffect } from 'react';
 import TableHead from './components/TableHead.js'
 import TableBody from './components/TableBody.js'
+import Pagination from './components/Pagination.js';
 
+
+function sortFunction(arr, keyIndex, key, order, select, isPagination) {
+
+    let sortData = arr
+        .filter((f, i) => isPagination ? i < select : f)
+        .sort((a, b) => {
+            if (a[keyIndex] === b[keyIndex]) {
+                return 0;
+            }
+            else {
+                return (a[keyIndex] < b[keyIndex]) ? -1 : 1;
+            }
+        });
+
+    if (order === 1) {
+        return sortData
+    } else {
+        return sortData.reverse()
+    }
+}
+
+function onPageChange(value) {
+    return true
+}
 
 const MyTable = (props) => {
+
+    const {
+        rmtData,
+        rmtHeaders,
+        rmtClass,
+        pagination,
+        paginateSelection,
+        defaultSelection } = props
+
+    const [keyIndex, handleKeyIndex] = useState(0);
     const [shortByKey, handleName] = useState('name');
-    const [shortOrder, hangleOrder] = useState(1);
+    const [shortOrder, handleOrder] = useState(1);
+    const [selectItem, handleSelectitem] = useState(defaultSelection);
+    const isPagination = (pagination == undefined || pagination === true)
 
-
-
-    if (!props.rmtHeaders || !props.rmtData) {
+    if (!rmtHeaders || !rmtData) {
         return "Loading..."
     }
 
     let mapData = []
 
-    props.rmtData.forEach((d) => {
+    rmtData.forEach((d) => {
         let selectedkey = []
-        props.rmtHeaders.forEach((h) => {
+        rmtHeaders.forEach((h) => {
             for (const [key, value] of Object.entries(d)) {
                 if (h.key === key) {
                     selectedkey.push(value)
@@ -27,12 +62,11 @@ const MyTable = (props) => {
         mapData.push(selectedkey)
     });
 
-    console.log(mapData)
-
+    let sortedData = sortFunction(mapData, keyIndex, shortByKey, shortOrder, selectItem, isPagination);
 
 
     return <table
-        className={props.rmtClass}
+        className={rmtClass}
         style={{
             width: "100%",
             margin: "0",
@@ -45,18 +79,29 @@ const MyTable = (props) => {
         }} >
         <thead >
             <TableHead
+                handleKeyIndex={handleKeyIndex}
                 handleName={handleName}
-                hangleOrder={hangleOrder}
+                handleOrder={handleOrder}
+                keyIndex={keyIndex}
                 shortByKey={shortByKey}
                 shortOrder={shortOrder}
-                headers={props.rmtHeaders} />
+                headers={rmtHeaders} />
         </thead>
         <tbody>
             <TableBody
                 shortByKey={shortByKey}
                 shortOrder={shortOrder}
-                data={mapData} />
+                data={sortedData} />
         </tbody>
+
+        {isPagination && <tfoot>
+            <Pagination
+                rmtHeaders={rmtHeaders}
+                selectItem={selectItem}
+                handleSelectitem={handleSelectitem}
+                paginateSelection={paginateSelection}
+                defaultSelection={defaultSelection} />
+        </tfoot>}
     </table >
 }
 
