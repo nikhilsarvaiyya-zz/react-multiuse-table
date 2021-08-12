@@ -30,27 +30,17 @@ const Pagination = props => {
   }
 
   return /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", {
-    style: {
-      padding: ".5em",
-      border: "1px solid lightgrey",
-      cursor: "pointer",
-      textAlign: "left"
-    },
     colSpan: rmtHeaders.length + 2
-  }, /*#__PURE__*/_react.default.createElement("div", {
-    style: {
-      float: "left"
-    }
+  }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", {
+    className: "fl"
   }, /*#__PURE__*/_react.default.createElement(_SelectPagination.default, {
     pages: pages,
     defaultSelection: defaultSelection,
     handleSelectitem: handleSelectitem,
     totalrecords: totalrecords
   })), /*#__PURE__*/_react.default.createElement("div", {
-    style: {
-      float: "right"
-    }
-  }, /*#__PURE__*/_react.default.createElement(_PaginationBar.default, null))));
+    className: "fr"
+  }, /*#__PURE__*/_react.default.createElement(_PaginationBar.default, null)))));
 };
 
 var _default = Pagination;

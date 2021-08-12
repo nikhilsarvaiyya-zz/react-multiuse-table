@@ -15,96 +15,20 @@ const PaginationBar = props => {
     handleSelectitem,
     pages
   } = props;
-  return /*#__PURE__*/_react.default.createElement("ul", {
-    style: {
-      display: "inline-block",
-      padding: "0",
-      margin: "0",
-      float: "right"
-    }
-  }, /*#__PURE__*/_react.default.createElement("li", {
-    style: {
-      display: "inline"
-    }
-  }, /*#__PURE__*/_react.default.createElement("a", {
-    style: {
-      float: "left",
-      padding: "8px 16px",
-      textDecoration: "none",
-      color: "inherit"
-    },
+  return /*#__PURE__*/_react.default.createElement("ul", null, /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("a", {
     href: "tryit.asp-filename=trycss_ex_pagination.html#"
-  }, "\xAB")), /*#__PURE__*/_react.default.createElement("li", {
-    style: {
-      display: "inline"
-    }
-  }, /*#__PURE__*/_react.default.createElement("a", {
-    style: {
-      float: "left",
-      padding: "8px 16px",
-      textDecoration: "none",
-      color: "inherit"
-    },
+  }, "\xAB")), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("a", {
     href: "tryit.asp-filename=trycss_ex_pagination.html#"
-  }, "1")), /*#__PURE__*/_react.default.createElement("li", {
-    style: {
-      display: "inline"
-    }
-  }, /*#__PURE__*/_react.default.createElement("a", {
-    style: {
-      float: "left",
-      padding: "8px 16px",
-      textDecoration: "none",
-      color: "inherit"
-    },
+  }, "1")), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("a", {
+    className: "active",
     href: "tryit.asp-filename=trycss_ex_pagination.html#"
-  }, "2")), /*#__PURE__*/_react.default.createElement("li", {
-    style: {
-      display: "inline"
-    }
-  }, /*#__PURE__*/_react.default.createElement("a", {
-    style: {
-      float: "left",
-      padding: "8px 16px",
-      textDecoration: "none",
-      color: "inherit"
-    },
+  }, "2")), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("a", {
     href: "tryit.asp-filename=trycss_ex_pagination.html#"
-  }, "...")), /*#__PURE__*/_react.default.createElement("li", {
-    style: {
-      display: "inline"
-    }
-  }, /*#__PURE__*/_react.default.createElement("a", {
-    style: {
-      float: "left",
-      padding: "8px 16px",
-      textDecoration: "none",
-      color: "inherit"
-    },
+  }, "...")), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("a", {
     href: "tryit.asp-filename=trycss_ex_pagination.html#"
-  }, "6")), /*#__PURE__*/_react.default.createElement("li", {
-    style: {
-      display: "inline"
-    }
-  }, /*#__PURE__*/_react.default.createElement("a", {
-    style: {
-      float: "left",
-      padding: "8px 16px",
-      textDecoration: "none",
-      color: "inherit"
-    },
+  }, "6")), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("a", {
     href: "tryit.asp-filename=trycss_ex_pagination.html#"
-  }, "7")), /*#__PURE__*/_react.default.createElement("li", {
-    style: {
-      display: "inline"
-    }
-  }, /*#__PURE__*/_react.default.createElement("a", {
-    style: {
-      float: "left",
-      padding: "8px 16px",
-      textDecoration: "none",
-      color: "inherit"
-    },
+  }, "7")), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("a", {
     href: "tryit.asp-filename=trycss_ex_pagination.html#"
   }, "\xBB")));
 };

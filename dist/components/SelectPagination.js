@@ -16,21 +16,13 @@ const SelectPagination = props => {
     pages,
     totalrecords
   } = props;
-  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", {
-    style: {
-      margin: "0 20px 0 0",
-      display: "inline-block"
-    }
+  return /*#__PURE__*/_react.default.createElement("div", {
+    className: "fl db lh-2"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "fl mr-1"
   }, "Total Records: ", totalrecords), /*#__PURE__*/_react.default.createElement("div", {
-    style: {
-      margin: "0 20px 0 0",
-      display: "inline-block"
-    }
-  }, "Records per page", /*#__PURE__*/_react.default.createElement("select", {
-    style: {
-      padding: "3px 8px 3px 3px",
-      margin: "3px"
-    },
+    className: "fl mr-1"
+  }, "Records per page \xA0", /*#__PURE__*/_react.default.createElement("select", {
     defaultValue: defaultSelection,
     onChange: e => handleSelectitem(e.target.value)
   }, pages.map((p, i) => {
@@ -39,15 +31,8 @@ const SelectPagination = props => {
       value: p
     }, p);
   }))), /*#__PURE__*/_react.default.createElement("div", {
-    style: {
-      margin: "0 20px 0 0",
-      display: "inline-block"
-    }
-  }, "Go to page", /*#__PURE__*/_react.default.createElement("select", {
-    style: {
-      padding: "3px 8px 3px 3px",
-      margin: "3px"
-    },
+    className: "fl mr-1"
+  }, "Go to page\xA0", /*#__PURE__*/_react.default.createElement("select", {
     defaultValue: defaultSelection,
     onChange: e => handleSelectitem(e.target.value)
   }, /*#__PURE__*/_react.default.createElement("option", {

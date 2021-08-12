@@ -4,14 +4,13 @@ const SelectPagination = (props) => {
 
     const { defaultSelection, handleSelectitem, pages, totalrecords } = props
 
-    return <div>
-        <div style={{ margin: "0 20px 0 0", display: "inline-block" }}>
+    return <div className="fl db lh-2">
+        <div className="fl mr-1">
             Total Records: {totalrecords}
         </div>
-        <div style={{ margin: "0 20px 0 0", display: "inline-block" }}>
-            Records per page
+        <div className="fl mr-1">
+            Records per page &nbsp;
             <select
-                style={{ padding: "3px 8px 3px 3px", margin: "3px" }}
                 defaultValue={defaultSelection}
                 onChange={(e) => handleSelectitem(e.target.value)}
             >
@@ -21,10 +20,9 @@ const SelectPagination = (props) => {
             </select>
         </div>
 
-        <div style={{ margin: "0 20px 0 0", display: "inline-block" }}>
-            Go to page
+        <div className="fl mr-1">
+            Go to page&nbsp;
             <select
-                style={{ padding: "3px 8px 3px 3px", margin: "3px" }}
                 defaultValue={defaultSelection}
                 onChange={(e) => handleSelectitem(e.target.value)}
             >
