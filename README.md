@@ -30,6 +30,9 @@ const data = [{
 <ReactMultiuseTable
     rmtHeaders={headers}
     rmtData={data}
+    pagination={true}
+    paginateSelection={[5,10,15,20]}
+    defaultSelection={10}
 />
 ```
 
