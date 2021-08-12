@@ -1,6 +1,14 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import TableHead from './components/TableHead.js'
+import TableBody from './components/TableBody.js'
+
 
 const MyTable = (props) => {
+    const [shortByKey, handleName] = useState('name');
+    const [shortOrder, hangleOrder] = useState(1);
+
+
+
     if (!props.rmtHeaders || !props.rmtData) {
         return "Loading..."
     }
@@ -19,43 +27,35 @@ const MyTable = (props) => {
         mapData.push(selectedkey)
     });
 
+    console.log(mapData)
 
-    return <table style={{
-        margin: "0",
-        color: "#333",
-        background: "white",
-        border: "1px solid grey",
-        fontSize: "12pt",
-        fontFamily: "Verdana, sans-serif",
-        borderCollapse: "collapse"
-    }} >
+
+
+    return <table
+        className={props.rmtClass}
+        style={{
+            width: "100%",
+            margin: "0",
+            color: "#333",
+            background: "white",
+            border: "1px solid grey",
+            fontSize: "12pt",
+            fontFamily: "Verdana, sans-serif",
+            borderCollapse: "collapse"
+        }} >
         <thead >
-            <tr >
-                {props.rmtHeaders.map((h, i) => {
-                    return <th
-                        style={{
-                            padding: ".5em",
-                            border: "1px solid lightgrey"
-                        }}
-                        key={i}>{h.label}</th>
-                })}
-            </tr>
+            <TableHead
+                handleName={handleName}
+                hangleOrder={hangleOrder}
+                shortByKey={shortByKey}
+                shortOrder={shortOrder}
+                headers={props.rmtHeaders} />
         </thead>
         <tbody>
-            {mapData.map((d, i1) => {
-                return <tr key={i1}>
-                    {d.map((m, i2) => {
-                        return <td
-                            key={i2}
-                            style={{
-                                padding: ".5em",
-                                border: "1px solid lightgrey"
-                            }}>
-                            {m}
-                        </td>
-                    })}
-                </tr>
-            })}
+            <TableBody
+                shortByKey={shortByKey}
+                shortOrder={shortOrder}
+                data={mapData} />
         </tbody>
     </table >
 }
