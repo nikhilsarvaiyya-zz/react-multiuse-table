@@ -12,6 +12,16 @@ const TableHead = (props) => {
     }
 
     return <tr >
+        <th
+            style={{
+                padding: ".5em",
+                border: "1px solid lightgrey",
+                cursor: "pointer",
+                textAlign: "left"
+            }}
+        >
+            <input type="checkbox" />
+        </th>
         {headers.map((h, i) => {
             return <th
                 onClick={() => {
@@ -34,6 +44,12 @@ const TableHead = (props) => {
 
             </th>
         })}
+        <th style={{
+            padding: ".5em",
+            border: "1px solid lightgrey"
+        }}>
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAA4ElEQVQ4jaXSMUpDQRSF4S/RZ7ALSSnYCRbBwi1YuQAjxMLGRlJrZekWAkEEKwutDK7ApaSzsEkTUREs3iTImDcjyWmGuXfOP4c7Q7Xqid5ctWjfwiW28Yki1G/wkoPt4AmdqL6Ja1ykzAVGaCbOXOGwqtlDN5OwwGNcnA3qAM8ZwBfeRClngA28ZwACoLUIMEH7H4AtvC4CjHCSMTeVSadVB+6xW9Gr4w57uRsecIrGr3pHOf1vnMem+CfWcKR87zV8YIwBjsPaxzCVJKWzkKS/LOAPZH0JwG3w7a+SYq4fo1AfZnFyNMQAAAAASUVORK5CYII=" />
+        </th>
     </tr>
 }
 

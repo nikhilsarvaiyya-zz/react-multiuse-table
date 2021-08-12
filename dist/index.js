@@ -19,6 +19,10 @@ var _TableBody = _interopRequireDefault(require("./components/TableBody.js"));
 
 var _Pagination = _interopRequireDefault(require("./components/Pagination.js"));
 
+var _ColumnSearch = _interopRequireDefault(require("./components/ColumnSearch.js"));
+
+var _TableHeader = _interopRequireDefault(require("./components/TableHeader.js"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -59,6 +63,7 @@ const MyTable = props => {
   const [shortByKey, handleName] = (0, _react.useState)('name');
   const [shortOrder, handleOrder] = (0, _react.useState)(1);
   const [selectItem, handleSelectitem] = (0, _react.useState)(selection);
+  const [totalrecords, handleTotalRecords] = (0, _react.useState)(0);
   const isPagination = pagination == undefined || pagination === true;
 
   if (!rmtHeaders || !rmtData) {
@@ -90,13 +95,19 @@ const MyTable = props => {
       fontFamily: "Verdana, sans-serif",
       borderCollapse: "collapse"
     }
-  }, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement(_TableHead.default, {
+  }, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement(_TableHeader.default, {
+    heading: "Heading",
+    subHeading: "All staf listed in this area",
+    rmtHeaders: rmtHeaders
+  }), /*#__PURE__*/_react.default.createElement(_TableHead.default, {
     handleKeyIndex: handleKeyIndex,
     handleName: handleName,
     handleOrder: handleOrder,
     keyIndex: keyIndex,
     shortByKey: shortByKey,
     shortOrder: shortOrder,
+    headers: rmtHeaders
+  })), /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement(_ColumnSearch.default, {
     headers: rmtHeaders
   })), /*#__PURE__*/_react.default.createElement("tbody", null, /*#__PURE__*/_react.default.createElement(_TableBody.default, {
     shortByKey: shortByKey,
@@ -107,9 +118,11 @@ const MyTable = props => {
     selectItem: selectItem,
     handleSelectitem: handleSelectitem,
     paginateSelection: paginateSelection,
-    defaultSelection: selection
+    defaultSelection: selection,
+    totalrecords: mapData.length
   })));
 };
 
+document.head.innerHTML += "\n  <style>\n  table {\n    font-family: arial, sans-serif;\n    border-collapse: collapse;\n    width: 100%;\n  }\n  \n  td, th {\n    border: 1px solid #dddddd;\n    text-align: left;\n    padding: 8px;\n  }\n  \n  tr:nth-child(even) {\n    background-color: #dddddd;\n  }\n  </style>";
 var _default = MyTable;
 exports.default = _default;

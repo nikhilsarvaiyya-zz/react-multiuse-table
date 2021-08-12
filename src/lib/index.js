@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import TableHead from './components/TableHead.js'
 import TableBody from './components/TableBody.js'
 import Pagination from './components/Pagination.js';
+import ColumnSearch from './components/ColumnSearch.js';
+import TableHeader from './components/TableHeader.js';
+
 
 
 function sortFunction(arr, keyIndex, key, order, select, isPagination) {
@@ -44,6 +47,7 @@ const MyTable = (props) => {
     const [shortByKey, handleName] = useState('name');
     const [shortOrder, handleOrder] = useState(1);
     const [selectItem, handleSelectitem] = useState(selection);
+    const [totalrecords, handleTotalRecords] = useState(0);
     const isPagination = (pagination == undefined || pagination === true)
 
     if (!rmtHeaders || !rmtData) {
@@ -64,6 +68,7 @@ const MyTable = (props) => {
         mapData.push(selectedkey)
     });
 
+
     let sortedData = sortFunction(mapData, keyIndex, shortByKey, shortOrder, selectItem, isPagination);
 
 
@@ -80,6 +85,10 @@ const MyTable = (props) => {
             borderCollapse: "collapse"
         }} >
         <thead >
+            <TableHeader
+                heading="Heading"
+                subHeading="All staf listed in this area"
+                rmtHeaders={rmtHeaders} />
             <TableHead
                 handleKeyIndex={handleKeyIndex}
                 handleName={handleName}
@@ -87,6 +96,10 @@ const MyTable = (props) => {
                 keyIndex={keyIndex}
                 shortByKey={shortByKey}
                 shortOrder={shortOrder}
+                headers={rmtHeaders} />
+        </thead>
+        <thead >
+            <ColumnSearch
                 headers={rmtHeaders} />
         </thead>
         <tbody>
@@ -102,10 +115,30 @@ const MyTable = (props) => {
                 selectItem={selectItem}
                 handleSelectitem={handleSelectitem}
                 paginateSelection={paginateSelection}
-                defaultSelection={selection} />
+                defaultSelection={selection}
+                totalrecords={mapData.length} />
         </tfoot>}
     </table >
 }
+
+document.head.innerHTML += `
+  <style>
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+  </style>`
 
 export default MyTable;
 
