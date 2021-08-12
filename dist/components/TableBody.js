@@ -5,16 +5,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-require("core-js/modules/es.array.sort.js");
-
 var _react = _interopRequireDefault(require("react"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function handleSortKey(sortBy, sortOrder, arr) {
-  arr.sort((a, b) => a.sortBy - b.sortBy);
-  return arr;
-}
 
 const TableBody = props => {
   if (!props.data) {

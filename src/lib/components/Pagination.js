@@ -5,6 +5,12 @@ const Pagination = (props) => {
 
     const { rmtHeaders, handleSelectitem, paginateSelection, defaultSelection } = props
 
+    let pages;
+    if (paginateSelection) {
+        pages = paginateSelection
+    } else {
+        pages = [5, 10, 15, 20]
+    }
     return <tr >
         <td style={{
             padding: ".5em",
@@ -17,8 +23,8 @@ const Pagination = (props) => {
                 float: "left"
             }}>
                 <select defaultValue={defaultSelection} onChange={(e) => handleSelectitem(e.target.value)} >
-                    {paginateSelection.map((p, i) => {
-                        return <option key={i} value={p}   >{p}</option>
+                    {pages.map((p, i) => {
+                        return <option key={i} value={p} >{p}</option>
                     })}
                 </select>
             </div>

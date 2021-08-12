@@ -16,6 +16,14 @@ const Pagination = props => {
     paginateSelection,
     defaultSelection
   } = props;
+  let pages;
+
+  if (paginateSelection) {
+    pages = paginateSelection;
+  } else {
+    pages = [5, 10, 15, 20];
+  }
+
   return /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", {
     style: {
       padding: ".5em",
@@ -31,7 +39,7 @@ const Pagination = props => {
   }, /*#__PURE__*/_react.default.createElement("select", {
     defaultValue: defaultSelection,
     onChange: e => handleSelectitem(e.target.value)
-  }, paginateSelection.map((p, i) => {
+  }, pages.map((p, i) => {
     return /*#__PURE__*/_react.default.createElement("option", {
       key: i,
       value: p

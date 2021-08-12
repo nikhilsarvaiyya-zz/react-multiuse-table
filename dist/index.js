@@ -54,10 +54,11 @@ const MyTable = props => {
     paginateSelection,
     defaultSelection
   } = props;
+  let selection = defaultSelection ? defaultSelection : 5;
   const [keyIndex, handleKeyIndex] = (0, _react.useState)(0);
   const [shortByKey, handleName] = (0, _react.useState)('name');
   const [shortOrder, handleOrder] = (0, _react.useState)(1);
-  const [selectItem, handleSelectitem] = (0, _react.useState)(defaultSelection);
+  const [selectItem, handleSelectitem] = (0, _react.useState)(selection);
   const isPagination = pagination == undefined || pagination === true;
 
   if (!rmtHeaders || !rmtData) {
@@ -106,7 +107,7 @@ const MyTable = props => {
     selectItem: selectItem,
     handleSelectitem: handleSelectitem,
     paginateSelection: paginateSelection,
-    defaultSelection: defaultSelection
+    defaultSelection: selection
   })));
 };
 

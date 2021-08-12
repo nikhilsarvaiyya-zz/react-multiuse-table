@@ -35,9 +35,7 @@ function App() {
     rmtClass="table"
     rmtHeaders={rmtHeaders}
     rmtData={rmtData}
-    pagination={true}
-    paginateSelection={[1, 3, 5, 7, 9, 10, 15, 20]}
-    defaultSelection={15}
+
   />
 }
 

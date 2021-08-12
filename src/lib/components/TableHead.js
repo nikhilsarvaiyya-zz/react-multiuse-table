@@ -1,6 +1,11 @@
 import React from 'react';
 const TableHead = (props) => {
-    const { headers, shortByKey, shortOrder, handleName, handleOrder, handleKeyIndex } = props
+    const { headers,
+        shortByKey,
+        shortOrder,
+        handleName,
+        handleOrder,
+        handleKeyIndex } = props
 
     if (!headers) {
         return "Loading..."

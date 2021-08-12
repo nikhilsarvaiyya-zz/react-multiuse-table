@@ -1,11 +1,5 @@
 import React from 'react';
 
-function handleSortKey(sortBy, sortOrder, arr) {
-    arr.sort((a, b) => a.sortBy - b.sortBy);
-    return arr
-}
-
-
 const TableBody = (props) => {
 
     if (!props.data) {

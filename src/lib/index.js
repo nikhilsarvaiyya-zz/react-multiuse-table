@@ -38,10 +38,12 @@ const MyTable = (props) => {
         paginateSelection,
         defaultSelection } = props
 
+    let selection = defaultSelection ? defaultSelection : 5
+
     const [keyIndex, handleKeyIndex] = useState(0);
     const [shortByKey, handleName] = useState('name');
     const [shortOrder, handleOrder] = useState(1);
-    const [selectItem, handleSelectitem] = useState(defaultSelection);
+    const [selectItem, handleSelectitem] = useState(selection);
     const isPagination = (pagination == undefined || pagination === true)
 
     if (!rmtHeaders || !rmtData) {
@@ -100,7 +102,7 @@ const MyTable = (props) => {
                 selectItem={selectItem}
                 handleSelectitem={handleSelectitem}
                 paginateSelection={paginateSelection}
-                defaultSelection={defaultSelection} />
+                defaultSelection={selection} />
         </tfoot>}
     </table >
 }
