@@ -16,12 +16,15 @@ const Toolbar = (props) => {
         columnSpan,
         isActions,
         handleColumnSearch,
-        columnSearch
+        columnSearch,
+        handleGlobalSearchValue,
+        darkMode,
+        handleDarkMode
     } = props
 
 
     return <tr >
-        <td colSpan={columnSpan} style={{ padding: "5px" }}>
+        <th colSpan={columnSpan} style={{ padding: "5px" }}>
             <div>
                 <div className="fl"
                     style={rmtSubHeading ? { padding: "0 0 0 5px" } : { padding: "5px 0 0 5px" }}>
@@ -39,7 +42,7 @@ const Toolbar = (props) => {
                                     onClick={() => { handleGlobalSearch(false) }}
                                     className="p-a" style={{ right: "1px" }}
                                     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAAV0lEQVQ4jWNgGExgOgMDgzQR6qShajGAOAMDw0YChkgQUoPPEIKa8RlCtGZsGkjWDAPSDAwMW6EYp2YmUk0lFlDkBWwaiDYEn0KChhBjC97ERnFSHhgAAP3XEqdC/dYtAAAAAElFTkSuQmCC" />
-                                <input type="search" />
+                                <input type="search" onChange={(e) => { handleGlobalSearchValue(e.target.value) }} />
                             </li> :
                             <li className="ml-01 cr-p">
                                 <img
@@ -62,8 +65,14 @@ const Toolbar = (props) => {
                         <li className="ml-01 cr-p">
                             <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAAuElEQVQ4jdXSMWqCMQDF8Z9WcSjFwd7CKyhIceomegDBsYfQimfQW7jqWEpxaMHZM6gIinS1g/nKN3wRR/3DgyQv75GEcIsU0cMXtjhggbfg1YIyecYPZmiignIYz7HEBIOscB7feL9wuiFO6YJCymzjiH4kfLpQ/M/TNZvun+g1B84PlSjGBzrJJB8pykXCI5QwTRYeUmYDK7yghTV2eEQdY1Txit+s9mZQ0fnbLrDHBp/oBu/G+ANI2SCkCXAwFQAAAABJRU5ErkJggg==" />
                         </li>
+                        <li
+                            className="ml-01 cr-p"
+                            onClick={() => { handleDarkMode(darkMode ? false : true) }}>
+                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAA40lEQVQ4jaXTMU4DMRCF4Y8VLcsN6IICBVcBcRpElVyAOwSh1IgCrkFoghBtApdgQ2EvMsYOKxhpCo/nnxk/2/zTdirxY5ziMK5fcIvlbwX3MUeHTeYdbtBug58KYO6LWpH5APgKK1yXzlwaO/VJzD2LueO0wOVAGBqscQG7MTiqCRPhabLuBB1GfTWxyxA4nWKTFngtJE23wCc5c+S7iJOf3Jed40MmIuGR9FdVswNBwFlpsxXEWQlX1SR7Tey8xiP2ah1a4ZF0eMM9HvAex57lcO0zjYXP1J9ziTs81zr/2T4BZ2RR+NbR+GoAAAAASUVORK5CYII=" />
+                        </li>
                         {!fullScreen ?
-                            <li className="ml-01 cr-p"
+                            <li
+                                className="ml-01 cr-p"
                                 onClick={() => { openFullScreen(); handleFullScreen(true) }}
                             >
                                 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAAa0lEQVQ4jc2SQQ6AIAwEJ/5HDspnxP/f6As0gYNN5ICBhmjcY3eyNGXhT9oBARJwAK7wnM6SMqEWIMDS8dAKxJqR+pe92akYnoaAKjsbAizsh/Kj7PARh79RuErSkuehSEGNVpUjsBm2fVkZh9sa61aJuakAAAAASUVORK5CYII=" />
@@ -77,7 +86,7 @@ const Toolbar = (props) => {
                     </ul>
                 </div>
             </div>
-        </td>
+        </th>
     </tr>
 }
 

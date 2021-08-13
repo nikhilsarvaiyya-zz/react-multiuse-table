@@ -26,8 +26,8 @@ const Pagination = (props) => {
 
     return <tr >
         <td colSpan={columnSpan}>
-            <div >
-                <div className="fl">
+            <div className="w-100" >
+                <div className="fl w-50">
                     <SelectPagination
                         pages={pages}
                         defaultSelection={defaultSelection}
@@ -35,7 +35,7 @@ const Pagination = (props) => {
                         totalrecords={totalrecords}
                     />
                 </div>
-                <div className="fr">
+                <div className="fr w-50 tx-r">
                     <PaginationBar />
                 </div>
             </div>

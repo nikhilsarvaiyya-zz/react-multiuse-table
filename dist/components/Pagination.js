@@ -34,15 +34,17 @@ const Pagination = props => {
 
   return /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", {
     colSpan: columnSpan
-  }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", {
-    className: "fl"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "w-100"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "fl w-50"
   }, /*#__PURE__*/_react.default.createElement(_SelectPagination.default, {
     pages: pages,
     defaultSelection: defaultSelection,
     handleSelectitem: handleSelectitem,
     totalrecords: totalrecords
   })), /*#__PURE__*/_react.default.createElement("div", {
-    className: "fr"
+    className: "fr w-50 tx-r"
   }, /*#__PURE__*/_react.default.createElement(_PaginationBar.default, null)))));
 };
 

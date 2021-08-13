@@ -17,7 +17,7 @@ var _Pagination = _interopRequireDefault(require("./components/Pagination.js"));
 
 var _ColumnSearch = _interopRequireDefault(require("./components/ColumnSearch.js"));
 
-var _Style = _interopRequireDefault(require("./components/Style.js"));
+var _StyleBasic = _interopRequireDefault(require("./components/StyleBasic"));
 
 var _Toolbar = _interopRequireDefault(require("./components/Toolbar.js"));
 
@@ -77,6 +77,9 @@ const MyTable = props => {
   const [fullScreen, handleFullScreen] = (0, _react.useState)(false);
   const [columnSearch, handleColumnSearch] = (0, _react.useState)(rmtColumnSearch);
   const [globalSearch, handleGlobalSearch] = (0, _react.useState)(rmtGlobalSearch);
+  const [globalSearchValue, handleGlobalSearchValue] = (0, _react.useState)('');
+  const [darkMode, handleDarkMode] = (0, _react.useState)(false); // Need to Work
+
   const [isActions, handleisActions] = (0, _react.useState)(rmtActions && rmtActions.length !== 0);
   const isPagination = pagination == undefined || pagination === true;
 
@@ -111,7 +114,10 @@ const MyTable = props => {
     isActions: isActions,
     columnSpan: columnSpan,
     handleColumnSearch: handleColumnSearch,
-    columnSearch: columnSearch
+    columnSearch: columnSearch,
+    handleGlobalSearchValue: handleGlobalSearchValue,
+    handleDarkMode: handleDarkMode,
+    darkMode: darkMode
   }), /*#__PURE__*/_react.default.createElement(_TableHead.default, {
     handleKeyIndex: handleKeyIndex,
     handleName: handleName,
@@ -143,7 +149,8 @@ const MyTable = props => {
     columnSpan: columnSpan,
     keyIndex: keyIndex,
     selectItem: selectItem,
-    isPagination: isPagination
+    isPagination: isPagination,
+    globalSearchValue: globalSearchValue
   })), isPagination && /*#__PURE__*/_react.default.createElement("tfoot", null, /*#__PURE__*/_react.default.createElement(_Pagination.default, {
     rmtHeaders: rmtHeaders,
     selectItem: selectItem,

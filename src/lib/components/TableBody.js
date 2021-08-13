@@ -1,17 +1,33 @@
 import React from 'react';
 
-function sortFunction(arr, keyIndex, key, order, select, isPagination) {
+function sortFunction(arr, keyIndex, key, order, select, isPagination, globalSearchValue) {
 
-    let sortData = arr
-        .filter((f, i) => isPagination ? i < select : f)
-        .sort((a, b) => {
-            if (a[keyIndex] === b[keyIndex]) {
-                return 0;
-            }
-            else {
-                return (a[keyIndex] < b[keyIndex]) ? -1 : 1;
-            }
-        });
+    var collator = new Intl.Collator(undefined, {
+        numeric: true,
+        sensitivity: 'base'
+    });
+
+    let sortData = arr;
+
+    if (isPagination) {
+        sortData = sortData.filter((f, i) => i < select)
+    }
+
+    if (globalSearchValue.length > 0) {
+        sortData = sortData.filter((f, i) => {
+            return f[0].includes(globalSearchValue)
+        })
+    }
+
+
+    sortData.sort((a, b) => {
+        if (a[keyIndex] === b[keyIndex]) {
+            return 0;
+        }
+        else {
+            return (a[keyIndex] < b[keyIndex]) ? -1 : 1;
+        }
+    });
 
     if (order === 1) {
         return sortData
@@ -24,13 +40,17 @@ const TableBody = (props) => {
 
     const { rmtCheckAll, rmtActions,
         rmtHeaders,
-        handleSelectitem,
-        paginateSelection,
-        defaultSelection,
-        totalrecords,
         rmtData,
-        isActions,
-        columnSpan, keyIndex, shortByKey, shortOrder, selectItem, isPagination } = props;
+        columnSpan,
+        keyIndex,
+        shortByKey,
+        shortOrder,
+        selectItem,
+        isPagination,
+        globalSearchValue
+    } = props;
+
+    console.log(globalSearchValue)
 
     if (!rmtData) {
         return <td colSpan={columnSpan} className="mr-1">Loading...</td>
@@ -49,7 +69,9 @@ const TableBody = (props) => {
         });
         mapData.push(selectedkey)
     });
-    let sortedData = sortFunction(mapData, keyIndex, shortByKey, shortOrder, selectItem, isPagination);
+
+
+    let sortedData = sortFunction(mapData, keyIndex, shortByKey, shortOrder, selectItem, isPagination, globalSearchValue);
 
 
     return sortedData.map((d, i1) => {

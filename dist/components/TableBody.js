@@ -5,6 +5,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
+require("core-js/modules/es.string.includes.js");
+
 require("core-js/modules/es.array.sort.js");
 
 require("core-js/modules/es.array.reverse.js");
@@ -15,8 +17,24 @@ var _react = _interopRequireDefault(require("react"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function sortFunction(arr, keyIndex, key, order, select, isPagination) {
-  let sortData = arr.filter((f, i) => isPagination ? i < select : f).sort((a, b) => {
+function sortFunction(arr, keyIndex, key, order, select, isPagination, globalSearchValue) {
+  var collator = new Intl.Collator(undefined, {
+    numeric: true,
+    sensitivity: 'base'
+  });
+  let sortData = arr;
+
+  if (isPagination) {
+    sortData = sortData.filter((f, i) => i < select);
+  }
+
+  if (globalSearchValue.length > 0) {
+    sortData = sortData.filter((f, i) => {
+      return f[0].includes(globalSearchValue);
+    });
+  }
+
+  sortData.sort((a, b) => {
     if (a[keyIndex] === b[keyIndex]) {
       return 0;
     } else {
@@ -36,19 +54,16 @@ const TableBody = props => {
     rmtCheckAll,
     rmtActions,
     rmtHeaders,
-    handleSelectitem,
-    paginateSelection,
-    defaultSelection,
-    totalrecords,
     rmtData,
-    isActions,
     columnSpan,
     keyIndex,
     shortByKey,
     shortOrder,
     selectItem,
-    isPagination
+    isPagination,
+    globalSearchValue
   } = props;
+  console.log(globalSearchValue);
 
   if (!rmtData) {
     return /*#__PURE__*/_react.default.createElement("td", {
@@ -69,7 +84,7 @@ const TableBody = props => {
     });
     mapData.push(selectedkey);
   });
-  let sortedData = sortFunction(mapData, keyIndex, shortByKey, shortOrder, selectItem, isPagination);
+  let sortedData = sortFunction(mapData, keyIndex, shortByKey, shortOrder, selectItem, isPagination, globalSearchValue);
   return sortedData.map((d, i1) => {
     return /*#__PURE__*/_react.default.createElement("tr", {
       key: i1

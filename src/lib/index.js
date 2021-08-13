@@ -3,7 +3,7 @@ import TableHead from './components/TableHead.js'
 import TableBody from './components/TableBody.js'
 import Pagination from './components/Pagination.js';
 import ColumnSearch from './components/ColumnSearch.js';
-import StyleSheet from './components/Style.js';
+import StyleSheet from './components/StyleBasic';
 import Toolbar from './components/Toolbar.js';
 
 var elem = document.documentElement;
@@ -26,10 +26,6 @@ function closeFullScreen() {
         document.msExitFullscreen();
     }
 }
-
-
-
-
 
 const MyTable = (props) => {
 
@@ -57,6 +53,8 @@ const MyTable = (props) => {
     const [fullScreen, handleFullScreen] = useState(false);
     const [columnSearch, handleColumnSearch] = useState(rmtColumnSearch);
     const [globalSearch, handleGlobalSearch] = useState(rmtGlobalSearch);
+    const [globalSearchValue, handleGlobalSearchValue] = useState('');
+    const [darkMode, handleDarkMode] = useState(false); // Need to Work
     const [isActions, handleisActions] = useState(rmtActions && rmtActions.length !== 0);
 
     const isPagination = (pagination == undefined || pagination === true)
@@ -65,9 +63,6 @@ const MyTable = (props) => {
         return "Headers is not Provided"
     }
 
-
-
-
     let columnSpan = rmtHeaders.length
     if (rmtCheckAll) {
         columnSpan = columnSpan + 1
@@ -75,7 +70,6 @@ const MyTable = (props) => {
     if (isActions) {
         columnSpan = columnSpan + 1
     }
-
 
     return <table className={rmtClass} id="rmtable">
         <thead >
@@ -94,7 +88,10 @@ const MyTable = (props) => {
                 isActions={isActions}
                 columnSpan={columnSpan}
                 handleColumnSearch={handleColumnSearch}
-                columnSearch={columnSearch} />
+                columnSearch={columnSearch}
+                handleGlobalSearchValue={handleGlobalSearchValue}
+                handleDarkMode={handleDarkMode}
+                darkMode={darkMode} />
             <TableHead
                 handleKeyIndex={handleKeyIndex}
                 handleName={handleName}
@@ -132,6 +129,8 @@ const MyTable = (props) => {
                 keyIndex={keyIndex}
                 selectItem={selectItem}
                 isPagination={isPagination}
+                globalSearchValue={globalSearchValue}
+
             />
         </tbody>
 

@@ -24,9 +24,12 @@ const Toolbar = props => {
     columnSpan,
     isActions,
     handleColumnSearch,
-    columnSearch
+    columnSearch,
+    handleGlobalSearchValue,
+    darkMode,
+    handleDarkMode
   } = props;
-  return /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", {
+  return /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", {
     colSpan: columnSpan,
     style: {
       padding: "5px"
@@ -59,7 +62,10 @@ const Toolbar = props => {
     },
     src: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAAV0lEQVQ4jWNgGExgOgMDgzQR6qShajGAOAMDw0YChkgQUoPPEIKa8RlCtGZsGkjWDAPSDAwMW6EYp2YmUk0lFlDkBWwaiDYEn0KChhBjC97ERnFSHhgAAP3XEqdC/dYtAAAAAElFTkSuQmCC"
   }), /*#__PURE__*/_react.default.createElement("input", {
-    type: "search"
+    type: "search",
+    onChange: e => {
+      handleGlobalSearchValue(e.target.value);
+    }
   })) : /*#__PURE__*/_react.default.createElement("li", {
     className: "ml-01 cr-p"
   }, /*#__PURE__*/_react.default.createElement("img", {
@@ -77,6 +83,13 @@ const Toolbar = props => {
     className: "ml-01 cr-p"
   }, /*#__PURE__*/_react.default.createElement("img", {
     src: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAAuElEQVQ4jdXSMWqCMQDF8Z9WcSjFwd7CKyhIceomegDBsYfQimfQW7jqWEpxaMHZM6gIinS1g/nKN3wRR/3DgyQv75GEcIsU0cMXtjhggbfg1YIyecYPZmiignIYz7HEBIOscB7feL9wuiFO6YJCymzjiH4kfLpQ/M/TNZvun+g1B84PlSjGBzrJJB8pykXCI5QwTRYeUmYDK7yghTV2eEQdY1Txit+s9mZQ0fnbLrDHBp/oBu/G+ANI2SCkCXAwFQAAAABJRU5ErkJggg=="
+  })), /*#__PURE__*/_react.default.createElement("li", {
+    className: "ml-01 cr-p",
+    onClick: () => {
+      handleDarkMode(darkMode ? false : true);
+    }
+  }, /*#__PURE__*/_react.default.createElement("img", {
+    src: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAA40lEQVQ4jaXTMU4DMRCF4Y8VLcsN6IICBVcBcRpElVyAOwSh1IgCrkFoghBtApdgQ2EvMsYOKxhpCo/nnxk/2/zTdirxY5ziMK5fcIvlbwX3MUeHTeYdbtBug58KYO6LWpH5APgKK1yXzlwaO/VJzD2LueO0wOVAGBqscQG7MTiqCRPhabLuBB1GfTWxyxA4nWKTFngtJE23wCc5c+S7iJOf3Jed40MmIuGR9FdVswNBwFlpsxXEWQlX1SR7Tey8xiP2ah1a4ZF0eMM9HvAex57lcO0zjYXP1J9ziTs81zr/2T4BZ2RR+NbR+GoAAAAASUVORK5CYII="
   })), !fullScreen ? /*#__PURE__*/_react.default.createElement("li", {
     className: "ml-01 cr-p",
     onClick: () => {

@@ -1,7 +1,7 @@
 import React from 'react';
 
 const StyleSheet = () => {
-  return true
+    return true
 }
 document.head.innerHTML += `
   <style>
@@ -17,8 +17,9 @@ document.head.innerHTML += `
     border-collapse: collapse;
     width: 100%;
     color:#444444;
-   
-    font-size:14px
+   background:white;
+    font-size:13px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;
   }
   
   td, th {
@@ -27,7 +28,10 @@ document.head.innerHTML += `
     padding: 8px;
   }
   th{
-    background:#fafafa
+    background:#fafafa;
+    position: sticky;
+          top: 0; /* Don't forget this, required for the stickiness */
+          box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
   }
   thead{
 
@@ -128,6 +132,9 @@ document.head.innerHTML += `
         padding:1em
     }
    
+    .w-50{
+      width:50%
+  }
     .w-100{
         width:100%
     }
@@ -145,6 +152,9 @@ document.head.innerHTML += `
     .tx-c{
         text-align:center
     }
+    .tx-r{
+      text-align:right
+  }
     .dropdown {
         
           position: relative;
@@ -206,7 +216,8 @@ document.head.innerHTML += `
         } 
         .p-r{
           position:relative
-        }    
+        }
+         
   </style>`
 export default StyleSheet;
 

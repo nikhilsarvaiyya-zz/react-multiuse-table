@@ -19,18 +19,24 @@ const actions = [
 
 function App() {
   return <ReactMultiuseTable
+    rmtHeaders={rmtHeaders}
+    rmtData={TableJson}
+
     rmtHeading="Heading"
     rmtSubHeading="SubHeading"
     rmtClass="table"
-    rmtHeaders={rmtHeaders}
-    rmtData={TableJson}
+
     pagination={true}
-    paginateSelection={[5, 10, 15]}
+    paginateSelection={[5, 10, 100]}
     defaultSelection={10}
+
     rmtColumnSearch={true}
-    rmtGlobalSearch={false}
-    rmtActions={actions}
+    rmtGlobalSearch={true}
+
     rmtCheckAll={true}
+    rmtActions={actions}
+
+
   />
 }
 
