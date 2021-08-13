@@ -20,11 +20,14 @@ const Toolbar = props => {
     handleFullScreen,
     rmtCheckAll,
     globalSearch,
-    handleGlobalSearch
+    handleGlobalSearch,
+    columnSpan,
+    isActions,
+    handleColumnSearch,
+    columnSearch
   } = props;
-  let colspan = rmtCheckAll ? rmtHeaders.length + 2 : rmtHeaders.length + 1;
   return /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", {
-    colSpan: colspan,
+    colSpan: columnSpan,
     style: {
       padding: "5px"
     }
@@ -64,6 +67,12 @@ const Toolbar = props => {
       handleGlobalSearch(true);
     },
     src: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAA4ElEQVQ4jaXSMUpDQRSF4S/RZ7ALSSnYCRbBwi1YuQAjxMLGRlJrZekWAkEEKwutDK7ApaSzsEkTUREs3iTImDcjyWmGuXfOP4c7Q7Xqid5ctWjfwiW28Yki1G/wkoPt4AmdqL6Ja1ykzAVGaCbOXOGwqtlDN5OwwGNcnA3qAM8ZwBfeRClngA28ZwACoLUIMEH7H4AtvC4CjHCSMTeVSadVB+6xW9Gr4w57uRsecIrGr3pHOf1vnMem+CfWcKR87zV8YIwBjsPaxzCVJKWzkKS/LOAPZH0JwG3w7a+SYq4fo1AfZnFyNMQAAAAASUVORK5CYII="
+  })), /*#__PURE__*/_react.default.createElement("li", null, columnSearch ? /*#__PURE__*/_react.default.createElement("img", {
+    onClick: () => handleColumnSearch(false),
+    src: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAAnklEQVQ4jdXSPQrCQBiE4ccgSCqxsbSw0FJSWHkAj+Q9vJS12AhWgoo2sVFQELQwhYT8GFM5sLAMO+83Hyzc8Kx4HgghwEZ17RII6GJdYfoJwzSxh+0X4TOivFoDHAvCV0zKdhshzgjfMc0KNDK8COOUt8KibPqnlkmTGPuih80cv41Ocm8VAYIqtf4LcKgLDjHDxfsD/aw+5nXbFOoFzGo/FIAQQ1YAAAAASUVORK5CYII="
+  }) : /*#__PURE__*/_react.default.createElement("img", {
+    onClick: () => handleColumnSearch(true),
+    src: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAAwElEQVQ4jdXSsWoCQRDG8d+ZEEWbWAkKh1iIjZB0FiGFjS9k6TPYamulpkhAAnkOy1R5hJBWUqS4EyTcnXt2ftXuN/MfZnYnwif2ymmIEX7gHe0ScDNlakejjQ+0AuA6XjH4H4ixw30BfIcNHvMS+nhDIyN2gxWezrX4gBdUT7wIS0yygCjDe8YMX+k9xkIyYrDWktduYluUeJvj/+I7PR+KClTKtHVdBRoYhxTI+kaSPZ+ih46cHQhRF/NL4SD9AXMyFQWiX47OAAAAAElFTkSuQmCC"
   })), /*#__PURE__*/_react.default.createElement("li", {
     className: "ml-01 cr-p"
   }, /*#__PURE__*/_react.default.createElement("img", {

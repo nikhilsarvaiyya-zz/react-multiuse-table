@@ -9,10 +9,10 @@ const PaginationBar = (props) => {
             <a href="tryit.asp-filename=trycss_ex_pagination.html#">«</a>
         </li>
         <li >
-            <a href="tryit.asp-filename=trycss_ex_pagination.html#">1</a>
+            <a className="active" href="tryit.asp-filename=trycss_ex_pagination.html#">1</a>
         </li>
         <li >
-            <a className="active" href="tryit.asp-filename=trycss_ex_pagination.html#">2</a>
+            <a href="tryit.asp-filename=trycss_ex_pagination.html#">2</a>
         </li>
         <li >
             <a href="tryit.asp-filename=trycss_ex_pagination.html#">...</a>

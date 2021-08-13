@@ -12,12 +12,16 @@ const Toolbar = (props) => {
         handleFullScreen,
         rmtCheckAll,
         globalSearch,
-        handleGlobalSearch
+        handleGlobalSearch,
+        columnSpan,
+        isActions,
+        handleColumnSearch,
+        columnSearch
     } = props
 
-    let colspan = rmtCheckAll ? rmtHeaders.length + 2 : rmtHeaders.length + 1
+
     return <tr >
-        <td colSpan={colspan} style={{ padding: "5px" }}>
+        <td colSpan={columnSpan} style={{ padding: "5px" }}>
             <div>
                 <div className="fl"
                     style={rmtSubHeading ? { padding: "0 0 0 5px" } : { padding: "5px 0 0 5px" }}>
@@ -42,6 +46,19 @@ const Toolbar = (props) => {
                                     onClick={() => { handleGlobalSearch(true) }}
                                     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAA4ElEQVQ4jaXSMUpDQRSF4S/RZ7ALSSnYCRbBwi1YuQAjxMLGRlJrZekWAkEEKwutDK7ApaSzsEkTUREs3iTImDcjyWmGuXfOP4c7Q7Xqid5ctWjfwiW28Yki1G/wkoPt4AmdqL6Ja1ykzAVGaCbOXOGwqtlDN5OwwGNcnA3qAM8ZwBfeRClngA28ZwACoLUIMEH7H4AtvC4CjHCSMTeVSadVB+6xW9Gr4w57uRsecIrGr3pHOf1vnMem+CfWcKR87zV8YIwBjsPaxzCVJKWzkKS/LOAPZH0JwG3w7a+SYq4fo1AfZnFyNMQAAAAASUVORK5CYII=" />
                             </li>}
+                        <li>
+                            {columnSearch ?
+                                <img
+                                    onClick={() => handleColumnSearch(false)}
+                                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAAnklEQVQ4jdXSPQrCQBiE4ccgSCqxsbSw0FJSWHkAj+Q9vJS12AhWgoo2sVFQELQwhYT8GFM5sLAMO+83Hyzc8Kx4HgghwEZ17RII6GJdYfoJwzSxh+0X4TOivFoDHAvCV0zKdhshzgjfMc0KNDK8COOUt8KibPqnlkmTGPuih80cv41Ocm8VAYIqtf4LcKgLDjHDxfsD/aw+5nXbFOoFzGo/FIAQQ1YAAAAASUVORK5CYII=" />
+                                :
+                                <img
+                                    onClick={() => handleColumnSearch(true)}
+                                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAAwElEQVQ4jdXSsWoCQRDG8d+ZEEWbWAkKh1iIjZB0FiGFjS9k6TPYamulpkhAAnkOy1R5hJBWUqS4EyTcnXt2ftXuN/MfZnYnwif2ymmIEX7gHe0ScDNlakejjQ+0AuA6XjH4H4ixw30BfIcNHvMS+nhDIyN2gxWezrX4gBdUT7wIS0yygCjDe8YMX+k9xkIyYrDWktduYluUeJvj/+I7PR+KClTKtHVdBRoYhxTI+kaSPZ+ih46cHQhRF/NL4SD9AXMyFQWiX47OAAAAAElFTkSuQmCC" />
+
+                            }
+                        </li>
+
                         <li className="ml-01 cr-p">
                             <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAAuElEQVQ4jdXSMWqCMQDF8Z9WcSjFwd7CKyhIceomegDBsYfQimfQW7jqWEpxaMHZM6gIinS1g/nKN3wRR/3DgyQv75GEcIsU0cMXtjhggbfg1YIyecYPZmiignIYz7HEBIOscB7feL9wuiFO6YJCymzjiH4kfLpQ/M/TNZvun+g1B84PlSjGBzrJJB8pykXCI5QwTRYeUmYDK7yghTV2eEQdY1Txit+s9mZQ0fnbLrDHBp/oBu/G+ANI2SCkCXAwFQAAAABJRU5ErkJggg==" />
                         </li>

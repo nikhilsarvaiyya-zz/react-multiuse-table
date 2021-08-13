@@ -176,7 +176,7 @@ document.head.innerHTML += `
           top:0px;
           position: absolute;
           background-color: #f9f9f9;
-          min-width: 160px;
+          min-width: 100px;
           box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.2);
           z-index: 1;
           border-radius:2px

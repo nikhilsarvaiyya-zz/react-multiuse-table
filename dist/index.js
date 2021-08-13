@@ -5,10 +5,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-require("core-js/modules/es.array.sort.js");
-
-require("core-js/modules/es.array.reverse.js");
-
 require("core-js/modules/web.dom-collections.iterator.js");
 
 var _react = _interopRequireWildcard(require("react"));
@@ -57,22 +53,6 @@ function closeFullScreen() {
   }
 }
 
-function sortFunction(arr, keyIndex, key, order, select, isPagination) {
-  let sortData = arr.filter((f, i) => isPagination ? i < select : f).sort((a, b) => {
-    if (a[keyIndex] === b[keyIndex]) {
-      return 0;
-    } else {
-      return a[keyIndex] < b[keyIndex] ? -1 : 1;
-    }
-  });
-
-  if (order === 1) {
-    return sortData;
-  } else {
-    return sortData.reverse();
-  }
-}
-
 const MyTable = props => {
   const {
     rmtData,
@@ -85,7 +65,8 @@ const MyTable = props => {
     rmtSubHeading,
     rmtCheckAll,
     rmtColumnSearch,
-    rmtGlobalSearch
+    rmtGlobalSearch,
+    rmtActions
   } = props;
   let selection = defaultSelection ? defaultSelection : 5;
   const [keyIndex, handleKeyIndex] = (0, _react.useState)(0);
@@ -96,25 +77,23 @@ const MyTable = props => {
   const [fullScreen, handleFullScreen] = (0, _react.useState)(false);
   const [columnSearch, handleColumnSearch] = (0, _react.useState)(rmtColumnSearch);
   const [globalSearch, handleGlobalSearch] = (0, _react.useState)(rmtGlobalSearch);
+  const [isActions, handleisActions] = (0, _react.useState)(rmtActions && rmtActions.length !== 0);
   const isPagination = pagination == undefined || pagination === true;
 
-  if (!rmtHeaders || !rmtData) {
-    return "Loading...";
+  if (!rmtHeaders) {
+    return "Headers is not Provided";
   }
 
-  let mapData = [];
-  rmtData.forEach(d => {
-    let selectedkey = [];
-    rmtHeaders.forEach(h => {
-      for (const [key, value] of Object.entries(d)) {
-        if (h.key === key) {
-          selectedkey.push(value);
-        }
-      }
-    });
-    mapData.push(selectedkey);
-  });
-  let sortedData = sortFunction(mapData, keyIndex, shortByKey, shortOrder, selectItem, isPagination);
+  let columnSpan = rmtHeaders.length;
+
+  if (rmtCheckAll) {
+    columnSpan = columnSpan + 1;
+  }
+
+  if (isActions) {
+    columnSpan = columnSpan + 1;
+  }
+
   return /*#__PURE__*/_react.default.createElement("table", {
     className: rmtClass,
     id: "rmtable"
@@ -128,7 +107,11 @@ const MyTable = props => {
     handleFullScreen: handleFullScreen,
     rmtCheckAll: rmtCheckAll,
     globalSearch: globalSearch,
-    handleGlobalSearch: handleGlobalSearch
+    handleGlobalSearch: handleGlobalSearch,
+    isActions: isActions,
+    columnSpan: columnSpan,
+    handleColumnSearch: handleColumnSearch,
+    columnSearch: columnSearch
   }), /*#__PURE__*/_react.default.createElement(_TableHead.default, {
     handleKeyIndex: handleKeyIndex,
     handleName: handleName,
@@ -139,25 +122,38 @@ const MyTable = props => {
     headers: rmtHeaders,
     rmtCheckAll: rmtCheckAll,
     columnSearch: columnSearch,
-    handleColumnSearch: handleColumnSearch
+    handleColumnSearch: handleColumnSearch,
+    isActions: isActions,
+    columnSpan: columnSpan
   }), columnSearch ? /*#__PURE__*/_react.default.createElement(_ColumnSearch.default, {
     headers: rmtHeaders,
     rmtCheckAll: rmtCheckAll,
     columnSearch: columnSearch,
-    handleColumnSearch: handleColumnSearch
+    handleColumnSearch: handleColumnSearch,
+    isActions: isActions,
+    columnSpan: columnSpan
   }) : null), /*#__PURE__*/_react.default.createElement("tbody", null, /*#__PURE__*/_react.default.createElement(_TableBody.default, {
     shortByKey: shortByKey,
     shortOrder: shortOrder,
-    data: sortedData,
-    rmtCheckAll: rmtCheckAll
+    rmtData: rmtData,
+    rmtHeaders: rmtHeaders,
+    rmtCheckAll: rmtCheckAll,
+    rmtActions: rmtActions,
+    isActions: isActions,
+    columnSpan: columnSpan,
+    keyIndex: keyIndex,
+    selectItem: selectItem,
+    isPagination: isPagination
   })), isPagination && /*#__PURE__*/_react.default.createElement("tfoot", null, /*#__PURE__*/_react.default.createElement(_Pagination.default, {
     rmtHeaders: rmtHeaders,
     selectItem: selectItem,
     handleSelectitem: handleSelectitem,
     paginateSelection: paginateSelection,
     defaultSelection: selection,
-    totalrecords: mapData.length,
-    rmtCheckAll: rmtCheckAll
+    totalrecords: 20,
+    rmtCheckAll: rmtCheckAll,
+    isActions: isActions,
+    columnSpan: columnSpan
   })));
 };
 

@@ -29,25 +29,7 @@ function closeFullScreen() {
 
 
 
-function sortFunction(arr, keyIndex, key, order, select, isPagination) {
 
-    let sortData = arr
-        .filter((f, i) => isPagination ? i < select : f)
-        .sort((a, b) => {
-            if (a[keyIndex] === b[keyIndex]) {
-                return 0;
-            }
-            else {
-                return (a[keyIndex] < b[keyIndex]) ? -1 : 1;
-            }
-        });
-
-    if (order === 1) {
-        return sortData
-    } else {
-        return sortData.reverse()
-    }
-}
 
 const MyTable = (props) => {
 
@@ -62,7 +44,8 @@ const MyTable = (props) => {
         rmtSubHeading,
         rmtCheckAll,
         rmtColumnSearch,
-        rmtGlobalSearch } = props
+        rmtGlobalSearch,
+        rmtActions } = props
 
     let selection = defaultSelection ? defaultSelection : 5
 
@@ -74,29 +57,24 @@ const MyTable = (props) => {
     const [fullScreen, handleFullScreen] = useState(false);
     const [columnSearch, handleColumnSearch] = useState(rmtColumnSearch);
     const [globalSearch, handleGlobalSearch] = useState(rmtGlobalSearch);
+    const [isActions, handleisActions] = useState(rmtActions && rmtActions.length !== 0);
 
     const isPagination = (pagination == undefined || pagination === true)
 
-    if (!rmtHeaders || !rmtData) {
-        return "Loading..."
+    if (!rmtHeaders) {
+        return "Headers is not Provided"
     }
 
-    let mapData = []
-
-    rmtData.forEach((d) => {
-        let selectedkey = []
-        rmtHeaders.forEach((h) => {
-            for (const [key, value] of Object.entries(d)) {
-                if (h.key === key) {
-                    selectedkey.push(value)
-                }
-            }
-        });
-        mapData.push(selectedkey)
-    });
 
 
-    let sortedData = sortFunction(mapData, keyIndex, shortByKey, shortOrder, selectItem, isPagination);
+
+    let columnSpan = rmtHeaders.length
+    if (rmtCheckAll) {
+        columnSpan = columnSpan + 1
+    }
+    if (isActions) {
+        columnSpan = columnSpan + 1
+    }
 
 
     return <table className={rmtClass} id="rmtable">
@@ -112,7 +90,11 @@ const MyTable = (props) => {
                 handleFullScreen={handleFullScreen}
                 rmtCheckAll={rmtCheckAll}
                 globalSearch={globalSearch}
-                handleGlobalSearch={handleGlobalSearch} />
+                handleGlobalSearch={handleGlobalSearch}
+                isActions={isActions}
+                columnSpan={columnSpan}
+                handleColumnSearch={handleColumnSearch}
+                columnSearch={columnSearch} />
             <TableHead
                 handleKeyIndex={handleKeyIndex}
                 handleName={handleName}
@@ -124,21 +106,33 @@ const MyTable = (props) => {
                 rmtCheckAll={rmtCheckAll}
                 columnSearch={columnSearch}
                 handleColumnSearch={handleColumnSearch}
+                isActions={isActions}
+                columnSpan={columnSpan}
             />
 
             {columnSearch ? <ColumnSearch
                 headers={rmtHeaders}
                 rmtCheckAll={rmtCheckAll}
                 columnSearch={columnSearch}
-                handleColumnSearch={handleColumnSearch} /> : null}
+                handleColumnSearch={handleColumnSearch}
+                isActions={isActions}
+                columnSpan={columnSpan} /> : null}
         </thead>
 
         <tbody>
             <TableBody
                 shortByKey={shortByKey}
                 shortOrder={shortOrder}
-                data={sortedData}
-                rmtCheckAll={rmtCheckAll} />
+                rmtData={rmtData}
+                rmtHeaders={rmtHeaders}
+                rmtCheckAll={rmtCheckAll}
+                rmtActions={rmtActions}
+                isActions={isActions}
+                columnSpan={columnSpan}
+                keyIndex={keyIndex}
+                selectItem={selectItem}
+                isPagination={isPagination}
+            />
         </tbody>
 
         {isPagination && <tfoot>
@@ -148,8 +142,10 @@ const MyTable = (props) => {
                 handleSelectitem={handleSelectitem}
                 paginateSelection={paginateSelection}
                 defaultSelection={selection}
-                totalrecords={mapData.length}
-                rmtCheckAll={rmtCheckAll} />
+                totalrecords={20}
+                rmtCheckAll={rmtCheckAll}
+                isActions={isActions}
+                columnSpan={columnSpan} />
         </tfoot>}
     </table >
 }

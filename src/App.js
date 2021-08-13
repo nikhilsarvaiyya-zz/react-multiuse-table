@@ -10,6 +10,13 @@ const rmtHeaders = [
 
 ]
 
+const actions = [
+  { key: 'add', label: "Add" },
+  { key: 'edit', label: "Edit" },
+  { key: 'delete', label: "Delete" },
+  { key: 'view', label: "View" },
+]
+
 function App() {
   return <ReactMultiuseTable
     rmtHeading="Heading"
@@ -20,10 +27,10 @@ function App() {
     pagination={true}
     paginateSelection={[5, 10, 15]}
     defaultSelection={10}
-    rmtCheckAll={true}
-    rmtActions={true}
     rmtColumnSearch={true}
     rmtGlobalSearch={false}
+    rmtActions={actions}
+    rmtCheckAll={true}
   />
 }
 

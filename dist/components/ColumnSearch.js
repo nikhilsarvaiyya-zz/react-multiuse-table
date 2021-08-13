@@ -14,7 +14,8 @@ const ColumnSearch = props => {
     headers,
     rmtCheckAll,
     handleColumnSearch,
-    columnSearch
+    columnSearch,
+    isActions
   } = props;
   let emptyTh = rmtCheckAll ? /*#__PURE__*/_react.default.createElement("th", {
     className: "tx-c"
@@ -25,7 +26,7 @@ const ColumnSearch = props => {
     }, /*#__PURE__*/_react.default.createElement("input", {
       type: "search"
     }));
-  }), /*#__PURE__*/_react.default.createElement("th", {
+  }), isActions && /*#__PURE__*/_react.default.createElement("th", {
     className: "tx-c"
   }, /*#__PURE__*/_react.default.createElement("img", {
     onClick: () => handleColumnSearch(false),

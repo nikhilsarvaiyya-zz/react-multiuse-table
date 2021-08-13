@@ -18,9 +18,9 @@ const PaginationBar = props => {
   return /*#__PURE__*/_react.default.createElement("ul", null, /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("a", {
     href: "tryit.asp-filename=trycss_ex_pagination.html#"
   }, "\xAB")), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("a", {
+    className: "active",
     href: "tryit.asp-filename=trycss_ex_pagination.html#"
   }, "1")), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("a", {
-    className: "active",
     href: "tryit.asp-filename=trycss_ex_pagination.html#"
   }, "2")), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("a", {
     href: "tryit.asp-filename=trycss_ex_pagination.html#"
