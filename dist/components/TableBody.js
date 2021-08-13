@@ -28,13 +28,13 @@ const TableBody = props => {
     }), /*#__PURE__*/_react.default.createElement("td", {
       className: "tx-c"
     }, /*#__PURE__*/_react.default.createElement("div", {
-      class: "dropdown"
+      className: "dropdown"
     }, /*#__PURE__*/_react.default.createElement("button", {
-      class: "dropbtn"
+      className: "dropbtn"
     }, /*#__PURE__*/_react.default.createElement("img", {
       src: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAAiElEQVQ4jc2SwQ1AQBREX5BogiJQgxroRA1utEMPbq4uqnAQDjaxlz8JBzHJJD/5s7OZ2YU/IwVGx+SNQQscjq0lCoTBZMyPUAC5EkRiFwMlV4QZ2J7e3nB30Fgi1YGPw1qoCJ13uLdEoTDYuXIvwCp0JmruDipLpDrIvFk+pYUEGBxffeVvcAIAMhhp+VgEPQAAAABJRU5ErkJggg=="
     })), /*#__PURE__*/_react.default.createElement("div", {
-      class: "dropdown-content"
+      className: "dropdown-content"
     }, /*#__PURE__*/_react.default.createElement("a", {
       href: "#"
     }, "Link 1"), /*#__PURE__*/_react.default.createElement("a", {
