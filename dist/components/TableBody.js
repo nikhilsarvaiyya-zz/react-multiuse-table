@@ -10,6 +10,10 @@ var _react = _interopRequireDefault(require("react"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const TableBody = props => {
+  const {
+    rmtCheckAll
+  } = props;
+
   if (!props.data) {
     return "Loading...";
   }
@@ -17,11 +21,11 @@ const TableBody = props => {
   return props.data.map((d, i1) => {
     return /*#__PURE__*/_react.default.createElement("tr", {
       key: i1
-    }, /*#__PURE__*/_react.default.createElement("td", {
+    }, rmtCheckAll && /*#__PURE__*/_react.default.createElement("th", {
       className: "tx-c"
-    }, /*#__PURE__*/_react.default.createElement("input", {
+    }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("input", {
       type: "checkbox"
-    })), d.map((m, i2) => {
+    }))), d.map((m, i2) => {
       return /*#__PURE__*/_react.default.createElement("td", {
         key: i2
       }, " ", m, " ");

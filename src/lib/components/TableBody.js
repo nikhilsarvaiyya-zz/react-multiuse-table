@@ -2,14 +2,19 @@ import React from 'react';
 
 const TableBody = (props) => {
 
+    const { rmtCheckAll } = props;
+
     if (!props.data) {
         return "Loading..."
     }
     return props.data.map((d, i1) => {
         return <tr key={i1}>
-            <td className="tx-c">
-                <input type="checkbox" />
-            </td>
+            {rmtCheckAll &&
+                <th className="tx-c">
+                    <div>
+                        <input type="checkbox" />
+                    </div>
+                </th>}
             {d.map((m, i2) => {
                 return <td key={i2} > {m} </td>
             })}

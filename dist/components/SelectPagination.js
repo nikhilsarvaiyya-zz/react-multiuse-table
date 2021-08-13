@@ -32,10 +32,7 @@ const SelectPagination = props => {
     }, p);
   }))), /*#__PURE__*/_react.default.createElement("div", {
     className: "fl mr-1"
-  }, "Go to page\xA0", /*#__PURE__*/_react.default.createElement("select", {
-    defaultValue: defaultSelection,
-    onChange: e => handleSelectitem(e.target.value)
-  }, /*#__PURE__*/_react.default.createElement("option", {
+  }, "Go to page\xA0", /*#__PURE__*/_react.default.createElement("select", null, /*#__PURE__*/_react.default.createElement("option", {
     value: 1
   }, "1"), /*#__PURE__*/_react.default.createElement("option", {
     value: 2
@@ -43,7 +40,9 @@ const SelectPagination = props => {
     value: 3
   }, "3"), /*#__PURE__*/_react.default.createElement("option", {
     value: 4
-  }, "4"))));
+  }, "4"), /*#__PURE__*/_react.default.createElement("option", {
+    value: 5
+  }, "5"))));
 };
 
 var _default = SelectPagination;

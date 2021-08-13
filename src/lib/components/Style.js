@@ -5,6 +5,13 @@ const StyleSheet = () => {
 }
 document.head.innerHTML += `
   <style>
+  .trans{
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    -o-transition: all .5s ease;
+    -ms-transition: all .5s ease;
+    transition: all .5s ease;
+  }
   table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
@@ -54,7 +61,8 @@ document.head.innerHTML += `
   ul li img:hover,
   ul li a.active
   {
-    background:#efefef
+    background:#efefef;
+    
   }
   input[type="text" i],
   input[type="search" i]{
@@ -104,8 +112,8 @@ document.head.innerHTML += `
     .mr-01{
       margin-right:0.1em
   }
-  .m-0{
-    margin:0
+    .m-0{
+      margin:0
     }
     .mr-1{
         margin-right:1em
@@ -123,6 +131,13 @@ document.head.innerHTML += `
     .w-100{
         width:100%
     }
+
+    .va-m{
+      vertical-align:middle
+  }
+  .va-b{
+    vertical-align:bottom
+}
    
     .cr-p{
         cursor:pointer
@@ -131,7 +146,7 @@ document.head.innerHTML += `
         text-align:center
     }
     .dropdown {
-         float:right;
+        
           position: relative;
           display: inline-block;
         }
@@ -142,6 +157,8 @@ document.head.innerHTML += `
             border:none;
             border-radius: 4px;
             padding: 2px;
+            
+            
           }
           .dropdown .dropbtn img{
             vertical-align:middle
@@ -149,7 +166,8 @@ document.head.innerHTML += `
 
           .dropdown:hover .dropbtn {
             background:#e5e5e5;
-            cursor:pointer 
+            cursor:pointer ;
+            
           }
         
         .dropdown-content {
@@ -182,6 +200,12 @@ document.head.innerHTML += `
           margin:0;
           padding:2px 0;
           font-size:80%
+        } 
+        .p-a{
+          position:absolute
+        } 
+        .p-r{
+          position:relative
         }    
   </style>`
 export default StyleSheet;

@@ -21,9 +21,9 @@ var _Pagination = _interopRequireDefault(require("./components/Pagination.js"));
 
 var _ColumnSearch = _interopRequireDefault(require("./components/ColumnSearch.js"));
 
-var _TableHeader = _interopRequireDefault(require("./components/TableHeader.js"));
-
 var _Style = _interopRequireDefault(require("./components/Style.js"));
+
+var _Toolbar = _interopRequireDefault(require("./components/Toolbar.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -80,7 +80,12 @@ const MyTable = props => {
     rmtClass,
     pagination,
     paginateSelection,
-    defaultSelection
+    defaultSelection,
+    rmtHeading,
+    rmtSubHeading,
+    rmtCheckAll,
+    rmtColumnSearch,
+    rmtGlobalSearch
   } = props;
   let selection = defaultSelection ? defaultSelection : 5;
   const [keyIndex, handleKeyIndex] = (0, _react.useState)(0);
@@ -89,6 +94,8 @@ const MyTable = props => {
   const [selectItem, handleSelectitem] = (0, _react.useState)(selection);
   const [totalrecords, handleTotalRecords] = (0, _react.useState)(0);
   const [fullScreen, handleFullScreen] = (0, _react.useState)(false);
+  const [columnSearch, handleColumnSearch] = (0, _react.useState)(rmtColumnSearch);
+  const [globalSearch, handleGlobalSearch] = (0, _react.useState)(rmtGlobalSearch);
   const isPagination = pagination == undefined || pagination === true;
 
   if (!rmtHeaders || !rmtData) {
@@ -111,14 +118,17 @@ const MyTable = props => {
   return /*#__PURE__*/_react.default.createElement("table", {
     className: rmtClass,
     id: "rmtable"
-  }, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement(_TableHeader.default, {
-    heading: "Heading",
-    subHeading: "SubHeading",
+  }, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement(_Toolbar.default, {
+    rmtHeading: rmtHeading,
+    rmtSubHeading: rmtSubHeading,
     rmtHeaders: rmtHeaders,
     openFullScreen: openFullScreen,
     closeFullScreen: closeFullScreen,
     fullScreen: fullScreen,
-    handleFullScreen: handleFullScreen
+    handleFullScreen: handleFullScreen,
+    rmtCheckAll: rmtCheckAll,
+    globalSearch: globalSearch,
+    handleGlobalSearch: handleGlobalSearch
   }), /*#__PURE__*/_react.default.createElement(_TableHead.default, {
     handleKeyIndex: handleKeyIndex,
     handleName: handleName,
@@ -126,20 +136,28 @@ const MyTable = props => {
     keyIndex: keyIndex,
     shortByKey: shortByKey,
     shortOrder: shortOrder,
-    headers: rmtHeaders
-  }), /*#__PURE__*/_react.default.createElement(_ColumnSearch.default, {
-    headers: rmtHeaders
-  })), /*#__PURE__*/_react.default.createElement("tbody", null, /*#__PURE__*/_react.default.createElement(_TableBody.default, {
+    headers: rmtHeaders,
+    rmtCheckAll: rmtCheckAll,
+    columnSearch: columnSearch,
+    handleColumnSearch: handleColumnSearch
+  }), columnSearch ? /*#__PURE__*/_react.default.createElement(_ColumnSearch.default, {
+    headers: rmtHeaders,
+    rmtCheckAll: rmtCheckAll,
+    columnSearch: columnSearch,
+    handleColumnSearch: handleColumnSearch
+  }) : null), /*#__PURE__*/_react.default.createElement("tbody", null, /*#__PURE__*/_react.default.createElement(_TableBody.default, {
     shortByKey: shortByKey,
     shortOrder: shortOrder,
-    data: sortedData
+    data: sortedData,
+    rmtCheckAll: rmtCheckAll
   })), isPagination && /*#__PURE__*/_react.default.createElement("tfoot", null, /*#__PURE__*/_react.default.createElement(_Pagination.default, {
     rmtHeaders: rmtHeaders,
     selectItem: selectItem,
     handleSelectitem: handleSelectitem,
     paginateSelection: paginateSelection,
     defaultSelection: selection,
-    totalrecords: mapData.length
+    totalrecords: mapData.length,
+    rmtCheckAll: rmtCheckAll
   })));
 };
 

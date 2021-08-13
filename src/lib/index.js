@@ -3,8 +3,8 @@ import TableHead from './components/TableHead.js'
 import TableBody from './components/TableBody.js'
 import Pagination from './components/Pagination.js';
 import ColumnSearch from './components/ColumnSearch.js';
-import TableHeader from './components/TableHeader.js';
 import StyleSheet from './components/Style.js';
+import Toolbar from './components/Toolbar.js';
 
 var elem = document.documentElement;
 function openFullScreen() {
@@ -26,6 +26,8 @@ function closeFullScreen() {
         document.msExitFullscreen();
     }
 }
+
+
 
 function sortFunction(arr, keyIndex, key, order, select, isPagination) {
 
@@ -55,7 +57,12 @@ const MyTable = (props) => {
         rmtClass,
         pagination,
         paginateSelection,
-        defaultSelection } = props
+        defaultSelection,
+        rmtHeading,
+        rmtSubHeading,
+        rmtCheckAll,
+        rmtColumnSearch,
+        rmtGlobalSearch } = props
 
     let selection = defaultSelection ? defaultSelection : 5
 
@@ -65,6 +72,9 @@ const MyTable = (props) => {
     const [selectItem, handleSelectitem] = useState(selection);
     const [totalrecords, handleTotalRecords] = useState(0);
     const [fullScreen, handleFullScreen] = useState(false);
+    const [columnSearch, handleColumnSearch] = useState(rmtColumnSearch);
+    const [globalSearch, handleGlobalSearch] = useState(rmtGlobalSearch);
+
     const isPagination = (pagination == undefined || pagination === true)
 
     if (!rmtHeaders || !rmtData) {
@@ -91,14 +101,18 @@ const MyTable = (props) => {
 
     return <table className={rmtClass} id="rmtable">
         <thead >
-            <TableHeader
-                heading="Heading"
-                subHeading="SubHeading"
+
+            <Toolbar
+                rmtHeading={rmtHeading}
+                rmtSubHeading={rmtSubHeading}
                 rmtHeaders={rmtHeaders}
                 openFullScreen={openFullScreen}
                 closeFullScreen={closeFullScreen}
                 fullScreen={fullScreen}
-                handleFullScreen={handleFullScreen} />
+                handleFullScreen={handleFullScreen}
+                rmtCheckAll={rmtCheckAll}
+                globalSearch={globalSearch}
+                handleGlobalSearch={handleGlobalSearch} />
             <TableHead
                 handleKeyIndex={handleKeyIndex}
                 handleName={handleName}
@@ -107,16 +121,24 @@ const MyTable = (props) => {
                 shortByKey={shortByKey}
                 shortOrder={shortOrder}
                 headers={rmtHeaders}
+                rmtCheckAll={rmtCheckAll}
+                columnSearch={columnSearch}
+                handleColumnSearch={handleColumnSearch}
             />
-            <ColumnSearch
-                headers={rmtHeaders} />
+
+            {columnSearch ? <ColumnSearch
+                headers={rmtHeaders}
+                rmtCheckAll={rmtCheckAll}
+                columnSearch={columnSearch}
+                handleColumnSearch={handleColumnSearch} /> : null}
         </thead>
 
         <tbody>
             <TableBody
                 shortByKey={shortByKey}
                 shortOrder={shortOrder}
-                data={sortedData} />
+                data={sortedData}
+                rmtCheckAll={rmtCheckAll} />
         </tbody>
 
         {isPagination && <tfoot>
@@ -126,7 +148,8 @@ const MyTable = (props) => {
                 handleSelectitem={handleSelectitem}
                 paginateSelection={paginateSelection}
                 defaultSelection={selection}
-                totalrecords={mapData.length} />
+                totalrecords={mapData.length}
+                rmtCheckAll={rmtCheckAll} />
         </tfoot>}
     </table >
 }

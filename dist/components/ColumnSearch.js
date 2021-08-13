@@ -11,11 +11,15 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 const ColumnSearch = props => {
   const {
-    headers
+    headers,
+    rmtCheckAll,
+    handleColumnSearch,
+    columnSearch
   } = props;
-  return /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", {
+  let emptyTh = rmtCheckAll ? /*#__PURE__*/_react.default.createElement("th", {
     className: "tx-c"
-  }, " "), headers.map((h, i) => {
+  }, " ") : null;
+  return /*#__PURE__*/_react.default.createElement("tr", null, emptyTh, headers.map((h, i) => {
     return /*#__PURE__*/_react.default.createElement("th", {
       key: i
     }, /*#__PURE__*/_react.default.createElement("input", {
@@ -24,6 +28,8 @@ const ColumnSearch = props => {
   }), /*#__PURE__*/_react.default.createElement("th", {
     className: "tx-c"
   }, /*#__PURE__*/_react.default.createElement("img", {
+    onClick: () => handleColumnSearch(false),
+    className: "cr-p",
     src: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAAV0lEQVQ4jWNgGExgOgMDgzQR6qShajGAOAMDw0YChkgQUoPPEIKa8RlCtGZsGkjWDAPSDAwMW6EYp2YmUk0lFlDkBWwaiDYEn0KChhBjC97ERnFSHhgAAP3XEqdC/dYtAAAAAElFTkSuQmCC"
   })));
 };

@@ -19,7 +19,8 @@ const Pagination = props => {
     handleSelectitem,
     paginateSelection,
     defaultSelection,
-    totalrecords
+    totalrecords,
+    rmtCheckAll
   } = props;
   let pages;
 
@@ -29,8 +30,9 @@ const Pagination = props => {
     pages = [5, 10, 15, 20];
   }
 
+  let colspan = rmtCheckAll ? rmtHeaders.length + 2 : rmtHeaders.length + 1;
   return /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", {
-    colSpan: rmtHeaders.length + 2
+    colSpan: colspan
   }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", {
     className: "fl"
   }, /*#__PURE__*/_react.default.createElement(_SelectPagination.default, {

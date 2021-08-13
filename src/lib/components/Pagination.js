@@ -10,7 +10,8 @@ const Pagination = (props) => {
         handleSelectitem,
         paginateSelection,
         defaultSelection,
-        totalrecords
+        totalrecords,
+        rmtCheckAll
     } = props
 
     let pages;
@@ -19,8 +20,10 @@ const Pagination = (props) => {
     } else {
         pages = [5, 10, 15, 20]
     }
+
+    let colspan = rmtCheckAll ? rmtHeaders.length + 2 : rmtHeaders.length + 1
     return <tr >
-        <td colSpan={rmtHeaders.length + 2}>
+        <td colSpan={colspan}>
             <div >
                 <div className="fl">
                     <SelectPagination
