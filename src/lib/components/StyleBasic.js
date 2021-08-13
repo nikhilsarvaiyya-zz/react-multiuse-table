@@ -1,7 +1,7 @@
 import React from 'react';
 
 const StyleSheet = () => {
-    return true
+  return true
 }
 document.head.innerHTML += `
   <style>
@@ -29,16 +29,23 @@ document.head.innerHTML += `
   }
   th{
     background:#fafafa;
-    position: sticky;
-          top: 0; /* Don't forget this, required for the stickiness */
-          box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
+    
+         
   }
-  thead{
+  thead tr:nth-child(2) {
+    position: sticky;
+    top: -1px; 
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 8px -4px;
+    z-index:4
+  }
 
+  thead {
+    
   }
   tbody{
 
    }
+ 
   ul{
       list-style:none;
       display:block;
