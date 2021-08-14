@@ -77,7 +77,9 @@ const TableBody = (props) => {
     return sortedData.map((d, i1) => {
         return <tr key={i1}>
             {rmtCheckAll &&
-                <th className="tx-c">
+                <th
+                    className="tx-c p-s l-0"
+                    style={{ boxShadow: "rgb(0 0 0) -1px 0px 8px -8px inset" }}>
                     <div>
                         <input type="checkbox" />
                     </div>
@@ -86,7 +88,8 @@ const TableBody = (props) => {
                 return <td key={i2} > {m} </td>
             })}
             {rmtActions && rmtActions.length !== 0 &&
-                <td className="tx-c">
+                <th className="tx-c p-s r-0"
+                    style={{ boxShadow: "rgb(0 0 0) 1px 0px 8px -8px inset" }}>
                     {
                         <div className="dropdown">
                             <button className="dropbtn"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAAiElEQVQ4jc2SwQ1AQBREX5BogiJQgxroRA1utEMPbq4uqnAQDjaxlz8JBzHJJD/5s7OZ2YU/IwVGx+SNQQscjq0lCoTBZMyPUAC5EkRiFwMlV4QZ2J7e3nB30Fgi1YGPw1qoCJ13uLdEoTDYuXIvwCp0JmruDipLpDrIvFk+pYUEGBxffeVvcAIAMhhp+VgEPQAAAABJRU5ErkJggg==" /></button>
@@ -97,8 +100,9 @@ const TableBody = (props) => {
                             </div>
                         </div>
                     }
-                </td>}
-        </tr>
+                </th>
+            }
+        </tr >
     })
 
 }

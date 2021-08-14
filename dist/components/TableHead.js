@@ -28,7 +28,7 @@ const TableHead = props => {
   }
 
   return /*#__PURE__*/_react.default.createElement("tr", null, rmtCheckAll && /*#__PURE__*/_react.default.createElement("th", {
-    className: "tx-c",
+    className: "tx-c p-s l-0",
     style: {
       width: "24px"
     }
@@ -41,6 +41,9 @@ const TableHead = props => {
         handleName(h);
         handleOrder(h.key === shortByKey ? shortOrder : -shortOrder);
         handleKeyIndex(i);
+      },
+      style: {
+        minWidth: "100px"
       },
       key: i
     }, /*#__PURE__*/_react.default.createElement("div", {
@@ -68,7 +71,7 @@ const TableHead = props => {
       src: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAAxElEQVQ4jaXRTU5CMRSG4QeBRCWCBi8RF+HIObBVVoKSwEQXYZzo1KEEdGCvaUhvb41f0qSnp++b/vDPdDK9Pu7D/Am71KZuBp7jFpe4wSv2JYIeZqiitTNMguSQE9TwJCE+T0liQReLBjiWVHjBF5xEzeujYzelwrgujn9h6ucBc/nEW130okYHdxi2CD7wLlwhziIslox5ynyKxwJ4HfYmM8AqA29w0XJFAzw0wG3v85shthH8jKtSuM4IyzBGf4WL8w1I/jc6Uk9dWQAAAABJRU5ErkJggg=="
     }))));
   }), isActions && /*#__PURE__*/_react.default.createElement("th", {
-    className: "tx-c cr-p",
+    className: "tx-c cr-p p-s r-0",
     style: {
       width: "24px"
     }

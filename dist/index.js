@@ -97,10 +97,9 @@ const MyTable = props => {
     columnSpan = columnSpan + 1;
   }
 
-  return /*#__PURE__*/_react.default.createElement("table", {
-    className: rmtClass,
-    id: "rmtable"
-  }, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement(_Toolbar.default, {
+  return /*#__PURE__*/_react.default.createElement("div", {
+    className: "rmtMainContainer"
+  }, /*#__PURE__*/_react.default.createElement(_Toolbar.default, {
     rmtHeading: rmtHeading,
     rmtSubHeading: rmtSubHeading,
     rmtHeaders: rmtHeaders,
@@ -118,7 +117,12 @@ const MyTable = props => {
     handleGlobalSearchValue: handleGlobalSearchValue,
     handleDarkMode: handleDarkMode,
     darkMode: darkMode
-  }), /*#__PURE__*/_react.default.createElement(_TableHead.default, {
+  }), /*#__PURE__*/_react.default.createElement("div", {
+    className: "rmtTableContainer"
+  }, /*#__PURE__*/_react.default.createElement("table", {
+    className: rmtClass,
+    id: "rmtable"
+  }, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement(_TableHead.default, {
     handleKeyIndex: handleKeyIndex,
     handleName: handleName,
     handleOrder: handleOrder,
@@ -151,7 +155,7 @@ const MyTable = props => {
     selectItem: selectItem,
     isPagination: isPagination,
     globalSearchValue: globalSearchValue
-  })), isPagination && /*#__PURE__*/_react.default.createElement("tfoot", null, /*#__PURE__*/_react.default.createElement(_Pagination.default, {
+  }), /*#__PURE__*/_react.default.createElement("tfoot", null)))), isPagination && /*#__PURE__*/_react.default.createElement(_Pagination.default, {
     rmtHeaders: rmtHeaders,
     selectItem: selectItem,
     handleSelectitem: handleSelectitem,
@@ -161,7 +165,7 @@ const MyTable = props => {
     rmtCheckAll: rmtCheckAll,
     isActions: isActions,
     columnSpan: columnSpan
-  })));
+  }));
 };
 
 var _default = MyTable;

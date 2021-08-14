@@ -7,6 +7,21 @@ const rmtHeaders = [
   { key: 'phone', label: "Phone" },
   { key: 'gender', label: "Gender" },
   { key: 'city', label: "City" },
+  { key: 'name', label: "Full Name" },
+  { key: 'email', label: "Email" },
+  { key: 'phone', label: "Phone" },
+  { key: 'gender', label: "Gender" },
+  { key: 'city', label: "City" },
+  { key: 'name', label: "Full Name" },
+  { key: 'email', label: "Email" },
+  { key: 'phone', label: "Phone" },
+  { key: 'gender', label: "Gender" },
+  { key: 'city', label: "City" },
+  { key: 'name', label: "Full Name" },
+  { key: 'email', label: "Email" },
+  { key: 'phone', label: "Phone" },
+  { key: 'gender', label: "Gender" },
+  { key: 'city', label: "City" },
 
 ]
 
@@ -28,7 +43,7 @@ function App() {
 
     pagination={true}
     paginateSelection={[5, 10, 100]}
-    defaultSelection={10}
+    defaultSelection={5}
 
     rmtColumnSearch={true}
     rmtGlobalSearch={true}

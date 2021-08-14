@@ -24,24 +24,21 @@ const Pagination = (props) => {
     }
 
 
-    return <tr >
-        <td colSpan={columnSpan}>
-            <div className="w-100" >
-                <div className="fl w-50">
-                    <SelectPagination
-                        pages={pages}
-                        defaultSelection={defaultSelection}
-                        handleSelectitem={handleSelectitem}
-                        totalrecords={totalrecords}
-                    />
-                </div>
-                <div className="fr w-50 tx-r">
-                    <PaginationBar />
-                </div>
-            </div>
+    return <div className="rmtPagnation" >
+        <div className="fl w-50">
+            <SelectPagination
+                pages={pages}
+                defaultSelection={defaultSelection}
+                handleSelectitem={handleSelectitem}
+                totalrecords={totalrecords}
+            />
+        </div>
+        <div className="fr w-50 tx-r">
+            <PaginationBar />
+        </div>
+    </div>
 
-        </td>
-    </tr>
+
 }
 
 export default Pagination;

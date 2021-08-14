@@ -4,7 +4,7 @@ const ColumnSearch = (props) => {
 
     const { headers, rmtCheckAll, handleColumnSearch, columnSearch,
         isActions } = props
-    let emptyTh = rmtCheckAll ? <th className="tx-c"> </th> : null
+    let emptyTh = rmtCheckAll ? <th className="tx-c p-s l-0"> </th> : null
     return <tr >
         {emptyTh}
         {headers.map((h, i) => {
@@ -13,7 +13,7 @@ const ColumnSearch = (props) => {
             </th>
         })}
         {isActions &&
-            <th className="tx-c" >
+            <th className="tx-c p-s r-0" >
                 <img
                     onClick={() => handleColumnSearch(false)}
                     className="cr-p" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAAV0lEQVQ4jWNgGExgOgMDgzQR6qShajGAOAMDw0YChkgQUoPPEIKa8RlCtGZsGkjWDAPSDAwMW6EYp2YmUk0lFlDkBWwaiDYEn0KChhBjC97ERnFSHhgAAP3XEqdC/dYtAAAAAElFTkSuQmCC" />

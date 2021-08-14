@@ -28,13 +28,12 @@ const Toolbar = props => {
     handleGlobalSearchValue,
     darkMode,
     handleDarkMode
-  } = props;
-  return /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", {
-    colSpan: columnSpan,
-    style: {
-      padding: "5px"
-    }
-  }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", {
+  } = props; // return <tr >
+  //     <th colSpan={columnSpan} style={{ padding: "5px" }}>
+
+  return /*#__PURE__*/_react.default.createElement("div", {
+    className: "rmtToolbar"
+  }, /*#__PURE__*/_react.default.createElement("div", {
     className: "fl",
     style: rmtSubHeading ? {
       padding: "0 0 0 5px"
@@ -106,7 +105,8 @@ const Toolbar = props => {
       handleFullScreen(false);
     },
     src: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAApElEQVQ4jb2SXQrCMBCEP3/yXqWXEHxoyS2qDzlAb+1F9AC2vmx12SYrBHQgLJmZLLNh4QfYAZcMfxXtKzpgBg6KOwrXWfO2kEBX7Vsl2EsNwFmMJyfdoj2Bm1QAkkTUp1UP24w+AGyUqTH3uxgXX6O0CXg4Sf+I2hFm0d+o+cSkGwSgByIwOg1G8fR8VmCF6DSI1pzbxMnUEldEwMwnSDixq/EC9+wq3CrMRXcAAAAASUVORK5CYII="
-  })) : null)))));
+  })) : null))); //     </th>
+  // </tr>
 };
 
 var _default = Toolbar;

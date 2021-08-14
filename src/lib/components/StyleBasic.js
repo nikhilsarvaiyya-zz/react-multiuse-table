@@ -5,21 +5,29 @@ const StyleSheet = () => {
 }
 document.head.innerHTML += `
   <style>
-  .trans{
-    -webkit-transition: all .5s ease;
-    -moz-transition: all .5s ease;
-    -o-transition: all .5s ease;
-    -ms-transition: all .5s ease;
-    transition: all .5s ease;
+  .rmtMainContainer{
+    font-family: arial, sans-serif;
+    color:#444444;
+    background:white;
+    font-size:13px;
+  }
+  .rmtTableContainer{
+    width:100%;
+    margin:0;
+    padding:0;
+    overflow-x: auto;
+    border-left:1px solid #efefef;
+    border-right:1px solid #efefef;
+    
   }
   table {
-    font-family: arial, sans-serif;
+    
+
+    border: none;
     border-collapse: collapse;
+    border-spacing: 0;
     width: 100%;
-    color:#444444;
-   background:white;
-    font-size:13px;
-    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;
+    
   }
   
   td, th {
@@ -28,9 +36,7 @@ document.head.innerHTML += `
     padding: 8px;
   }
   th{
-    background:#fafafa;
-    
-         
+    background:#fafafa;    
   }
   thead tr:nth-child(2) {
     position: sticky;
@@ -45,6 +51,13 @@ document.head.innerHTML += `
   tbody{
 
    }
+   .trans{
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    -o-transition: all .5s ease;
+    -ms-transition: all .5s ease;
+    transition: all .5s ease;
+  }
  
   ul{
       list-style:none;
@@ -83,9 +96,7 @@ document.head.innerHTML += `
     }
 
     input[type="checkbox" ]{
-      
-        border:1px solid #cccccc
-        
+      border:1px solid #cccccc  
     }
 
     select{
@@ -218,13 +229,51 @@ document.head.innerHTML += `
           padding:2px 0;
           font-size:80%
         } 
+
+        .rmtToolbar,
+        .rmtPagnation{
+          display: block;
+          float: left;
+          width: calc(100% - 10px);
+          padding: 5px;
+          background:#fafafa;  
+        }
+        .rmtToolbar{ 
+          border-right: 1px solid #efefef;
+          border-left: 1px solid #efefef;
+          border-top: 1px solid #efefef;
+        }
+        
+        .rmtPagnation{ 
+          border-right: 1px solid #efefef;
+          border-left: 1px solid #efefef;
+          border-bottom: 1px solid #efefef;
+        }
         .p-a{
           position:absolute
         } 
         .p-r{
           position:relative
         }
-         
+        .p-s{
+          position:sticky;
+        }
+        .p-f{
+          position:fixed;
+        }
+        .t-0{
+          top:0px
+        }
+        .l-0{
+          left:0px
+        }
+        .b-0{
+          bottom:0px
+        }
+        .r-0{
+          right:0px
+        }
+
   </style>`
 export default StyleSheet;
 

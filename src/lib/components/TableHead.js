@@ -18,7 +18,7 @@ const TableHead = (props) => {
 
     return <tr >
         {rmtCheckAll &&
-            <th className="tx-c" style={{ width: "24px" }}>
+            <th className="tx-c p-s l-0" style={{ width: "24px" }}>
                 <div>
                     <input type="checkbox" />
                 </div>
@@ -31,6 +31,7 @@ const TableHead = (props) => {
                     handleOrder(h.key === shortByKey ? shortOrder : -shortOrder);
                     handleKeyIndex(i)
                 }}
+                style={{ minWidth: "100px" }}
                 key={i}>
                 <div className="lh-1">
                     <label style={{
@@ -48,7 +49,7 @@ const TableHead = (props) => {
             </th>
         })}
 
-        {isActions && <th className="tx-c cr-p" style={{ width: "24px" }}>
+        {isActions && <th className="tx-c cr-p p-s r-0" style={{ width: "24px" }}>
             {!columnSearch && <img
                 onClick={() => handleColumnSearch(true)}
                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAAwElEQVQ4jdXSsWoCQRDG8d+ZEEWbWAkKh1iIjZB0FiGFjS9k6TPYamulpkhAAnkOy1R5hJBWUqS4EyTcnXt2ftXuN/MfZnYnwif2ymmIEX7gHe0ScDNlakejjQ+0AuA6XjH4H4ixw30BfIcNHvMS+nhDIyN2gxWezrX4gBdUT7wIS0yygCjDe8YMX+k9xkIyYrDWktduYluUeJvj/+I7PR+KClTKtHVdBRoYhxTI+kaSPZ+ih46cHQhRF/NL4SD9AXMyFQWiX47OAAAAAElFTkSuQmCC" />

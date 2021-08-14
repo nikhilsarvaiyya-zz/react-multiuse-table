@@ -89,15 +89,21 @@ const TableBody = props => {
     return /*#__PURE__*/_react.default.createElement("tr", {
       key: i1
     }, rmtCheckAll && /*#__PURE__*/_react.default.createElement("th", {
-      className: "tx-c"
+      className: "tx-c p-s l-0",
+      style: {
+        boxShadow: "rgb(0 0 0) -1px 0px 8px -8px inset"
+      }
     }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("input", {
       type: "checkbox"
     }))), d.map((m, i2) => {
       return /*#__PURE__*/_react.default.createElement("td", {
         key: i2
       }, " ", m, " ");
-    }), rmtActions && rmtActions.length !== 0 && /*#__PURE__*/_react.default.createElement("td", {
-      className: "tx-c"
+    }), rmtActions && rmtActions.length !== 0 && /*#__PURE__*/_react.default.createElement("th", {
+      className: "tx-c p-s r-0",
+      style: {
+        boxShadow: "rgb(0 0 0) 1px 0px 8px -8px inset"
+      }
     }, /*#__PURE__*/_react.default.createElement("div", {
       className: "dropdown"
     }, /*#__PURE__*/_react.default.createElement("button", {

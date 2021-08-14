@@ -71,82 +71,85 @@ const MyTable = (props) => {
         columnSpan = columnSpan + 1
     }
 
-    return <table className={rmtClass} id="rmtable">
-        <thead >
+    return <div className="rmtMainContainer">
+        <Toolbar
+            rmtHeading={rmtHeading}
+            rmtSubHeading={rmtSubHeading}
+            rmtHeaders={rmtHeaders}
+            openFullScreen={openFullScreen}
+            closeFullScreen={closeFullScreen}
+            fullScreen={fullScreen}
+            handleFullScreen={handleFullScreen}
+            rmtCheckAll={rmtCheckAll}
+            globalSearch={globalSearch}
+            handleGlobalSearch={handleGlobalSearch}
+            isActions={isActions}
+            columnSpan={columnSpan}
+            handleColumnSearch={handleColumnSearch}
+            columnSearch={columnSearch}
+            handleGlobalSearchValue={handleGlobalSearchValue}
+            handleDarkMode={handleDarkMode}
+            darkMode={darkMode} />
+        <div className="rmtTableContainer">
+            <table className={rmtClass} id="rmtable">
+                <thead >
+                    <TableHead
+                        handleKeyIndex={handleKeyIndex}
+                        handleName={handleName}
+                        handleOrder={handleOrder}
+                        keyIndex={keyIndex}
+                        shortByKey={shortByKey}
+                        shortOrder={shortOrder}
+                        headers={rmtHeaders}
+                        rmtCheckAll={rmtCheckAll}
+                        columnSearch={columnSearch}
+                        handleColumnSearch={handleColumnSearch}
+                        isActions={isActions}
+                        columnSpan={columnSpan}
+                    />
 
-            <Toolbar
-                rmtHeading={rmtHeading}
-                rmtSubHeading={rmtSubHeading}
-                rmtHeaders={rmtHeaders}
-                openFullScreen={openFullScreen}
-                closeFullScreen={closeFullScreen}
-                fullScreen={fullScreen}
-                handleFullScreen={handleFullScreen}
-                rmtCheckAll={rmtCheckAll}
-                globalSearch={globalSearch}
-                handleGlobalSearch={handleGlobalSearch}
-                isActions={isActions}
-                columnSpan={columnSpan}
-                handleColumnSearch={handleColumnSearch}
-                columnSearch={columnSearch}
-                handleGlobalSearchValue={handleGlobalSearchValue}
-                handleDarkMode={handleDarkMode}
-                darkMode={darkMode} />
-            <TableHead
-                handleKeyIndex={handleKeyIndex}
-                handleName={handleName}
-                handleOrder={handleOrder}
-                keyIndex={keyIndex}
-                shortByKey={shortByKey}
-                shortOrder={shortOrder}
-                headers={rmtHeaders}
-                rmtCheckAll={rmtCheckAll}
-                columnSearch={columnSearch}
-                handleColumnSearch={handleColumnSearch}
-                isActions={isActions}
-                columnSpan={columnSpan}
-            />
+                    {columnSearch ? <ColumnSearch
+                        headers={rmtHeaders}
+                        rmtCheckAll={rmtCheckAll}
+                        columnSearch={columnSearch}
+                        handleColumnSearch={handleColumnSearch}
+                        isActions={isActions}
+                        columnSpan={columnSpan} /> : null}
+                </thead>
 
-            {columnSearch ? <ColumnSearch
-                headers={rmtHeaders}
-                rmtCheckAll={rmtCheckAll}
-                columnSearch={columnSearch}
-                handleColumnSearch={handleColumnSearch}
-                isActions={isActions}
-                columnSpan={columnSpan} /> : null}
-        </thead>
+                <tbody>
+                    <TableBody
+                        shortByKey={shortByKey}
+                        shortOrder={shortOrder}
+                        rmtData={rmtData}
+                        rmtHeaders={rmtHeaders}
+                        rmtCheckAll={rmtCheckAll}
+                        rmtActions={rmtActions}
+                        isActions={isActions}
+                        columnSpan={columnSpan}
+                        keyIndex={keyIndex}
+                        selectItem={selectItem}
+                        isPagination={isPagination}
+                        globalSearchValue={globalSearchValue}
 
-        <tbody>
-            <TableBody
-                shortByKey={shortByKey}
-                shortOrder={shortOrder}
-                rmtData={rmtData}
-                rmtHeaders={rmtHeaders}
-                rmtCheckAll={rmtCheckAll}
-                rmtActions={rmtActions}
-                isActions={isActions}
-                columnSpan={columnSpan}
-                keyIndex={keyIndex}
-                selectItem={selectItem}
-                isPagination={isPagination}
-                globalSearchValue={globalSearchValue}
+                    />
+                    <tfoot></tfoot>
+                </tbody>
+            </table >
+        </div>
+        {isPagination && <Pagination
+            rmtHeaders={rmtHeaders}
+            selectItem={selectItem}
+            handleSelectitem={handleSelectitem}
+            paginateSelection={paginateSelection}
+            defaultSelection={selection}
+            totalrecords={20}
+            rmtCheckAll={rmtCheckAll}
+            isActions={isActions}
+            columnSpan={columnSpan} />
+        }
 
-            />
-        </tbody>
-
-        {isPagination && <tfoot>
-            <Pagination
-                rmtHeaders={rmtHeaders}
-                selectItem={selectItem}
-                handleSelectitem={handleSelectitem}
-                paginateSelection={paginateSelection}
-                defaultSelection={selection}
-                totalrecords={20}
-                rmtCheckAll={rmtCheckAll}
-                isActions={isActions}
-                columnSpan={columnSpan} />
-        </tfoot>}
-    </table >
+    </div>
 }
 
 
