@@ -38,7 +38,7 @@ const data = [
 />
 ```
 
-## Column search and Globel search
+## Column search or Global search
 ```js
 
 <ReactMultiuseTable
@@ -47,7 +47,7 @@ const data = [
 />
 ```
 
-## collect params for serverside 
+## Collect Params for Serverside  
 
 ```js
 
