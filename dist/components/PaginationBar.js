@@ -11,7 +11,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 const PaginationBar = props => {
   const {
-    defaultSelection,
+    rmtDefaultSelection,
     handleSelectitem,
     pages
   } = props;

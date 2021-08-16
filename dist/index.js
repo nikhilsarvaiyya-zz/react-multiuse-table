@@ -58,18 +58,18 @@ const MyTable = props => {
     rmtData,
     rmtHeaders,
     rmtClass,
-    pagination,
-    paginateSelection,
-    defaultSelection,
+    rmtPagination,
+    rmtPaginateSelection,
+    rmtDefaultSelection,
     rmtHeading,
     rmtSubHeading,
     rmtCheckAll,
     rmtColumnSearch,
     rmtGlobalSearch,
     rmtActions,
-    query
+    handleSubmit
   } = props;
-  let selection = defaultSelection ? defaultSelection : 5;
+  let selection = rmtDefaultSelection ? rmtDefaultSelection : 5;
   const [keyIndex, handleKeyIndex] = (0, _react.useState)(0);
   const [shortByKey, handleName] = (0, _react.useState)('name');
   const [shortOrder, handleOrder] = (0, _react.useState)(1);
@@ -88,15 +88,19 @@ const MyTable = props => {
   const [checkSingleRow, handleCheckSingleRow] = (0, _react.useState)([]);
   const [setQuery, handlesetQuery] = (0, _react.useState)({});
   (0, _react.useEffect)(() => {
-    handlesetQuery(selectItem, 10, shortOrder);
-    query({
-      limit: Number(selectItem),
-      skip: 10,
-      order: Number(setQuery)
-    });
-  }, [selectItem, shortOrder]);
-  console.log(columnSearchArray);
-  const isPagination = pagination == undefined || pagination === true;
+    handlesetQuery(selectItem, 10, shortOrder, columnSearchValue, globalSearchValue);
+
+    if (handleSubmit) {
+      handleSubmit({
+        limit: Number(selectItem),
+        skip: 10,
+        order: Number(shortOrder),
+        columnSearch: columnSearchValue,
+        globalSearch: globalSearchValue
+      });
+    }
+  }, [selectItem, 10, shortOrder, columnSearchValue, globalSearchValue]);
+  const isPagination = rmtPagination == undefined || rmtPagination === true;
 
   if (!rmtHeaders) {
     return "Headers is not Provided";
@@ -181,8 +185,8 @@ const MyTable = props => {
     rmtHeaders: rmtHeaders,
     selectItem: selectItem,
     handleSelectitem: handleSelectitem,
-    paginateSelection: paginateSelection,
-    defaultSelection: selection,
+    rmtPaginateSelection: rmtPaginateSelection,
+    rmtDefaultSelection: selection,
     totalrecords: totalrecords,
     rmtCheckAll: rmtCheckAll,
     isActions: isActions,

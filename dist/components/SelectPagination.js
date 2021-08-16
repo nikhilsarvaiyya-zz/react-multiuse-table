@@ -11,7 +11,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 const SelectPagination = props => {
   const {
-    defaultSelection,
+    rmtDefaultSelection,
     handleSelectitem,
     pages,
     totalrecords
@@ -23,7 +23,7 @@ const SelectPagination = props => {
   }, "Total Records: ", totalrecords), /*#__PURE__*/_react.default.createElement("div", {
     className: "fl mr-1"
   }, "Records per page \xA0", /*#__PURE__*/_react.default.createElement("select", {
-    defaultValue: defaultSelection,
+    defaultValue: rmtDefaultSelection,
     onChange: e => handleSelectitem(e.target.value)
   }, pages.map((p, i) => {
     return /*#__PURE__*/_react.default.createElement("option", {

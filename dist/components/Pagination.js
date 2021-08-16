@@ -16,14 +16,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 const Pagination = props => {
   const {
     handleSelectitem,
-    paginateSelection,
-    defaultSelection,
+    rmtPaginateSelection,
+    rmtDefaultSelection,
     totalrecords
   } = props;
   let pages;
 
-  if (paginateSelection) {
-    pages = paginateSelection;
+  if (rmtPaginateSelection) {
+    pages = rmtPaginateSelection;
   } else {
     pages = [5, 10, 15, 20];
   }
@@ -34,7 +34,7 @@ const Pagination = props => {
     className: "fl w-50"
   }, /*#__PURE__*/_react.default.createElement(_SelectPagination.default, {
     pages: pages,
-    defaultSelection: defaultSelection,
+    rmtDefaultSelection: rmtDefaultSelection,
     handleSelectitem: handleSelectitem,
     totalrecords: totalrecords
   })), /*#__PURE__*/_react.default.createElement("div", {
