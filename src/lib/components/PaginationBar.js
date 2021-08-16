@@ -2,7 +2,7 @@ import React from 'react';
 
 const PaginationBar = (props) => {
 
-    const { defaultSelection, handleSelectitem, pages } = props
+    const { rmtDefaultSelection, handleSelectitem, pages } = props
 
     return <ul >
         <li >

@@ -7,14 +7,14 @@ const Pagination = (props) => {
 
     const {
         handleSelectitem,
-        paginateSelection,
-        defaultSelection,
+        rmtPaginateSelection,
+        rmtDefaultSelection,
         totalrecords,
     } = props
 
     let pages;
-    if (paginateSelection) {
-        pages = paginateSelection
+    if (rmtPaginateSelection) {
+        pages = rmtPaginateSelection
     } else {
         pages = [5, 10, 15, 20]
     }
@@ -24,7 +24,7 @@ const Pagination = (props) => {
         <div className="fl w-50">
             <SelectPagination
                 pages={pages}
-                defaultSelection={defaultSelection}
+                rmtDefaultSelection={rmtDefaultSelection}
                 handleSelectitem={handleSelectitem}
                 totalrecords={totalrecords}
             />

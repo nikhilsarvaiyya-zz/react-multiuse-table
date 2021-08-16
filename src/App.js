@@ -24,8 +24,8 @@ const actions = [
   { key: 'view', label: "View" },
 ]
 
-const query = ({ limit, skip, order }) => {
-  //console.log({ skip, limit, order })
+const handleSubmit = ({ skip, limit, order, columnSearch, globalSearch }) => {
+  console.log({ skip, limit, order, columnSearch, globalSearch })
 }
 
 function App() {
@@ -37,9 +37,9 @@ function App() {
     rmtSubHeading="SubHeading"
     rmtClass="table"
 
-    pagination={true}
-    paginateSelection={[5, 10, 100]}
-    defaultSelection={10}
+    rmtPagination={true}
+    rmtPaginateSelection={[5, 10, 100]}
+    rmtDefaultSelection={10}
 
     rmtColumnSearch={true}
     rmtGlobalSearch={false}
@@ -47,7 +47,7 @@ function App() {
     rmtCheckAll={true}
     rmtActions={actions}
 
-    query={query}
+
   />
 }
 

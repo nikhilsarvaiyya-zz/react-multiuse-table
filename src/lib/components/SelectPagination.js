@@ -2,7 +2,7 @@ import React from 'react';
 
 const SelectPagination = (props) => {
 
-    const { defaultSelection, handleSelectitem, pages, totalrecords } = props
+    const { rmtDefaultSelection, handleSelectitem, pages, totalrecords } = props
 
     return <div className="fl db lh-2">
         <div className="fl mr-1">
@@ -11,7 +11,7 @@ const SelectPagination = (props) => {
         <div className="fl mr-1">
             Records per page &nbsp;
             <select
-                defaultValue={defaultSelection}
+                defaultValue={rmtDefaultSelection}
                 onChange={(e) => handleSelectitem(e.target.value)}
             >
                 {pages.map((p, i) => {

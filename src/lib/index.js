@@ -33,19 +33,19 @@ const MyTable = (props) => {
         rmtData,
         rmtHeaders,
         rmtClass,
-        pagination,
-        paginateSelection,
-        defaultSelection,
+        rmtPagination,
+        rmtPaginateSelection,
+        rmtDefaultSelection,
         rmtHeading,
         rmtSubHeading,
         rmtCheckAll,
         rmtColumnSearch,
         rmtGlobalSearch,
         rmtActions,
-        query
+        handleSubmit
     } = props
 
-    let selection = defaultSelection ? defaultSelection : 5
+    let selection = rmtDefaultSelection ? rmtDefaultSelection : 5
 
     const [keyIndex, handleKeyIndex] = useState(0);
     const [shortByKey, handleName] = useState('name');
@@ -69,16 +69,21 @@ const MyTable = (props) => {
     const [setQuery, handlesetQuery] = useState({});
 
     useEffect(() => {
-        handlesetQuery(selectItem, 10, shortOrder)
-        query({
-            limit: Number(selectItem),
-            skip: 10,
-            order: Number(setQuery)
-        })
-    }, [selectItem, shortOrder])
+        handlesetQuery(selectItem, 10, shortOrder, columnSearchValue, globalSearchValue)
+        if (handleSubmit) {
+            handleSubmit({
+                limit: Number(selectItem),
+                skip: 10,
+                order: Number(shortOrder),
+                columnSearch: columnSearchValue,
+                globalSearch: globalSearchValue
 
-    console.log(columnSearchArray)
-    const isPagination = (pagination == undefined || pagination === true)
+            })
+        }
+    }, [selectItem, 10, shortOrder, columnSearchValue, globalSearchValue])
+
+
+    const isPagination = (rmtPagination == undefined || rmtPagination === true)
 
     if (!rmtHeaders) {
         return "Headers is not Provided"
@@ -169,8 +174,8 @@ const MyTable = (props) => {
             rmtHeaders={rmtHeaders}
             selectItem={selectItem}
             handleSelectitem={handleSelectitem}
-            paginateSelection={paginateSelection}
-            defaultSelection={selection}
+            rmtPaginateSelection={rmtPaginateSelection}
+            rmtDefaultSelection={selection}
             totalrecords={totalrecords}
             rmtCheckAll={rmtCheckAll}
             isActions={isActions}

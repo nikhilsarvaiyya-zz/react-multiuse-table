@@ -28,20 +28,29 @@ function sortFunction(arr,
 
     if (globalSearchValue.length > 0) {
         sortData = sortData.filter((f, i) => {
-            return f.name.toLowerCase().includes(globalSearchValue.toLowerCase())
+            let ky = Object.entries(f);
+            let key1 = ky[0][0];
+            let key2 = ky[0][0];
+            let value1 = ky[0][1]
+            let value2 = ky[0][2]
+            if (typeof value1 !== 'number') {
+                return key1.toLowerCase().includes(value1)
+            } else {
+                return key2.toLowerCase().includes(value2)
+            }
+
+
         })
     }
 
     if (columnSearchValue && Object.keys(columnSearchValue).length !== 0) {
         sortData = sortData.filter((f, i) => {
-            let abc = Object.entries(columnSearchValue);
-            let key = abc[0][0];
-            let value = abc[0][1].toLowerCase()
+            let ky = Object.entries(columnSearchValue);
+            let key = ky[0][0];
+            let value = ky[0][1].toLowerCase()
             if (typeof f[key] !== "number") {
                 return f && f[key] && f[key].toLowerCase().includes(value)
             } else {
-                console.log(f[key])
-                console.log(value)
                 return f && f[key] == value
             }
         })
