@@ -13,7 +13,6 @@ const Toolbar = (props) => {
         rmtCheckAll,
         globalSearch,
         handleGlobalSearch,
-        columnSpan,
         isActions,
         handleColumnSearch,
         columnSearch,
@@ -23,8 +22,7 @@ const Toolbar = (props) => {
     } = props
 
 
-    // return <tr >
-    //     <th colSpan={columnSpan} style={{ padding: "5px" }}>
+
     return <div className="rmtToolbar">
         <div className="fl"
             style={rmtSubHeading ? { padding: "0 0 0 5px" } : { padding: "5px 0 0 5px" }}>
@@ -36,19 +34,23 @@ const Toolbar = (props) => {
         </div>
         <div className="fr">
             <ul >
-                {globalSearch ?
-                    <li className="ml-01 cr-p va-b p-r">
-                        <img
-                            onClick={() => { handleGlobalSearch(false) }}
-                            className="p-a" style={{ right: "1px" }}
-                            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAAV0lEQVQ4jWNgGExgOgMDgzQR6qShajGAOAMDw0YChkgQUoPPEIKa8RlCtGZsGkjWDAPSDAwMW6EYp2YmUk0lFlDkBWwaiDYEn0KChhBjC97ERnFSHhgAAP3XEqdC/dYtAAAAAElFTkSuQmCC" />
-                        <input type="search" onChange={(e) => { handleGlobalSearchValue(e.target.value) }} />
-                    </li> :
-                    <li className="ml-01 cr-p">
-                        <img
-                            onClick={() => { handleGlobalSearch(true) }}
-                            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAA4ElEQVQ4jaXSMUpDQRSF4S/RZ7ALSSnYCRbBwi1YuQAjxMLGRlJrZekWAkEEKwutDK7ApaSzsEkTUREs3iTImDcjyWmGuXfOP4c7Q7Xqid5ctWjfwiW28Yki1G/wkoPt4AmdqL6Ja1ykzAVGaCbOXOGwqtlDN5OwwGNcnA3qAM8ZwBfeRClngA28ZwACoLUIMEH7H4AtvC4CjHCSMTeVSadVB+6xW9Gr4w57uRsecIrGr3pHOf1vnMem+CfWcKR87zV8YIwBjsPaxzCVJKWzkKS/LOAPZH0JwG3w7a+SYq4fo1AfZnFyNMQAAAAASUVORK5CYII=" />
-                    </li>}
+                {!columnSearch ?
+                    globalSearch ?
+                        <li className="ml-01 cr-p va-b p-r">
+                            <img
+                                onClick={() => { handleGlobalSearch(false) }}
+                                className="p-a searchBox" style={{
+                                    left: "-26px",
+                                    background: "white"
+                                }}
+                                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAAV0lEQVQ4jWNgGExgOgMDgzQR6qShajGAOAMDw0YChkgQUoPPEIKa8RlCtGZsGkjWDAPSDAwMW6EYp2YmUk0lFlDkBWwaiDYEn0KChhBjC97ERnFSHhgAAP3XEqdC/dYtAAAAAElFTkSuQmCC" />
+                            <input type="search" onChange={(e) => { handleGlobalSearchValue(e.target.value) }} />
+                        </li> :
+                        <li className="ml-01 cr-p">
+                            <img
+                                onClick={() => { handleGlobalSearch(true) }}
+                                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAA4ElEQVQ4jaXSMUpDQRSF4S/RZ7ALSSnYCRbBwi1YuQAjxMLGRlJrZekWAkEEKwutDK7ApaSzsEkTUREs3iTImDcjyWmGuXfOP4c7Q7Xqid5ctWjfwiW28Yki1G/wkoPt4AmdqL6Ja1ykzAVGaCbOXOGwqtlDN5OwwGNcnA3qAM8ZwBfeRClngA28ZwACoLUIMEH7H4AtvC4CjHCSMTeVSadVB+6xW9Gr4w57uRsecIrGr3pHOf1vnMem+CfWcKR87zV8YIwBjsPaxzCVJKWzkKS/LOAPZH0JwG3w7a+SYq4fo1AfZnFyNMQAAAAASUVORK5CYII=" />
+                        </li> : null}
                 <li>
                     {columnSearch ?
                         <img
@@ -86,8 +88,7 @@ const Toolbar = (props) => {
             </ul>
         </div>
     </div>
-    //     </th>
-    // </tr>
+
 }
 
 export default Toolbar;

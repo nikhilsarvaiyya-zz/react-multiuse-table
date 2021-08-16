@@ -95,6 +95,14 @@ document.head.innerHTML += `
       border:1px solid #cccccc
     }
 
+    .searchBox{
+      -webkit-transition: all .5s ease;
+      -moz-transition: all .5s ease;
+      -o-transition: all .5s ease;
+      -ms-transition: all .5s ease;
+      transition: all .5s ease;
+    }
+
     input[type="checkbox" ]{
       border:1px solid #cccccc  
     }
@@ -125,6 +133,12 @@ document.head.innerHTML += `
     .dib{
         display:inline-block
     }
+    .df{
+      display:flex
+  }
+  .ws-nr{
+    white-space:noWrap
+  }
     .ml-1{
         margin-left:1em
     }
@@ -272,6 +286,12 @@ document.head.innerHTML += `
         }
         .r-0{
           right:0px
+        }
+        .overflow-200{
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          max-width: 200px;
         }
 
   </style>`

@@ -2,14 +2,27 @@ import React from 'react';
 
 const ColumnSearch = (props) => {
 
-    const { headers, rmtCheckAll, handleColumnSearch, columnSearch,
+    const { headers,
+        rmtCheckAll,
+        handleColumnSearch,
+        columnSearch,
+        handleColumnSearchValue,
+        columnSearchValue,
         isActions } = props
     let emptyTh = rmtCheckAll ? <th className="tx-c p-s l-0"> </th> : null
     return <tr >
         {emptyTh}
         {headers.map((h, i) => {
             return <th key={i}>
-                <input type="search" />
+                <input
+                    type="search"
+                    placeholder={` ${h.label}`}
+                    onChange={(e) => {
+                        handleColumnSearchValue({
+                            [h.key]: e.target.value
+                        })
+                    }}
+                />
             </th>
         })}
         {isActions &&

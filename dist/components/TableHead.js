@@ -20,7 +20,8 @@ const TableHead = props => {
     rmtCheckAll,
     handleColumnSearch,
     columnSearch,
-    isActions
+    isActions,
+    handleCheckAllAction
   } = props;
 
   if (!headers) {
@@ -33,7 +34,10 @@ const TableHead = props => {
       width: "24px"
     }
   }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("input", {
-    type: "checkbox"
+    type: "checkbox",
+    onChange: e => {
+      handleCheckAllAction(e.target.checked);
+    }
   }))), headers.map((h, i) => {
     return /*#__PURE__*/_react.default.createElement("th", {
       className: "cr-p",
@@ -42,12 +46,10 @@ const TableHead = props => {
         handleOrder(h.key === shortByKey ? shortOrder : -shortOrder);
         handleKeyIndex(i);
       },
-      style: {
-        minWidth: "100px"
-      },
+      style: {},
       key: i
     }, /*#__PURE__*/_react.default.createElement("div", {
-      className: "lh-1"
+      className: "lh-1 df ws-nr"
     }, /*#__PURE__*/_react.default.createElement("label", {
       style: {
         height: "18px",
@@ -55,7 +57,10 @@ const TableHead = props => {
       },
       className: "fl"
     }, h.label), /*#__PURE__*/_react.default.createElement("div", {
-      className: "fr"
+      className: "fr",
+      style: {
+        marginLeft: "auto"
+      }
     }, shortByKey.key !== h.key && /*#__PURE__*/_react.default.createElement("img", {
       src: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABmJLR0QA/wD/AP+gvaeTAAAAg0lEQVQ4jWNgGAU4QCIUUwWUMzAw/IfiemoaBsMd5BjEyMDA0IvFMBieClVDtGGT8BgGw7MYGBiYiDEwiAjDYDgQm2vQATMDA4MulMYH/jIwMFyG0nBAlJMpBRR5GRsgNlJmMpDgQ0LJZgoDCckGGVAtYSODMiTD6ig1DAaoWjgMMwAAZjtKHqTQNrUAAAAASUVORK5CYII="
     }), shortByKey.key === h.key && shortOrder === 1 && /*#__PURE__*/_react.default.createElement("img", {

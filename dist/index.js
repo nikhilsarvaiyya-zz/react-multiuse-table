@@ -66,21 +66,36 @@ const MyTable = props => {
     rmtCheckAll,
     rmtColumnSearch,
     rmtGlobalSearch,
-    rmtActions
+    rmtActions,
+    query
   } = props;
   let selection = defaultSelection ? defaultSelection : 5;
   const [keyIndex, handleKeyIndex] = (0, _react.useState)(0);
   const [shortByKey, handleName] = (0, _react.useState)('name');
   const [shortOrder, handleOrder] = (0, _react.useState)(1);
   const [selectItem, handleSelectitem] = (0, _react.useState)(selection);
-  const [totalrecords, handleTotalRecords] = (0, _react.useState)(0);
+  const [totalrecords, handleTotalRecords] = (0, _react.useState)(rmtData.length);
   const [fullScreen, handleFullScreen] = (0, _react.useState)(false);
   const [columnSearch, handleColumnSearch] = (0, _react.useState)(rmtColumnSearch);
+  const [columnSearchValue, handleColumnSearchValue] = (0, _react.useState)({});
+  const [columnSearchArray, handleColumnSearchArray] = (0, _react.useState)([]);
   const [globalSearch, handleGlobalSearch] = (0, _react.useState)(rmtGlobalSearch);
   const [globalSearchValue, handleGlobalSearchValue] = (0, _react.useState)('');
   const [darkMode, handleDarkMode] = (0, _react.useState)(false); // Need to Work
 
   const [isActions, handleisActions] = (0, _react.useState)(rmtActions && rmtActions.length !== 0);
+  const [checkAllAction, handleCheckAllAction] = (0, _react.useState)(false);
+  const [checkSingleRow, handleCheckSingleRow] = (0, _react.useState)([]);
+  const [setQuery, handlesetQuery] = (0, _react.useState)({});
+  (0, _react.useEffect)(() => {
+    handlesetQuery(selectItem, 10, shortOrder);
+    query({
+      limit: Number(selectItem),
+      skip: 10,
+      order: Number(setQuery)
+    });
+  }, [selectItem, shortOrder]);
+  console.log(columnSearchArray);
   const isPagination = pagination == undefined || pagination === true;
 
   if (!rmtHeaders) {
@@ -134,14 +149,17 @@ const MyTable = props => {
     columnSearch: columnSearch,
     handleColumnSearch: handleColumnSearch,
     isActions: isActions,
-    columnSpan: columnSpan
+    columnSpan: columnSpan,
+    handleCheckAllAction: handleCheckAllAction
   }), columnSearch ? /*#__PURE__*/_react.default.createElement(_ColumnSearch.default, {
     headers: rmtHeaders,
     rmtCheckAll: rmtCheckAll,
     columnSearch: columnSearch,
     handleColumnSearch: handleColumnSearch,
     isActions: isActions,
-    columnSpan: columnSpan
+    columnSpan: columnSpan,
+    handleColumnSearchValue: handleColumnSearchValue,
+    columnSearchValue: columnSearchValue
   }) : null), /*#__PURE__*/_react.default.createElement("tbody", null, /*#__PURE__*/_react.default.createElement(_TableBody.default, {
     shortByKey: shortByKey,
     shortOrder: shortOrder,
@@ -154,14 +172,18 @@ const MyTable = props => {
     keyIndex: keyIndex,
     selectItem: selectItem,
     isPagination: isPagination,
-    globalSearchValue: globalSearchValue
-  }), /*#__PURE__*/_react.default.createElement("tfoot", null)))), isPagination && /*#__PURE__*/_react.default.createElement(_Pagination.default, {
+    globalSearchValue: globalSearchValue,
+    checkAllAction: checkAllAction,
+    handleCheckSingleRow: handleCheckSingleRow,
+    checkSingleRow: checkSingleRow,
+    columnSearchValue: columnSearchValue
+  })), /*#__PURE__*/_react.default.createElement("tfoot", null))), isPagination && /*#__PURE__*/_react.default.createElement(_Pagination.default, {
     rmtHeaders: rmtHeaders,
     selectItem: selectItem,
     handleSelectitem: handleSelectitem,
     paginateSelection: paginateSelection,
     defaultSelection: selection,
-    totalrecords: 20,
+    totalrecords: totalrecords,
     rmtCheckAll: rmtCheckAll,
     isActions: isActions,
     columnSpan: columnSpan

@@ -15,14 +15,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 const Pagination = props => {
   const {
-    rmtHeaders,
     handleSelectitem,
     paginateSelection,
     defaultSelection,
-    totalrecords,
-    rmtCheckAll,
-    isActions,
-    columnSpan
+    totalrecords
   } = props;
   let pages;
 

@@ -15,6 +15,8 @@ const ColumnSearch = props => {
     rmtCheckAll,
     handleColumnSearch,
     columnSearch,
+    handleColumnSearchValue,
+    columnSearchValue,
     isActions
   } = props;
   let emptyTh = rmtCheckAll ? /*#__PURE__*/_react.default.createElement("th", {
@@ -24,7 +26,13 @@ const ColumnSearch = props => {
     return /*#__PURE__*/_react.default.createElement("th", {
       key: i
     }, /*#__PURE__*/_react.default.createElement("input", {
-      type: "search"
+      type: "search",
+      placeholder: " ".concat(h.label),
+      onChange: e => {
+        handleColumnSearchValue({
+          [h.key]: e.target.value
+        });
+      }
     }));
   }), isActions && /*#__PURE__*/_react.default.createElement("th", {
     className: "tx-c p-s r-0"

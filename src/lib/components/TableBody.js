@@ -1,6 +1,15 @@
 import React from 'react';
 
-function sortFunction(arr, keyIndex, key, order, select, isPagination, globalSearchValue) {
+
+
+function sortFunction(arr,
+    shortByKey,
+    order,
+    select,
+    isPagination,
+    globalSearchValue,
+    checkAllAction,
+    columnSearchValue) {
 
     var collator = new Intl.Collator(undefined, {
         numeric: true,
@@ -9,31 +18,55 @@ function sortFunction(arr, keyIndex, key, order, select, isPagination, globalSea
 
     let sortData = arr;
 
-    if (isPagination) {
-        sortData = sortData.filter((f, i) => i < select)
-    }
+    sortData.map((item, i) => {
+        item.isChecked = checkAllAction;
+        item.rowKey = i
+        return item
+    })
+
+
 
     if (globalSearchValue.length > 0) {
         sortData = sortData.filter((f, i) => {
-            return f[0].includes(globalSearchValue)
+            return f.name.toLowerCase().includes(globalSearchValue.toLowerCase())
         })
     }
 
+    if (columnSearchValue && Object.keys(columnSearchValue).length !== 0) {
+        sortData = sortData.filter((f, i) => {
+            let abc = Object.entries(columnSearchValue);
+            let key = abc[0][0];
+            let value = abc[0][1].toLowerCase()
+            if (typeof f[key] !== "number") {
+                return f && f[key] && f[key].toLowerCase().includes(value)
+            } else {
+                console.log(f[key])
+                console.log(value)
+                return f && f[key] == value
+            }
+        })
+    }
 
     sortData.sort((a, b) => {
-        if (a[keyIndex] === b[keyIndex]) {
-            return 0;
-        }
-        else {
-            return (a[keyIndex] < b[keyIndex]) ? -1 : 1;
-        }
-    });
+        var nameA = a[shortByKey.key], nameB = b[shortByKey.key];
+        return collator.compare(nameA, nameB)
+    }).reverse();
 
-    if (order === 1) {
-        return sortData
-    } else {
-        return sortData.reverse()
+    sortData.sort((a, b) => {
+        var nameA = a[shortByKey.key], nameB = b[shortByKey.key];
+        return collator.compare(nameA, nameB)
+    })
+
+    if (order === -1) {
+        sortData = sortData.reverse();
     }
+
+    if (isPagination) {
+        return sortData = sortData.filter((f, i) => {
+            return i < select
+        })
+    }
+
 }
 
 const TableBody = (props) => {
@@ -47,45 +80,68 @@ const TableBody = (props) => {
         shortOrder,
         selectItem,
         isPagination,
-        globalSearchValue
+        globalSearchValue,
+        checkAllAction,
+        handleCheckSingleRow,
+        checkSingleRow,
+        columnSearchValue
     } = props;
-
-    console.log(globalSearchValue)
 
     if (!rmtData) {
         return <td colSpan={columnSpan} className="mr-1">Loading...</td>
     }
 
-    let mapData = []
-
-    rmtData.forEach((d) => {
-        let selectedkey = []
-        rmtHeaders.forEach((h) => {
-            for (const [key, value] of Object.entries(d)) {
-                if (h.key === key) {
-                    selectedkey.push(value)
-                }
-            }
-        });
-        mapData.push(selectedkey)
-    });
+    rmtData.map((item, i) => {
+        return false
+    })
 
 
-    let sortedData = sortFunction(mapData, keyIndex, shortByKey, shortOrder, selectItem, isPagination, globalSearchValue);
+    let sortedData = sortFunction(
+        rmtData,
+        shortByKey,
+        shortOrder,
+        selectItem,
+        isPagination,
+        globalSearchValue,
+        checkAllAction,
+        columnSearchValue
+    );
 
+    const formateText = (text, index) => {
+        return <div key={index} className="overflow-200">{text ? text : <span style={{ opacity: "20%" }}>NA</span>} </div>
+    }
 
     return sortedData.map((d, i1) => {
-        return <tr key={i1}>
+        return <tr key={i1} >
             {rmtCheckAll &&
                 <th
                     className="tx-c p-s l-0"
                     style={{ boxShadow: "rgb(0 0 0) -1px 0px 8px -8px inset" }}>
                     <div>
-                        <input type="checkbox" />
+                        <input
+                            value={i1}
+                            type="checkbox"
+                            defaultChecked={d.isChecked}
+                            onChange={(e) => {
+                                if (e.target.checked) {
+                                    handleCheckSingleRow([...checkSingleRow, d])
+                                } else {
+                                    let findIndex = checkSingleRow.findIndex(x => x.rowKey == i1);
+                                    checkSingleRow.splice(findIndex, 1)
+                                    handleCheckSingleRow([...checkSingleRow])
+                                }
+                            }} />
                     </div>
                 </th>}
-            {d.map((m, i2) => {
-                return <td key={i2} > {m} </td>
+
+            {rmtHeaders.map((head, i2) => {
+                return <td key={i2} >
+                    {Object.entries(d).map((k, i3) => {
+                        if (k[0] === head.key) {
+                            return formateText(k[1], i3)
+                        }
+                    })}
+                </td>
             })}
             {rmtActions && rmtActions.length !== 0 &&
                 <th className="tx-c p-s r-0"

@@ -6,14 +6,10 @@ import SelectPagination from './SelectPagination';
 const Pagination = (props) => {
 
     const {
-        rmtHeaders,
         handleSelectitem,
         paginateSelection,
         defaultSelection,
         totalrecords,
-        rmtCheckAll,
-        isActions,
-        columnSpan
     } = props
 
     let pages;
