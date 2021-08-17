@@ -13,53 +13,50 @@ const headers = [
   { key: 'mobile', label: "Phone" },
 ]
 
-const data = [{
-  name: "john",
-  age: 28,
-  gender: "Male",
-  mobile: "234546673453",
-  email: "john@gmail.com"
-},
-{
-  age: 56,
-  gender: "Female",
-  mobile: "346724354564",
-  name: "Suzen",
-  email:"suzen@hotmail.com
-},
-{
-  age: 34,
-  gender: "Male",
-  mobile: "345567345678",
-  name: "Ricky",
-  email:"ricky@rediff.com
-},
-{
-  age: 23,
-  gender: "Male",
-  mobile: "443567656766",
-  name: "Messi",
-  email:"messi@gmail.com
-},
-{
-  age: 45,
-  gender: "Female",
-  mobile: "978954364563",
-  name: "Arial",
-  email:"arial@gmail.com
-}]
+const data = [
+    { age: 28,  gender: "Male",  mobile: "234546673453",  name: "john", email: "john@gmail.com"    },
+    { age: 56,  gender: "Female",  mobile: "346724354564",  name: "Suzen",  email: "suzen@hotmail.com"    },
+    { age: 34,  gender: "Male",  mobile: "345567345678",  name: "Ricky",  email: "ricky@rediff.com"    },
+    { age: 23,  gender: "Male",  mobile: "443567656766",  name: "Messi",  email: "messi@gmail.com"    },
+    { age: 45,  gender: "Female",  mobile: "978954364563",  name: "Arial",  email: "arial@gmail.com"    }
+]
 
 <ReactMultiuseTable
     rmtClass="table"
     rmtHeaders={headers}
     rmtData={data}
-    
-    pagination={true}
-    paginateSelection={[5,10,15,20]}
-    defaultSelection={10}
-    
-    rmtHeading="Heading"
-    rmtSubHeading="Subheading"
+/>
+```
+
+## Name and Sub text for table
+
+```js
+
+<ReactMultiuseTable
+   rmtHeading="Heading"
+   rmtSubHeading="SubHeading"
+/>
+```
+
+## Column search or Global search
+```js
+
+<ReactMultiuseTable
+    rmtColumnSearch={true}
+    rmtGlobalSearch={false}
+/>
+```
+
+## Collect Params for Serverside  
+
+```js
+
+const handleSubmit = ({ skip, limit, order, columnSearch, globalSearch }) => {
+  console.log({ skip, limit, order, columnSearch, globalSearch })
+}
+
+<ReactMultiuseTable
+    handleSubmit={handleSubmit}
 />
 ```
 
