@@ -1,7 +1,5 @@
 import React from 'react';
 
-
-
 function sortFunction(arr,
     shortByKey,
     order,
@@ -51,7 +49,7 @@ function sortFunction(arr,
             if (typeof f[key] !== "number") {
                 return f && f[key] && f[key].toLowerCase().includes(value)
             } else {
-                return f && f[key] == value
+                return f && f[key] === value
             }
         })
     }
@@ -84,7 +82,6 @@ const TableBody = (props) => {
         rmtHeaders,
         rmtData,
         columnSpan,
-        keyIndex,
         shortByKey,
         shortOrder,
         selectItem,
@@ -135,7 +132,7 @@ const TableBody = (props) => {
                                 if (e.target.checked) {
                                     handleCheckSingleRow([...checkSingleRow, d])
                                 } else {
-                                    let findIndex = checkSingleRow.findIndex(x => x.rowKey == i1);
+                                    let findIndex = checkSingleRow.findIndex(x => x.rowKey === i1);
                                     checkSingleRow.splice(findIndex, 1)
                                     handleCheckSingleRow([...checkSingleRow])
                                 }
@@ -157,7 +154,10 @@ const TableBody = (props) => {
                     style={{ boxShadow: "rgb(0 0 0) 1px 0px 8px -8px inset" }}>
                     {
                         <div className="dropdown">
-                            <button className="dropbtn"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAAiElEQVQ4jc2SwQ1AQBREX5BogiJQgxroRA1utEMPbq4uqnAQDjaxlz8JBzHJJD/5s7OZ2YU/IwVGx+SNQQscjq0lCoTBZMyPUAC5EkRiFwMlV4QZ2J7e3nB30Fgi1YGPw1qoCJ13uLdEoTDYuXIvwCp0JmruDipLpDrIvFk+pYUEGBxffeVvcAIAMhhp+VgEPQAAAABJRU5ErkJggg==" /></button>
+                            <button className="dropbtn">
+                                <img
+                                    alt="Dropdown Menu"
+                                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAAiElEQVQ4jc2SwQ1AQBREX5BogiJQgxroRA1utEMPbq4uqnAQDjaxlz8JBzHJJD/5s7OZ2YU/IwVGx+SNQQscjq0lCoTBZMyPUAC5EkRiFwMlV4QZ2J7e3nB30Fgi1YGPw1qoCJ13uLdEoTDYuXIvwCp0JmruDipLpDrIvFk+pYUEGBxffeVvcAIAMhhp+VgEPQAAAABJRU5ErkJggg==" /></button>
                             <div className="dropdown-content">
                                 {rmtActions.map((a, i) => {
                                     return <a key={i} href="#">{a.label}</a>

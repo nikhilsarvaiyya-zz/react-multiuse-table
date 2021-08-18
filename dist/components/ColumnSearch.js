@@ -14,9 +14,7 @@ const ColumnSearch = props => {
     headers,
     rmtCheckAll,
     handleColumnSearch,
-    columnSearch,
     handleColumnSearchValue,
-    columnSearchValue,
     isActions
   } = props;
   let emptyTh = rmtCheckAll ? /*#__PURE__*/_react.default.createElement("th", {
@@ -37,6 +35,7 @@ const ColumnSearch = props => {
   }), isActions && /*#__PURE__*/_react.default.createElement("th", {
     className: "tx-c p-s r-0"
   }, /*#__PURE__*/_react.default.createElement("img", {
+    alt: "Column Filter",
     onClick: () => handleColumnSearch(false),
     className: "cr-p",
     src: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAAV0lEQVQ4jWNgGExgOgMDgzQR6qShajGAOAMDw0YChkgQUoPPEIKa8RlCtGZsGkjWDAPSDAwMW6EYp2YmUk0lFlDkBWwaiDYEn0KChhBjC97ERnFSHhgAAP3XEqdC/dYtAAAAAElFTkSuQmCC"

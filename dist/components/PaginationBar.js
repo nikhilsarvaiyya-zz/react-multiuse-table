@@ -10,11 +10,6 @@ var _react = _interopRequireDefault(require("react"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const PaginationBar = props => {
-  const {
-    rmtDefaultSelection,
-    handleSelectitem,
-    pages
-  } = props;
   return /*#__PURE__*/_react.default.createElement("ul", null, /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("a", {
     href: "tryit.asp-filename=trycss_ex_pagination.html#"
   }, "\xAB")), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("a", {

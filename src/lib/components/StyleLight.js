@@ -1,7 +1,7 @@
-import React from 'react';
+
 
 const StyleSheet = () => {
-    return true
+  return true
 }
 document.head.innerHTML += `
   <style>

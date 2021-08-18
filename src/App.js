@@ -3,8 +3,8 @@ import TableJson from './table.json'
 
 const rmtHeaders = [
   { key: 'id', label: "Index" },
-  { key: 'first_name', label: "Full Name" },
-  { key: 'last_name', label: "Full Name" },
+  { key: 'first_name', label: "First Name" },
+  { key: 'last_name', label: "Last Name" },
   { key: 'email', label: "Email" },
   { key: 'phone', label: "Phone" },
   { key: 'gender', label: "Gender" },
@@ -24,8 +24,8 @@ const actions = [
   { key: 'view', label: "View" },
 ]
 
-const handleSubmit = ({ skip, limit, order, columnSearch, globalSearch }) => {
-  console.log({ skip, limit, order, columnSearch, globalSearch })
+const handleSubmit = (data, { skip, limit, order, columnSearch, globalSearch }) => {
+  console.log(JSON.stringify(data, null, 4))
 }
 
 function App() {
@@ -47,6 +47,7 @@ function App() {
     rmtCheckAll={true}
     rmtActions={actions}
 
+    handleSubmit={handleSubmit}
 
   />
 }

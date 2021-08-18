@@ -51,36 +51,51 @@ const MyTable = (props) => {
     const [shortByKey, handleName] = useState('name');
     const [shortOrder, handleOrder] = useState(1);
     const [selectItem, handleSelectitem] = useState(selection);
-    const [totalrecords, handleTotalRecords] = useState(rmtData.length);
+    //const [totalrecords, handleTotalRecords] = useState(rmtData.length);
+    const [totalrecords] = useState(rmtData.length);
     const [fullScreen, handleFullScreen] = useState(false);
 
     const [columnSearch, handleColumnSearch] = useState(rmtColumnSearch);
     const [columnSearchValue, handleColumnSearchValue] = useState({});
-    const [columnSearchArray, handleColumnSearchArray] = useState([]);
+    //const [columnSearchArray, handleColumnSearchArray] = useState([]);
 
     const [globalSearch, handleGlobalSearch] = useState(rmtGlobalSearch);
     const [globalSearchValue, handleGlobalSearchValue] = useState('');
 
     const [darkMode, handleDarkMode] = useState(false); // Need to Work
-    const [isActions, handleisActions] = useState(rmtActions && rmtActions.length !== 0);
+    //const [isActions, handleisActions] = useState(rmtActions && rmtActions.length !== 0);
+    const [isActions] = useState(rmtActions && rmtActions.length !== 0);
     const [checkAllAction, handleCheckAllAction] = useState(false);
     const [checkSingleRow, handleCheckSingleRow] = useState([]);
 
-    const [setQuery, handlesetQuery] = useState({});
+
+
 
     useEffect(() => {
-        handlesetQuery(selectItem, 10, shortOrder, columnSearchValue, globalSearchValue)
-        if (handleSubmit) {
-            handleSubmit({
-                limit: Number(selectItem),
-                skip: 10,
-                order: Number(shortOrder),
-                columnSearch: columnSearchValue,
-                globalSearch: globalSearchValue
-
-            })
+        let basic = {
+            limit: Number(selectItem),
+            skip: 10,
+            order: Number(shortOrder),
+            columnSearch: columnSearchValue,
+            globalSearch: globalSearchValue
         }
-    }, [selectItem, 10, shortOrder, columnSearchValue, globalSearchValue])
+        let all = {
+            limit: Number(selectItem),
+            skip: 0,
+            shortByKey: shortByKey.key,
+            shortByOrder: Number(shortOrder),
+            columnSearch: columnSearchValue,
+            globalSearch: globalSearchValue,
+            fullScreen: fullScreen,
+            darkMode: darkMode,
+            isActions: isActions,
+            checkAllAction: checkAllAction,
+            checkSingleRow: checkSingleRow
+        }
+        if (handleSubmit) {
+            handleSubmit(all, basic)
+        }
+    })
 
 
     const isPagination = (rmtPagination == undefined || rmtPagination === true)

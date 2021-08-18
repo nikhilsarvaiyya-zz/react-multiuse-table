@@ -73,33 +73,47 @@ const MyTable = props => {
   const [keyIndex, handleKeyIndex] = (0, _react.useState)(0);
   const [shortByKey, handleName] = (0, _react.useState)('name');
   const [shortOrder, handleOrder] = (0, _react.useState)(1);
-  const [selectItem, handleSelectitem] = (0, _react.useState)(selection);
-  const [totalrecords, handleTotalRecords] = (0, _react.useState)(rmtData.length);
+  const [selectItem, handleSelectitem] = (0, _react.useState)(selection); //const [totalrecords, handleTotalRecords] = useState(rmtData.length);
+
+  const [totalrecords] = (0, _react.useState)(rmtData.length);
   const [fullScreen, handleFullScreen] = (0, _react.useState)(false);
   const [columnSearch, handleColumnSearch] = (0, _react.useState)(rmtColumnSearch);
-  const [columnSearchValue, handleColumnSearchValue] = (0, _react.useState)({});
-  const [columnSearchArray, handleColumnSearchArray] = (0, _react.useState)([]);
+  const [columnSearchValue, handleColumnSearchValue] = (0, _react.useState)({}); //const [columnSearchArray, handleColumnSearchArray] = useState([]);
+
   const [globalSearch, handleGlobalSearch] = (0, _react.useState)(rmtGlobalSearch);
   const [globalSearchValue, handleGlobalSearchValue] = (0, _react.useState)('');
   const [darkMode, handleDarkMode] = (0, _react.useState)(false); // Need to Work
+  //const [isActions, handleisActions] = useState(rmtActions && rmtActions.length !== 0);
 
-  const [isActions, handleisActions] = (0, _react.useState)(rmtActions && rmtActions.length !== 0);
+  const [isActions] = (0, _react.useState)(rmtActions && rmtActions.length !== 0);
   const [checkAllAction, handleCheckAllAction] = (0, _react.useState)(false);
   const [checkSingleRow, handleCheckSingleRow] = (0, _react.useState)([]);
-  const [setQuery, handlesetQuery] = (0, _react.useState)({});
   (0, _react.useEffect)(() => {
-    handlesetQuery(selectItem, 10, shortOrder, columnSearchValue, globalSearchValue);
+    let basic = {
+      limit: Number(selectItem),
+      skip: 10,
+      order: Number(shortOrder),
+      columnSearch: columnSearchValue,
+      globalSearch: globalSearchValue
+    };
+    let all = {
+      limit: Number(selectItem),
+      skip: 0,
+      shortByKey: shortByKey.key,
+      shortByOrder: Number(shortOrder),
+      columnSearch: columnSearchValue,
+      globalSearch: globalSearchValue,
+      fullScreen: fullScreen,
+      darkMode: darkMode,
+      isActions: isActions,
+      checkAllAction: checkAllAction,
+      checkSingleRow: checkSingleRow
+    };
 
     if (handleSubmit) {
-      handleSubmit({
-        limit: Number(selectItem),
-        skip: 10,
-        order: Number(shortOrder),
-        columnSearch: columnSearchValue,
-        globalSearch: globalSearchValue
-      });
+      handleSubmit(all, basic);
     }
-  }, [selectItem, 10, shortOrder, columnSearchValue, globalSearchValue]);
+  });
   const isPagination = rmtPagination == undefined || rmtPagination === true;
 
   if (!rmtHeaders) {
