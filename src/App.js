@@ -25,7 +25,7 @@ const actions = [
 ]
 
 const handleSubmit = (data, { skip, limit, order, columnSearch, globalSearch }) => {
-  console.log(JSON.stringify(data, null, 4))
+  //console.log(JSON.stringify(data, null, 4))
 }
 
 function App() {
@@ -39,7 +39,8 @@ function App() {
 
     rmtPagination={true}
     rmtPaginateSelection={[5, 10, 100]}
-    rmtDefaultSelection={10}
+    rmtRecordPerPage={10}
+    rmtPageLimit={5}
 
     rmtColumnSearch={true}
     rmtGlobalSearch={false}
@@ -48,6 +49,9 @@ function App() {
     rmtActions={actions}
 
     handleSubmit={handleSubmit}
+
+
+
 
   />
 }

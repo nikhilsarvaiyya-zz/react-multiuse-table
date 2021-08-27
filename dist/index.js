@@ -60,22 +60,21 @@ const MyTable = props => {
     rmtClass,
     rmtPagination,
     rmtPaginateSelection,
-    rmtDefaultSelection,
+    rmtRecordPerPage,
     rmtHeading,
     rmtSubHeading,
     rmtCheckAll,
     rmtColumnSearch,
     rmtGlobalSearch,
     rmtActions,
-    handleSubmit
+    handleSubmit,
+    rmtPageLimit
   } = props;
-  let selection = rmtDefaultSelection ? rmtDefaultSelection : 5;
+  let rpp = rmtRecordPerPage ? rmtRecordPerPage : 5;
   const [keyIndex, handleKeyIndex] = (0, _react.useState)(0);
   const [shortByKey, handleName] = (0, _react.useState)('name');
   const [shortOrder, handleOrder] = (0, _react.useState)(1);
-  const [selectItem, handleSelectitem] = (0, _react.useState)(selection); //const [totalrecords, handleTotalRecords] = useState(rmtData.length);
-
-  const [totalrecords] = (0, _react.useState)(rmtData.length);
+  const [totalrecords, handleTotalRecords] = (0, _react.useState)(10);
   const [fullScreen, handleFullScreen] = (0, _react.useState)(false);
   const [columnSearch, handleColumnSearch] = (0, _react.useState)(rmtColumnSearch);
   const [columnSearchValue, handleColumnSearchValue] = (0, _react.useState)({}); //const [columnSearchArray, handleColumnSearchArray] = useState([]);
@@ -88,17 +87,20 @@ const MyTable = props => {
   const [isActions] = (0, _react.useState)(rmtActions && rmtActions.length !== 0);
   const [checkAllAction, handleCheckAllAction] = (0, _react.useState)(false);
   const [checkSingleRow, handleCheckSingleRow] = (0, _react.useState)([]);
+  const [currentPage, setCurrentPage] = (0, _react.useState)(1);
+  const [pagnetData, handlePagnetData] = (0, _react.useState)([]);
+  const [recordPerPage, handleRecordPerPage] = (0, _react.useState)(rpp);
   (0, _react.useEffect)(() => {
     let basic = {
-      limit: Number(selectItem),
+      limit: Number(recordPerPage),
       skip: 10,
       order: Number(shortOrder),
       columnSearch: columnSearchValue,
       globalSearch: globalSearchValue
     };
     let all = {
-      limit: Number(selectItem),
-      skip: 0,
+      limit: Number(recordPerPage),
+      skip: pagnetData.startIndex,
       shortByKey: shortByKey.key,
       shortByOrder: Number(shortOrder),
       columnSearch: columnSearchValue,
@@ -114,6 +116,14 @@ const MyTable = props => {
       handleSubmit(all, basic);
     }
   });
+  (0, _react.useEffect)(() => {
+    const startIndex = currentPage * Number(recordPerPage) - Number(recordPerPage);
+    const endIndex = startIndex + Number(recordPerPage);
+    handlePagnetData({
+      startIndex,
+      endIndex
+    });
+  }, [currentPage, recordPerPage]);
   const isPagination = rmtPagination == undefined || rmtPagination === true;
 
   if (!rmtHeaders) {
@@ -128,7 +138,8 @@ const MyTable = props => {
 
   if (isActions) {
     columnSpan = columnSpan + 1;
-  }
+  } // console.log(pagnetData)
+
 
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "rmtMainContainer"
@@ -177,7 +188,9 @@ const MyTable = props => {
     isActions: isActions,
     columnSpan: columnSpan,
     handleColumnSearchValue: handleColumnSearchValue,
-    columnSearchValue: columnSearchValue
+    columnSearchValue: columnSearchValue,
+    handlePagnetData: handlePagnetData,
+    setCurrentPage: setCurrentPage
   }) : null), /*#__PURE__*/_react.default.createElement("tbody", null, /*#__PURE__*/_react.default.createElement(_TableBody.default, {
     shortByKey: shortByKey,
     shortOrder: shortOrder,
@@ -188,23 +201,31 @@ const MyTable = props => {
     isActions: isActions,
     columnSpan: columnSpan,
     keyIndex: keyIndex,
-    selectItem: selectItem,
     isPagination: isPagination,
     globalSearchValue: globalSearchValue,
     checkAllAction: checkAllAction,
     handleCheckSingleRow: handleCheckSingleRow,
     checkSingleRow: checkSingleRow,
-    columnSearchValue: columnSearchValue
+    columnSearchValue: columnSearchValue,
+    pagnetData: pagnetData,
+    totalrecords: totalrecords,
+    handleTotalRecords: handleTotalRecords,
+    handlePagnetData: handlePagnetData
   })), /*#__PURE__*/_react.default.createElement("tfoot", null))), isPagination && /*#__PURE__*/_react.default.createElement(_Pagination.default, {
     rmtHeaders: rmtHeaders,
-    selectItem: selectItem,
-    handleSelectitem: handleSelectitem,
     rmtPaginateSelection: rmtPaginateSelection,
-    rmtDefaultSelection: selection,
+    rmtRecordPerPage: recordPerPage,
     totalrecords: totalrecords,
     rmtCheckAll: rmtCheckAll,
     isActions: isActions,
-    columnSpan: columnSpan
+    columnSpan: columnSpan,
+    rmtPageLimit: rmtPageLimit,
+    rmtData: rmtData,
+    handlePagnetData: handlePagnetData,
+    currentPage: currentPage,
+    setCurrentPage: setCurrentPage,
+    recordPerPage: recordPerPage,
+    handleRecordPerPage: handleRecordPerPage
   }));
 };
 

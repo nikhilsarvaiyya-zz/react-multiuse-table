@@ -17,8 +17,15 @@ const Pagination = props => {
   const {
     handleSelectitem,
     rmtPaginateSelection,
-    rmtDefaultSelection,
-    totalrecords
+    rmtRecordPerPage,
+    totalrecords,
+    rmtData,
+    rmtPageLimit,
+    handlePagnetData,
+    currentPage,
+    setCurrentPage,
+    recordPerPage,
+    handleRecordPerPage
   } = props;
   let pages;
 
@@ -34,12 +41,25 @@ const Pagination = props => {
     className: "fl w-50"
   }, /*#__PURE__*/_react.default.createElement(_SelectPagination.default, {
     pages: pages,
-    rmtDefaultSelection: rmtDefaultSelection,
+    rmtRecordPerPage: rmtRecordPerPage,
     handleSelectitem: handleSelectitem,
-    totalrecords: totalrecords
+    totalrecords: totalrecords,
+    currentPage: currentPage,
+    recordPerPage: recordPerPage,
+    setCurrentPage: setCurrentPage,
+    handleRecordPerPage: handleRecordPerPage
   })), /*#__PURE__*/_react.default.createElement("div", {
     className: "fr w-50 tx-r"
-  }, /*#__PURE__*/_react.default.createElement(_PaginationBar.default, null)));
+  }, /*#__PURE__*/_react.default.createElement(_PaginationBar.default, {
+    rmtData: rmtData,
+    rmtPageLimit: rmtPageLimit,
+    rmtRecordPerPage: rmtRecordPerPage,
+    handlePagnetData: handlePagnetData,
+    currentPage: currentPage,
+    setCurrentPage: setCurrentPage,
+    recordPerPage: recordPerPage,
+    totalrecords: totalrecords
+  })));
 };
 
 var _default = Pagination;

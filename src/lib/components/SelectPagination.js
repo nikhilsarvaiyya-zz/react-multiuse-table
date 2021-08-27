@@ -3,12 +3,18 @@ import React from 'react';
 const SelectPagination = (props) => {
 
     const {
-        rmtDefaultSelection,
-        handleSelectitem,
+
         pages,
-        totalrecords
+        totalrecords,
+        recordPerPage,
+        handleRecordPerPage,
+        setCurrentPage,
+        currentPage
     } = props
 
+
+    const totalPages = Math.round(totalrecords / Number(recordPerPage));
+    let allPages = Array.from(Array(totalPages).keys())
     return <div className="fl db lh-2">
         <div className="fl mr-1">
             Total Records: {totalrecords}
@@ -16,8 +22,11 @@ const SelectPagination = (props) => {
         <div className="fl mr-1">
             Records per page &nbsp;
             <select
-                defaultValue={rmtDefaultSelection}
-                onChange={(e) => handleSelectitem(e.target.value)}
+                defaultValue={recordPerPage}
+                onChange={(e) => {
+                    handleRecordPerPage(e.target.value)
+                    setCurrentPage(1)
+                }}
             >
                 {pages.map((p, i) => {
                     return <option key={i} value={p} >{p}</option>
@@ -27,12 +36,13 @@ const SelectPagination = (props) => {
 
         <div className="fl mr-1">
             Go to page&nbsp;
-            <select>
-                <option value={1} >1</option>
-                <option value={2} >2</option>
-                <option value={3} >3</option>
-                <option value={4} >4</option>
-                <option value={5} >5</option>
+            <select onChange={(e) => {
+                setCurrentPage(Number(e.target.value))
+            }}>
+                {allPages.map(p => {
+                    return <option selected={currentPage === p + 1} value={p + 1} >{p + 1}</option>
+                })}
+
             </select>
         </div>
     </div>

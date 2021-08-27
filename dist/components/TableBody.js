@@ -17,7 +17,7 @@ var _react = _interopRequireDefault(require("react"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function sortFunction(arr, shortByKey, order, select, isPagination, globalSearchValue, checkAllAction, columnSearchValue) {
+function sortFunction(arr, shortByKey, order, select, isPagination, globalSearchValue, checkAllAction, columnSearchValue, pagnetData, handleTotalRecords) {
   var collator = new Intl.Collator(undefined, {
     numeric: true,
     sensitivity: 'base'
@@ -70,14 +70,13 @@ function sortFunction(arr, shortByKey, order, select, isPagination, globalSearch
     return collator.compare(nameA, nameB);
   });
 
-  if (order === -1) {
+  if (order === 1) {
     sortData = sortData.reverse();
   }
 
   if (isPagination) {
-    return sortData = sortData.filter((f, i) => {
-      return i < select;
-    });
+    handleTotalRecords(sortData.length);
+    return sortData = sortData.slice(pagnetData.startIndex, pagnetData.endIndex);
   }
 }
 
@@ -90,13 +89,16 @@ const TableBody = props => {
     columnSpan,
     shortByKey,
     shortOrder,
-    selectItem,
+    recordPerPage,
     isPagination,
     globalSearchValue,
     checkAllAction,
     handleCheckSingleRow,
     checkSingleRow,
-    columnSearchValue
+    columnSearchValue,
+    pagnetData,
+    totalrecords,
+    handleTotalRecords
   } = props;
 
   if (!rmtData) {
@@ -104,12 +106,15 @@ const TableBody = props => {
       colSpan: columnSpan,
       className: "mr-1"
     }, "Loading...");
-  }
+  } // if (totalrecords > 0) {
+  //     return <td colSpan={columnSpan} className="mr-1"> No Data Avaliable...</td>
+  // }
+
 
   rmtData.map((item, i) => {
     return false;
   });
-  let sortedData = sortFunction(rmtData, shortByKey, shortOrder, selectItem, isPagination, globalSearchValue, checkAllAction, columnSearchValue);
+  let sortedData = sortFunction(rmtData, shortByKey, shortOrder, recordPerPage, isPagination, globalSearchValue, checkAllAction, columnSearchValue, pagnetData, handleTotalRecords);
 
   const formateText = (text, index) => {
     return /*#__PURE__*/_react.default.createElement("div", {

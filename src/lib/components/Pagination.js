@@ -8,8 +8,16 @@ const Pagination = (props) => {
     const {
         handleSelectitem,
         rmtPaginateSelection,
-        rmtDefaultSelection,
+        rmtRecordPerPage,
         totalrecords,
+        rmtData,
+        rmtPageLimit,
+        handlePagnetData,
+        currentPage,
+        setCurrentPage,
+        recordPerPage,
+        handleRecordPerPage
+
     } = props
 
     let pages;
@@ -20,17 +28,33 @@ const Pagination = (props) => {
     }
 
 
+
+
     return <div className="rmtPagnation" >
         <div className="fl w-50">
             <SelectPagination
                 pages={pages}
-                rmtDefaultSelection={rmtDefaultSelection}
+                rmtRecordPerPage={rmtRecordPerPage}
                 handleSelectitem={handleSelectitem}
                 totalrecords={totalrecords}
+                currentPage={currentPage}
+                recordPerPage={recordPerPage}
+                setCurrentPage={setCurrentPage}
+                handleRecordPerPage={handleRecordPerPage}
+
             />
         </div>
         <div className="fr w-50 tx-r">
-            <PaginationBar />
+            <PaginationBar
+                rmtData={rmtData}
+                rmtPageLimit={rmtPageLimit}
+                rmtRecordPerPage={rmtRecordPerPage}
+                handlePagnetData={handlePagnetData}
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+                recordPerPage={recordPerPage}
+                totalrecords={totalrecords}
+            />
         </div>
     </div>
 

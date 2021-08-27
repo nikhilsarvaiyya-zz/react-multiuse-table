@@ -15,6 +15,8 @@ const ColumnSearch = props => {
     rmtCheckAll,
     handleColumnSearch,
     handleColumnSearchValue,
+    handlePagnetData,
+    setCurrentPage,
     isActions
   } = props;
   let emptyTh = rmtCheckAll ? /*#__PURE__*/_react.default.createElement("th", {
@@ -30,6 +32,7 @@ const ColumnSearch = props => {
         handleColumnSearchValue({
           [h.key]: e.target.value
         });
+        setCurrentPage(1);
       }
     }));
   }), isActions && /*#__PURE__*/_react.default.createElement("th", {

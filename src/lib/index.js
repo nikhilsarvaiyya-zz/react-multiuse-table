@@ -35,24 +35,25 @@ const MyTable = (props) => {
         rmtClass,
         rmtPagination,
         rmtPaginateSelection,
-        rmtDefaultSelection,
+        rmtRecordPerPage,
         rmtHeading,
         rmtSubHeading,
         rmtCheckAll,
         rmtColumnSearch,
         rmtGlobalSearch,
         rmtActions,
-        handleSubmit
+        handleSubmit,
+        rmtPageLimit
     } = props
 
-    let selection = rmtDefaultSelection ? rmtDefaultSelection : 5
+    let rpp = rmtRecordPerPage ? rmtRecordPerPage : 5
 
     const [keyIndex, handleKeyIndex] = useState(0);
     const [shortByKey, handleName] = useState('name');
     const [shortOrder, handleOrder] = useState(1);
-    const [selectItem, handleSelectitem] = useState(selection);
-    //const [totalrecords, handleTotalRecords] = useState(rmtData.length);
-    const [totalrecords] = useState(rmtData.length);
+
+    const [totalrecords, handleTotalRecords] = useState(10);
+
     const [fullScreen, handleFullScreen] = useState(false);
 
     const [columnSearch, handleColumnSearch] = useState(rmtColumnSearch);
@@ -68,20 +69,26 @@ const MyTable = (props) => {
     const [checkAllAction, handleCheckAllAction] = useState(false);
     const [checkSingleRow, handleCheckSingleRow] = useState([]);
 
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pagnetData, handlePagnetData] = useState([]);
+    const [recordPerPage, handleRecordPerPage] = useState(rpp);
+
+
+
 
 
 
     useEffect(() => {
         let basic = {
-            limit: Number(selectItem),
+            limit: Number(recordPerPage),
             skip: 10,
             order: Number(shortOrder),
             columnSearch: columnSearchValue,
             globalSearch: globalSearchValue
         }
         let all = {
-            limit: Number(selectItem),
-            skip: 0,
+            limit: Number(recordPerPage),
+            skip: pagnetData.startIndex,
             shortByKey: shortByKey.key,
             shortByOrder: Number(shortOrder),
             columnSearch: columnSearchValue,
@@ -90,12 +97,22 @@ const MyTable = (props) => {
             darkMode: darkMode,
             isActions: isActions,
             checkAllAction: checkAllAction,
-            checkSingleRow: checkSingleRow
+            checkSingleRow: checkSingleRow,
+
         }
         if (handleSubmit) {
             handleSubmit(all, basic)
         }
+
     })
+
+
+    useEffect(() => {
+
+        const startIndex = currentPage * Number(recordPerPage) - Number(recordPerPage);
+        const endIndex = startIndex + Number(recordPerPage);
+        handlePagnetData({ startIndex, endIndex })
+    }, [currentPage, recordPerPage]);
 
 
     const isPagination = (rmtPagination == undefined || rmtPagination === true)
@@ -112,7 +129,10 @@ const MyTable = (props) => {
         columnSpan = columnSpan + 1
     }
 
+    // console.log(pagnetData)
+
     return <div className="rmtMainContainer">
+
         <Toolbar
             rmtHeading={rmtHeading}
             rmtSubHeading={rmtSubHeading}
@@ -159,7 +179,9 @@ const MyTable = (props) => {
                         isActions={isActions}
                         columnSpan={columnSpan}
                         handleColumnSearchValue={handleColumnSearchValue}
-                        columnSearchValue={columnSearchValue} /> : null}
+                        columnSearchValue={columnSearchValue}
+                        handlePagnetData={handlePagnetData}
+                        setCurrentPage={setCurrentPage} /> : null}
                 </thead>
 
                 <tbody>
@@ -173,28 +195,37 @@ const MyTable = (props) => {
                         isActions={isActions}
                         columnSpan={columnSpan}
                         keyIndex={keyIndex}
-                        selectItem={selectItem}
                         isPagination={isPagination}
                         globalSearchValue={globalSearchValue}
                         checkAllAction={checkAllAction}
                         handleCheckSingleRow={handleCheckSingleRow}
                         checkSingleRow={checkSingleRow}
                         columnSearchValue={columnSearchValue}
+                        pagnetData={pagnetData}
+                        totalrecords={totalrecords}
+                        handleTotalRecords={handleTotalRecords}
+                        handlePagnetData={handlePagnetData}
                     />
+
                 </tbody>
                 <tfoot></tfoot>
             </table >
         </div>
         {isPagination && <Pagination
             rmtHeaders={rmtHeaders}
-            selectItem={selectItem}
-            handleSelectitem={handleSelectitem}
             rmtPaginateSelection={rmtPaginateSelection}
-            rmtDefaultSelection={selection}
+            rmtRecordPerPage={recordPerPage}
             totalrecords={totalrecords}
             rmtCheckAll={rmtCheckAll}
             isActions={isActions}
-            columnSpan={columnSpan} />
+            columnSpan={columnSpan}
+            rmtPageLimit={rmtPageLimit}
+            rmtData={rmtData}
+            handlePagnetData={handlePagnetData}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+            recordPerPage={recordPerPage}
+            handleRecordPerPage={handleRecordPerPage} />
         }
 
     </div>

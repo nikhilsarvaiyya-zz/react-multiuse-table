@@ -7,7 +7,10 @@ function sortFunction(arr,
     isPagination,
     globalSearchValue,
     checkAllAction,
-    columnSearchValue) {
+    columnSearchValue,
+    pagnetData,
+    handleTotalRecords,
+) {
 
     var collator = new Intl.Collator(undefined, {
         numeric: true,
@@ -21,8 +24,6 @@ function sortFunction(arr,
         item.rowKey = i
         return item
     })
-
-
 
     if (globalSearchValue.length > 0) {
         sortData = sortData.filter((f, i) => {
@@ -64,14 +65,13 @@ function sortFunction(arr,
         return collator.compare(nameA, nameB)
     })
 
-    if (order === -1) {
+    if (order === 1) {
         sortData = sortData.reverse();
     }
 
     if (isPagination) {
-        return sortData = sortData.filter((f, i) => {
-            return i < select
-        })
+        handleTotalRecords(sortData.length)
+        return sortData = sortData.slice(pagnetData.startIndex, pagnetData.endIndex)
     }
 
 }
@@ -84,18 +84,28 @@ const TableBody = (props) => {
         columnSpan,
         shortByKey,
         shortOrder,
-        selectItem,
+        recordPerPage,
         isPagination,
         globalSearchValue,
         checkAllAction,
         handleCheckSingleRow,
         checkSingleRow,
-        columnSearchValue
+        columnSearchValue,
+        pagnetData,
+        totalrecords,
+        handleTotalRecords,
+
     } = props;
 
     if (!rmtData) {
         return <td colSpan={columnSpan} className="mr-1">Loading...</td>
     }
+
+
+
+    // if (totalrecords > 0) {
+    //     return <td colSpan={columnSpan} className="mr-1"> No Data Avaliable...</td>
+    // }
 
     rmtData.map((item, i) => {
         return false
@@ -106,11 +116,14 @@ const TableBody = (props) => {
         rmtData,
         shortByKey,
         shortOrder,
-        selectItem,
+        recordPerPage,
         isPagination,
         globalSearchValue,
         checkAllAction,
-        columnSearchValue
+        columnSearchValue,
+        pagnetData,
+        handleTotalRecords,
+
     );
 
     const formateText = (text, index) => {

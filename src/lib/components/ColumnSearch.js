@@ -6,6 +6,8 @@ const ColumnSearch = (props) => {
         rmtCheckAll,
         handleColumnSearch,
         handleColumnSearchValue,
+        handlePagnetData,
+        setCurrentPage,
         isActions } = props
     let emptyTh = rmtCheckAll ? <th className="tx-c p-s l-0"> </th> : null
     return <tr >
@@ -19,6 +21,7 @@ const ColumnSearch = (props) => {
                         handleColumnSearchValue({
                             [h.key]: e.target.value
                         })
+                        setCurrentPage(1)
                     }}
                 />
             </th>

@@ -293,6 +293,63 @@ document.head.innerHTML += `
           white-space: nowrap;
           max-width: 200px;
         }
+        
+        .rmtPagination {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          float:right
+        }
+        
+        .rmtPaginationItem,
+        .rmtPrev,
+        .rmtNext {
+          display: inline-block;
+          padding:  6px 10px;
+          margin-right: 4px;
+          border-radius: 3px;
+          border: solid 1px #c0c0c0;
+          background: #e9e9e9;
+          box-shadow: inset 0px 1px 0px rgba(255,255,255, .8), 0px 1px 3px rgba(0,0,0, .1);
+          font-size: .875em;
+          font-weight: bold;
+          text-decoration: none;
+          color: #717171;
+          text-shadow: 0px 1px 0px rgba(255,255,255, 1);
+          cursor:pointer
+        }
+        .rmtPaginationItem:hover,
+        .rmtPrev:hover,
+        .rmtNext:hover {
+          background: #fefefe;
+          background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FEFEFE), to(#f0f0f0));
+          background: -moz-linear-gradient(0% 0% 270deg,#FEFEFE, #f0f0f0);
+        }
+        .rmtPaginationItem.active {
+          border: none;
+          background: #616161;
+          box-shadow: inset 0px 0px 8px rgba(0,0,0, .5), 0px 1px 0px rgba(255,255,255, .8);
+          color: #f0f0f0;
+          text-shadow: 0px 0px 3px rgba(0,0,0, .5);
+        }
+        
+        .rmtPaginationItem span {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          display: contents;
+        }
+        
+        .rmtPrev.disabled,
+        .rmtNext.disabled {
+          pointer-events: none;
+          box-shadow: none;
+          color: #999;
+        }
+        .noDataAvaliable{
+          color:#aaa
+        }
 
   </style>`
 export default StyleSheet;
