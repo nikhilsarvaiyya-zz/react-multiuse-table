@@ -6,6 +6,7 @@ $ npm install react-multiuse-table
 ## Usage
 
 ```js
+
 import ReactMultiuseTable from 'react-multiuse-table'; 
 
 const headers = [
@@ -46,7 +47,16 @@ const data = [
     rmtGlobalSearch={false}
 />
 ```
+## Pagination
 
+```js
+
+<ReactMultiuseTable
+    rmtPaginateSelection={[5, 10, 100]}
+    rmtRecordPerPage={10}
+    rmtPageLimit={5}
+  />
+```
 ## Collect Params for Serverside  
 
 ```js
