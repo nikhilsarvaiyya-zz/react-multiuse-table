@@ -6,6 +6,7 @@ $ npm install react-multiuse-table
 ## Usage
 
 ```js
+
 import ReactMultiuseTable from 'react-multiuse-table'; 
 
 const headers = [
@@ -55,7 +56,7 @@ const data = [
     rmtRecordPerPage={10}
     rmtPageLimit={5}
   />
-
+```
 ## Collect Params for Serverside  
 
 ```js
