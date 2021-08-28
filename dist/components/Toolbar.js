@@ -17,14 +17,23 @@ const Toolbar = props => {
     closeFullScreen,
     fullScreen,
     handleFullScreen,
+    rmtGlobalSearch,
     globalSearch,
     handleGlobalSearch,
-    handleColumnSearch,
-    columnSearch,
     handleGlobalSearchValue,
+    globalSearchValue,
     darkMode,
-    handleDarkMode
+    handleDarkMode,
+    rmtResetData,
+    rmtFullScreenMode,
+    rmtDarkTheme,
+    columnSearchValue,
+    handleColumnSearchValue,
+    currentPage,
+    setCurrentPage
   } = props;
+  console.log(Object.keys(columnSearchValue).length);
+  let isDataToReset = globalSearchValue.length !== 0 || Object.keys(columnSearchValue).length !== 0 || currentPage !== 1;
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "rmtToolbar"
   }, /*#__PURE__*/_react.default.createElement("div", {
@@ -43,12 +52,20 @@ const Toolbar = props => {
     className: "subHeading"
   }, rmtSubHeading) : null), /*#__PURE__*/_react.default.createElement("div", {
     className: "fr"
-  }, /*#__PURE__*/_react.default.createElement("ul", null, !columnSearch ? globalSearch ? /*#__PURE__*/_react.default.createElement("li", {
-    className: "ml-01 cr-p va-b p-r"
+  }, /*#__PURE__*/_react.default.createElement("ul", null, rmtGlobalSearch ? globalSearch ? /*#__PURE__*/_react.default.createElement("li", {
+    className: "ml-01 cr-p"
   }, /*#__PURE__*/_react.default.createElement("img", {
     alt: "",
     onClick: () => {
       handleGlobalSearch(false);
+    },
+    src: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAA4ElEQVQ4jaXSMUpDQRSF4S/RZ7ALSSnYCRbBwi1YuQAjxMLGRlJrZekWAkEEKwutDK7ApaSzsEkTUREs3iTImDcjyWmGuXfOP4c7Q7Xqid5ctWjfwiW28Yki1G/wkoPt4AmdqL6Ja1ykzAVGaCbOXOGwqtlDN5OwwGNcnA3qAM8ZwBfeRClngA28ZwACoLUIMEH7H4AtvC4CjHCSMTeVSadVB+6xW9Gr4w57uRsecIrGr3pHOf1vnMem+CfWcKR87zV8YIwBjsPaxzCVJKWzkKS/LOAPZH0JwG3w7a+SYq4fo1AfZnFyNMQAAAAASUVORK5CYII="
+  })) : /*#__PURE__*/_react.default.createElement("li", {
+    className: "ml-01 cr-p va-b p-r"
+  }, /*#__PURE__*/_react.default.createElement("img", {
+    alt: "",
+    onClick: () => {
+      handleGlobalSearch(true);
     },
     className: "p-a searchBox",
     style: {
@@ -58,31 +75,22 @@ const Toolbar = props => {
     src: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAAV0lEQVQ4jWNgGExgOgMDgzQR6qShajGAOAMDw0YChkgQUoPPEIKa8RlCtGZsGkjWDAPSDAwMW6EYp2YmUk0lFlDkBWwaiDYEn0KChhBjC97ERnFSHhgAAP3XEqdC/dYtAAAAAElFTkSuQmCC"
   }), /*#__PURE__*/_react.default.createElement("input", {
     type: "search",
+    placeHolder: "search",
+    value: globalSearchValue,
     onChange: e => {
       handleGlobalSearchValue(e.target.value);
     }
-  })) : /*#__PURE__*/_react.default.createElement("li", {
+  })) : null, rmtResetData || isDataToReset ? /*#__PURE__*/_react.default.createElement("li", {
     className: "ml-01 cr-p"
   }, /*#__PURE__*/_react.default.createElement("img", {
-    alt: "",
     onClick: () => {
-      handleGlobalSearch(true);
+      handleGlobalSearchValue('');
+      handleColumnSearchValue('');
+      setCurrentPage(1);
     },
-    src: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAA4ElEQVQ4jaXSMUpDQRSF4S/RZ7ALSSnYCRbBwi1YuQAjxMLGRlJrZekWAkEEKwutDK7ApaSzsEkTUREs3iTImDcjyWmGuXfOP4c7Q7Xqid5ctWjfwiW28Yki1G/wkoPt4AmdqL6Ja1ykzAVGaCbOXOGwqtlDN5OwwGNcnA3qAM8ZwBfeRClngA28ZwACoLUIMEH7H4AtvC4CjHCSMTeVSadVB+6xW9Gr4w57uRsecIrGr3pHOf1vnMem+CfWcKR87zV8YIwBjsPaxzCVJKWzkKS/LOAPZH0JwG3w7a+SYq4fo1AfZnFyNMQAAAAASUVORK5CYII="
-  })) : null, /*#__PURE__*/_react.default.createElement("li", null, columnSearch ? /*#__PURE__*/_react.default.createElement("img", {
-    alt: "",
-    onClick: () => handleColumnSearch(false),
-    src: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAAnklEQVQ4jdXSPQrCQBiE4ccgSCqxsbSw0FJSWHkAj+Q9vJS12AhWgoo2sVFQELQwhYT8GFM5sLAMO+83Hyzc8Kx4HgghwEZ17RII6GJdYfoJwzSxh+0X4TOivFoDHAvCV0zKdhshzgjfMc0KNDK8COOUt8KibPqnlkmTGPuih80cv41Ocm8VAYIqtf4LcKgLDjHDxfsD/aw+5nXbFOoFzGo/FIAQQ1YAAAAASUVORK5CYII="
-  }) : /*#__PURE__*/_react.default.createElement("img", {
-    alt: "",
-    onClick: () => handleColumnSearch(true),
-    src: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAAwElEQVQ4jdXSsWoCQRDG8d+ZEEWbWAkKh1iIjZB0FiGFjS9k6TPYamulpkhAAnkOy1R5hJBWUqS4EyTcnXt2ftXuN/MfZnYnwif2ymmIEX7gHe0ScDNlakejjQ+0AuA6XjH4H4ixw30BfIcNHvMS+nhDIyN2gxWezrX4gBdUT7wIS0yygCjDe8YMX+k9xkIyYrDWktduYluUeJvj/+I7PR+KClTKtHVdBRoYhxTI+kaSPZ+ih46cHQhRF/NL4SD9AXMyFQWiX47OAAAAAElFTkSuQmCC"
-  })), /*#__PURE__*/_react.default.createElement("li", {
-    className: "ml-01 cr-p"
-  }, /*#__PURE__*/_react.default.createElement("img", {
     alt: "",
     src: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAAuElEQVQ4jdXSMWqCMQDF8Z9WcSjFwd7CKyhIceomegDBsYfQimfQW7jqWEpxaMHZM6gIinS1g/nKN3wRR/3DgyQv75GEcIsU0cMXtjhggbfg1YIyecYPZmiignIYz7HEBIOscB7feL9wuiFO6YJCymzjiH4kfLpQ/M/TNZvun+g1B84PlSjGBzrJJB8pykXCI5QwTRYeUmYDK7yghTV2eEQdY1Txit+s9mZQ0fnbLrDHBp/oBu/G+ANI2SCkCXAwFQAAAABJRU5ErkJggg=="
-  })), /*#__PURE__*/_react.default.createElement("li", {
+  })) : null, rmtDarkTheme ? /*#__PURE__*/_react.default.createElement("li", {
     className: "ml-01 cr-p",
     onClick: () => {
       handleDarkMode(darkMode ? false : true);
@@ -90,7 +98,7 @@ const Toolbar = props => {
   }, /*#__PURE__*/_react.default.createElement("img", {
     alt: "",
     src: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAA40lEQVQ4jaXTMU4DMRCF4Y8VLcsN6IICBVcBcRpElVyAOwSh1IgCrkFoghBtApdgQ2EvMsYOKxhpCo/nnxk/2/zTdirxY5ziMK5fcIvlbwX3MUeHTeYdbtBug58KYO6LWpH5APgKK1yXzlwaO/VJzD2LueO0wOVAGBqscQG7MTiqCRPhabLuBB1GfTWxyxA4nWKTFngtJE23wCc5c+S7iJOf3Jed40MmIuGR9FdVswNBwFlpsxXEWQlX1SR7Tey8xiP2ah1a4ZF0eMM9HvAex57lcO0zjYXP1J9ziTs81zr/2T4BZ2RR+NbR+GoAAAAASUVORK5CYII="
-  })), !fullScreen ? /*#__PURE__*/_react.default.createElement("li", {
+  })) : null, rmtFullScreenMode && !fullScreen ? /*#__PURE__*/_react.default.createElement("li", {
     className: "ml-01 cr-p",
     onClick: () => {
       openFullScreen();
@@ -99,7 +107,7 @@ const Toolbar = props => {
   }, /*#__PURE__*/_react.default.createElement("img", {
     alt: "",
     src: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAAa0lEQVQ4jc2SQQ6AIAwEJ/5HDspnxP/f6As0gYNN5ICBhmjcY3eyNGXhT9oBARJwAK7wnM6SMqEWIMDS8dAKxJqR+pe92akYnoaAKjsbAizsh/Kj7PARh79RuErSkuehSEGNVpUjsBm2fVkZh9sa61aJuakAAAAASUVORK5CYII="
-  })) : null, fullScreen ? /*#__PURE__*/_react.default.createElement("li", {
+  })) : null, rmtFullScreenMode && fullScreen ? /*#__PURE__*/_react.default.createElement("li", {
     className: "ml-01 cr-p"
   }, /*#__PURE__*/_react.default.createElement("img", {
     alt: "",

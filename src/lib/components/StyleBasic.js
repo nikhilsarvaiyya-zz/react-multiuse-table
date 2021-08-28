@@ -181,6 +181,9 @@ document.head.innerHTML += `
     .cr-p{
         cursor:pointer
     }
+    .cr-p:hover{
+     opacity:.9
+  }
     .tx-c{
         text-align:center
     }

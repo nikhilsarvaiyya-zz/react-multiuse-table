@@ -13,9 +13,11 @@ require("core-js/modules/es.array.sort.js");
 
 require("core-js/modules/web.dom-collections.iterator.js");
 
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function sortFunction(arr, shortByKey, order, select, isPagination, globalSearchValue, checkAllAction, columnSearchValue, pagnetData, handleTotalRecords) {
   var collator = new Intl.Collator(undefined, {
@@ -78,9 +80,12 @@ function sortFunction(arr, shortByKey, order, select, isPagination, globalSearch
     handleTotalRecords(sortData.length);
     return sortData = sortData.slice(pagnetData.startIndex, pagnetData.endIndex);
   }
+
+  return sortData;
 }
 
 const TableBody = props => {
+  let sortedData = [];
   const {
     rmtCheckAll,
     rmtActions,
@@ -97,24 +102,22 @@ const TableBody = props => {
     checkSingleRow,
     columnSearchValue,
     pagnetData,
-    totalrecords,
-    handleTotalRecords
+    handleTotalRecords,
+    rmtServer
   } = props;
+
+  if (rmtServer) {
+    sortedData = rmtData;
+  } else {
+    sortedData = sortFunction(rmtData, shortByKey, shortOrder, recordPerPage, isPagination, globalSearchValue, checkAllAction, columnSearchValue, pagnetData, handleTotalRecords);
+  }
 
   if (!rmtData) {
     return /*#__PURE__*/_react.default.createElement("td", {
       colSpan: columnSpan,
       className: "mr-1"
     }, "Loading...");
-  } // if (totalrecords > 0) {
-  //     return <td colSpan={columnSpan} className="mr-1"> No Data Avaliable...</td>
-  // }
-
-
-  rmtData.map((item, i) => {
-    return false;
-  });
-  let sortedData = sortFunction(rmtData, shortByKey, shortOrder, recordPerPage, isPagination, globalSearchValue, checkAllAction, columnSearchValue, pagnetData, handleTotalRecords);
+  }
 
   const formateText = (text, index) => {
     return /*#__PURE__*/_react.default.createElement("div", {
@@ -173,7 +176,7 @@ const TableBody = props => {
     }, rmtActions.map((a, i) => {
       return /*#__PURE__*/_react.default.createElement("a", {
         key: i,
-        href: "#"
+        href: a.label
       }, a.label);
     })))));
   });

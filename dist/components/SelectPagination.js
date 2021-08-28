@@ -26,7 +26,7 @@ const SelectPagination = props => {
     className: "fl db lh-2"
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: "fl mr-1"
-  }, "Total Records: ", totalrecords), /*#__PURE__*/_react.default.createElement("div", {
+  }, "Total Records: ", /*#__PURE__*/_react.default.createElement("b", null, totalrecords)), /*#__PURE__*/_react.default.createElement("div", {
     className: "fl mr-1"
   }, "Records per page \xA0", /*#__PURE__*/_react.default.createElement("select", {
     defaultValue: recordPerPage,
@@ -47,6 +47,7 @@ const SelectPagination = props => {
     }
   }, allPages.map(p => {
     return /*#__PURE__*/_react.default.createElement("option", {
+      key: p,
       selected: currentPage === p + 1,
       value: p + 1
     }, p + 1);

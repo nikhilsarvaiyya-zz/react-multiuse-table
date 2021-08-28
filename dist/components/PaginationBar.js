@@ -1,11 +1,11 @@
 "use strict";
 
-require("core-js/modules/web.dom-collections.iterator.js");
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
+
+require("core-js/modules/web.dom-collections.iterator.js");
 
 var _react = _interopRequireWildcard(require("react"));
 
@@ -23,6 +23,7 @@ const PaginationBar = _ref => {
     totalrecords
   } = _ref;
   const pages = Math.round(totalrecords / Number(recordPerPage));
+  const [pageLimit] = (0, _react.useState)(rmtPageLimit ? rmtPageLimit : 5);
 
   function goToNextPage() {
     setCurrentPage(page => page + 1);
@@ -38,17 +39,16 @@ const PaginationBar = _ref => {
   }
 
   const getPaginationGroup = () => {
-    let start = Math.floor((currentPage - 1) / rmtPageLimit) * rmtPageLimit;
-    return new Array(rmtPageLimit).fill().map((_, idx) => start + idx + 1);
+    let start = Math.floor((currentPage - 1) / pageLimit) * pageLimit;
+    return new Array(pageLimit).fill().map((_, idx) => start + idx + 1);
   };
 
-  console.log(typeof currentPage);
   return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", {
     className: "rmtPagination"
   }, /*#__PURE__*/_react.default.createElement("button", {
     onClick: goToPreviousPage,
     className: "rmtPrev ".concat(currentPage === 1 ? 'disabled' : '')
-  }, "prev"), getPaginationGroup().map((item, index) => {
+  }, "\u21E0"), getPaginationGroup().map((item, index) => {
     return /*#__PURE__*/_react.default.createElement("button", {
       key: index,
       onClick: changePage,
@@ -57,7 +57,7 @@ const PaginationBar = _ref => {
   }), /*#__PURE__*/_react.default.createElement("button", {
     onClick: goToNextPage,
     className: "rmtNext ".concat(currentPage === pages ? 'disabled' : '')
-  }, "next")));
+  }, "\u21E2")));
 };
 
 var _default = PaginationBar;

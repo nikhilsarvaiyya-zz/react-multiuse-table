@@ -17,7 +17,7 @@ const SelectPagination = (props) => {
     let allPages = Array.from(Array(totalPages).keys())
     return <div className="fl db lh-2">
         <div className="fl mr-1">
-            Total Records: {totalrecords}
+            Total Records: <b>{totalrecords}</b>
         </div>
         <div className="fl mr-1">
             Records per page &nbsp;
@@ -40,7 +40,7 @@ const SelectPagination = (props) => {
                 setCurrentPage(Number(e.target.value))
             }}>
                 {allPages.map(p => {
-                    return <option selected={currentPage === p + 1} value={p + 1} >{p + 1}</option>
+                    return <option key={p} selected={currentPage === p + 1} value={p + 1} >{p + 1}</option>
                 })}
 
             </select>

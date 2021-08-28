@@ -46,7 +46,9 @@ const TableHead = props => {
         handleOrder(h.key === shortByKey ? shortOrder : -shortOrder);
         handleKeyIndex(i);
       },
-      style: {},
+      style: {
+        minWidth: "120px"
+      },
       key: i
     }, /*#__PURE__*/_react.default.createElement("div", {
       className: "lh-1 df ws-nr"
@@ -54,7 +56,7 @@ const TableHead = props => {
       style: {
         padding: "5px"
       },
-      className: "fl"
+      className: "fl cr-p"
     }, h.label), /*#__PURE__*/_react.default.createElement("div", {
       className: "fr",
       style: {
@@ -83,6 +85,7 @@ const TableHead = props => {
       width: "24px"
     }
   }, !columnSearch && /*#__PURE__*/_react.default.createElement("img", {
+    alt: "search",
     onClick: () => handleColumnSearch(true),
     src: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAAwElEQVQ4jdXSsWoCQRDG8d+ZEEWbWAkKh1iIjZB0FiGFjS9k6TPYamulpkhAAnkOy1R5hJBWUqS4EyTcnXt2ftXuN/MfZnYnwif2ymmIEX7gHe0ScDNlakejjQ+0AuA6XjH4H4ixw30BfIcNHvMS+nhDIyN2gxWezrX4gBdUT7wIS0yygCjDe8YMX+k9xkIyYrDWktduYluUeJvj/+I7PR+KClTKtHVdBRoYhxTI+kaSPZ+ih46cHQhRF/NL4SD9AXMyFQWiX47OAAAAAElFTkSuQmCC"
   })));

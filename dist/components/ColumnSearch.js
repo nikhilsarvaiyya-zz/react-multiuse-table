@@ -14,8 +14,9 @@ const ColumnSearch = props => {
     headers,
     rmtCheckAll,
     handleColumnSearch,
+    columnSearch,
     handleColumnSearchValue,
-    handlePagnetData,
+    columnSearchValue,
     setCurrentPage,
     isActions
   } = props;
@@ -23,11 +24,13 @@ const ColumnSearch = props => {
     className: "tx-c p-s l-0"
   }, " ") : null;
   return /*#__PURE__*/_react.default.createElement("tr", null, emptyTh, headers.map((h, i) => {
+    console.log(h.key, Object.keys(columnSearchValue)[0]);
     return /*#__PURE__*/_react.default.createElement("th", {
       key: i
     }, /*#__PURE__*/_react.default.createElement("input", {
       type: "search",
       placeholder: " ".concat(h.label),
+      value: h.key === Object.keys(columnSearchValue)[0] ? Object.keys(columnSearchValue)[1] : '',
       onChange: e => {
         handleColumnSearchValue({
           [h.key]: e.target.value

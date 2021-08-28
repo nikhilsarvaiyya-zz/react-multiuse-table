@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 function sortFunction(arr,
     shortByKey,
@@ -74,9 +74,13 @@ function sortFunction(arr,
         return sortData = sortData.slice(pagnetData.startIndex, pagnetData.endIndex)
     }
 
+    return sortData
+
 }
 
 const TableBody = (props) => {
+    let sortedData = [];
+
 
     const { rmtCheckAll, rmtActions,
         rmtHeaders,
@@ -92,39 +96,32 @@ const TableBody = (props) => {
         checkSingleRow,
         columnSearchValue,
         pagnetData,
-        totalrecords,
         handleTotalRecords,
+        rmtServer
 
     } = props;
+
+    if (rmtServer) {
+        sortedData = rmtData
+    } else {
+        sortedData = sortFunction(
+            rmtData,
+            shortByKey,
+            shortOrder,
+            recordPerPage,
+            isPagination,
+            globalSearchValue,
+            checkAllAction,
+            columnSearchValue,
+            pagnetData,
+            handleTotalRecords,
+        );
+    }
 
     if (!rmtData) {
         return <td colSpan={columnSpan} className="mr-1">Loading...</td>
     }
 
-
-
-    // if (totalrecords > 0) {
-    //     return <td colSpan={columnSpan} className="mr-1"> No Data Avaliable...</td>
-    // }
-
-    rmtData.map((item, i) => {
-        return false
-    })
-
-
-    let sortedData = sortFunction(
-        rmtData,
-        shortByKey,
-        shortOrder,
-        recordPerPage,
-        isPagination,
-        globalSearchValue,
-        checkAllAction,
-        columnSearchValue,
-        pagnetData,
-        handleTotalRecords,
-
-    );
 
     const formateText = (text, index) => {
         return <div key={index} className="overflow-200">{text ? text : <span style={{ opacity: "20%" }}>NA</span>} </div>
@@ -173,7 +170,7 @@ const TableBody = (props) => {
                                     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAAiElEQVQ4jc2SwQ1AQBREX5BogiJQgxroRA1utEMPbq4uqnAQDjaxlz8JBzHJJD/5s7OZ2YU/IwVGx+SNQQscjq0lCoTBZMyPUAC5EkRiFwMlV4QZ2J7e3nB30Fgi1YGPw1qoCJ13uLdEoTDYuXIvwCp0JmruDipLpDrIvFk+pYUEGBxffeVvcAIAMhhp+VgEPQAAAABJRU5ErkJggg==" /></button>
                             <div className="dropdown-content">
                                 {rmtActions.map((a, i) => {
-                                    return <a key={i} href="#">{a.label}</a>
+                                    return <a key={i} href={a.label}>{a.label}</a>
                                 })}
                             </div>
                         </div>

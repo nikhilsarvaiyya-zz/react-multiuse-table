@@ -3,7 +3,7 @@ import TableHead from './components/TableHead.js'
 import TableBody from './components/TableBody.js'
 import Pagination from './components/Pagination.js';
 import ColumnSearch from './components/ColumnSearch.js';
-import StyleSheet from './components/StyleBasic';
+import './components/StyleBasic';
 import Toolbar from './components/Toolbar.js';
 
 var elem = document.documentElement;
@@ -42,18 +42,23 @@ const MyTable = (props) => {
         rmtColumnSearch,
         rmtGlobalSearch,
         rmtActions,
-        handleSubmit,
-        rmtPageLimit
+        rmtQueryParams,
+        rmtPageLimit,
+        rmtTotalrecord,
+        rmtServer,
+        rmtResetData,
+        rmtFullScreenMode,
+        rmtToolbar,
+        rmtDarkTheme
     } = props
 
-    let rpp = rmtRecordPerPage ? rmtRecordPerPage : 5
+    let rpp = rmtRecordPerPage ? rmtRecordPerPage : 10
 
     const [keyIndex, handleKeyIndex] = useState(0);
     const [shortByKey, handleName] = useState('name');
     const [shortOrder, handleOrder] = useState(1);
 
-    const [totalrecords, handleTotalRecords] = useState(10);
-
+    const [totalrecords, handleTotalRecords] = useState(rmtTotalrecord ? rmtTotalrecord : 0);
     const [fullScreen, handleFullScreen] = useState(false);
 
     const [columnSearch, handleColumnSearch] = useState(rmtColumnSearch);
@@ -66,17 +71,20 @@ const MyTable = (props) => {
     const [darkMode, handleDarkMode] = useState(false); // Need to Work
     //const [isActions, handleisActions] = useState(rmtActions && rmtActions.length !== 0);
     const [isActions] = useState(rmtActions && rmtActions.length !== 0);
+
     const [checkAllAction, handleCheckAllAction] = useState(false);
     const [checkSingleRow, handleCheckSingleRow] = useState([]);
 
     const [currentPage, setCurrentPage] = useState(1);
     const [pagnetData, handlePagnetData] = useState([]);
+
     const [recordPerPage, handleRecordPerPage] = useState(rpp);
+    const [loadData, handleLoadData] = useState(rmtData);
 
 
-
-
-
+    useEffect(() => {
+        handleLoadData(rmtData)
+    }, [loadData])
 
     useEffect(() => {
         let basic = {
@@ -100,11 +108,13 @@ const MyTable = (props) => {
             checkSingleRow: checkSingleRow,
 
         }
-        if (handleSubmit) {
-            handleSubmit(all, basic)
+        console.log(rmtQueryParams && rmtServer)
+        if (rmtQueryParams && rmtServer) {
+
+            rmtQueryParams(all, basic)
         }
 
-    })
+    }, [recordPerPage, pagnetData, shortByKey, shortOrder, columnSearchValue, globalSearchValue, isActions])
 
 
     useEffect(() => {
@@ -115,7 +125,7 @@ const MyTable = (props) => {
     }, [currentPage, recordPerPage]);
 
 
-    const isPagination = (rmtPagination == undefined || rmtPagination === true)
+    const isPagination = (rmtPagination === undefined || rmtPagination === true)
 
     if (!rmtHeaders) {
         return "Headers is not Provided"
@@ -130,27 +140,38 @@ const MyTable = (props) => {
     }
 
     // console.log(pagnetData)
-
+    console.log("State value")
     return <div className="rmtMainContainer">
-
-        <Toolbar
-            rmtHeading={rmtHeading}
-            rmtSubHeading={rmtSubHeading}
-            rmtHeaders={rmtHeaders}
-            openFullScreen={openFullScreen}
-            closeFullScreen={closeFullScreen}
-            fullScreen={fullScreen}
-            handleFullScreen={handleFullScreen}
-            rmtCheckAll={rmtCheckAll}
-            globalSearch={globalSearch}
-            handleGlobalSearch={handleGlobalSearch}
-            isActions={isActions}
-            columnSpan={columnSpan}
-            handleColumnSearch={handleColumnSearch}
-            columnSearch={columnSearch}
-            handleGlobalSearchValue={handleGlobalSearchValue}
-            handleDarkMode={handleDarkMode}
-            darkMode={darkMode} />
+        {rmtToolbar ?
+            <Toolbar
+                rmtHeading={rmtHeading}
+                rmtSubHeading={rmtSubHeading}
+                rmtHeaders={rmtHeaders}
+                openFullScreen={openFullScreen}
+                closeFullScreen={closeFullScreen}
+                fullScreen={fullScreen}
+                handleFullScreen={handleFullScreen}
+                rmtCheckAll={rmtCheckAll}
+                rmtGlobalSearch={rmtGlobalSearch}
+                globalSearchValue={globalSearchValue}
+                globalSearch={globalSearch}
+                handleGlobalSearch={handleGlobalSearch}
+                isActions={isActions}
+                columnSpan={columnSpan}
+                handleColumnSearch={handleColumnSearch}
+                columnSearch={columnSearch}
+                handleGlobalSearchValue={handleGlobalSearchValue}
+                handleDarkMode={handleDarkMode}
+                darkMode={darkMode}
+                rmtResetData={rmtResetData}
+                rmtFullScreenMode={rmtFullScreenMode}
+                rmtDarkTheme={rmtDarkTheme}
+                columnSearchValue={columnSearchValue}
+                handleColumnSearchValue={handleColumnSearchValue}
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+            /> :
+            null}
         <div className="rmtTableContainer">
             <table className={rmtClass} id="rmtable">
                 <thead >
@@ -165,7 +186,6 @@ const MyTable = (props) => {
                         rmtCheckAll={rmtCheckAll}
                         columnSearch={columnSearch}
                         handleColumnSearch={handleColumnSearch}
-
                         isActions={isActions}
                         columnSpan={columnSpan}
                         handleCheckAllAction={handleCheckAllAction}
@@ -205,6 +225,7 @@ const MyTable = (props) => {
                         totalrecords={totalrecords}
                         handleTotalRecords={handleTotalRecords}
                         handlePagnetData={handlePagnetData}
+                        rmtServer={rmtServer}
                     />
 
                 </tbody>

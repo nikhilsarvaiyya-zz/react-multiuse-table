@@ -5,18 +5,21 @@ const ColumnSearch = (props) => {
     const { headers,
         rmtCheckAll,
         handleColumnSearch,
+        columnSearch,
         handleColumnSearchValue,
-        handlePagnetData,
+        columnSearchValue,
         setCurrentPage,
         isActions } = props
     let emptyTh = rmtCheckAll ? <th className="tx-c p-s l-0"> </th> : null
     return <tr >
         {emptyTh}
         {headers.map((h, i) => {
+            console.log(h.key, Object.keys(columnSearchValue)[0])
             return <th key={i}>
                 <input
                     type="search"
                     placeholder={` ${h.label}`}
+                    value={h.key === Object.keys(columnSearchValue)[0] ? Object.keys(columnSearchValue)[1] : ''}
                     onChange={(e) => {
                         handleColumnSearchValue({
                             [h.key]: e.target.value

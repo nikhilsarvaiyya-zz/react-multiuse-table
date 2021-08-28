@@ -17,7 +17,7 @@ var _Pagination = _interopRequireDefault(require("./components/Pagination.js"));
 
 var _ColumnSearch = _interopRequireDefault(require("./components/ColumnSearch.js"));
 
-var _StyleBasic = _interopRequireDefault(require("./components/StyleBasic"));
+require("./components/StyleBasic");
 
 var _Toolbar = _interopRequireDefault(require("./components/Toolbar.js"));
 
@@ -67,14 +67,20 @@ const MyTable = props => {
     rmtColumnSearch,
     rmtGlobalSearch,
     rmtActions,
-    handleSubmit,
-    rmtPageLimit
+    rmtQueryParams,
+    rmtPageLimit,
+    rmtTotalrecord,
+    rmtServer,
+    rmtResetData,
+    rmtFullScreenMode,
+    rmtToolbar,
+    rmtDarkTheme
   } = props;
-  let rpp = rmtRecordPerPage ? rmtRecordPerPage : 5;
+  let rpp = rmtRecordPerPage ? rmtRecordPerPage : 10;
   const [keyIndex, handleKeyIndex] = (0, _react.useState)(0);
   const [shortByKey, handleName] = (0, _react.useState)('name');
   const [shortOrder, handleOrder] = (0, _react.useState)(1);
-  const [totalrecords, handleTotalRecords] = (0, _react.useState)(10);
+  const [totalrecords, handleTotalRecords] = (0, _react.useState)(rmtTotalrecord ? rmtTotalrecord : 0);
   const [fullScreen, handleFullScreen] = (0, _react.useState)(false);
   const [columnSearch, handleColumnSearch] = (0, _react.useState)(rmtColumnSearch);
   const [columnSearchValue, handleColumnSearchValue] = (0, _react.useState)({}); //const [columnSearchArray, handleColumnSearchArray] = useState([]);
@@ -90,6 +96,10 @@ const MyTable = props => {
   const [currentPage, setCurrentPage] = (0, _react.useState)(1);
   const [pagnetData, handlePagnetData] = (0, _react.useState)([]);
   const [recordPerPage, handleRecordPerPage] = (0, _react.useState)(rpp);
+  const [loadData, handleLoadData] = (0, _react.useState)(rmtData);
+  (0, _react.useEffect)(() => {
+    handleLoadData(rmtData);
+  }, [loadData]);
   (0, _react.useEffect)(() => {
     let basic = {
       limit: Number(recordPerPage),
@@ -111,11 +121,12 @@ const MyTable = props => {
       checkAllAction: checkAllAction,
       checkSingleRow: checkSingleRow
     };
+    console.log(rmtQueryParams && rmtServer);
 
-    if (handleSubmit) {
-      handleSubmit(all, basic);
+    if (rmtQueryParams && rmtServer) {
+      rmtQueryParams(all, basic);
     }
-  });
+  }, [recordPerPage, pagnetData, shortByKey, shortOrder, columnSearchValue, globalSearchValue, isActions]);
   (0, _react.useEffect)(() => {
     const startIndex = currentPage * Number(recordPerPage) - Number(recordPerPage);
     const endIndex = startIndex + Number(recordPerPage);
@@ -124,7 +135,7 @@ const MyTable = props => {
       endIndex
     });
   }, [currentPage, recordPerPage]);
-  const isPagination = rmtPagination == undefined || rmtPagination === true;
+  const isPagination = rmtPagination === undefined || rmtPagination === true;
 
   if (!rmtHeaders) {
     return "Headers is not Provided";
@@ -141,9 +152,10 @@ const MyTable = props => {
   } // console.log(pagnetData)
 
 
+  console.log("State value");
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "rmtMainContainer"
-  }, /*#__PURE__*/_react.default.createElement(_Toolbar.default, {
+  }, rmtToolbar ? /*#__PURE__*/_react.default.createElement(_Toolbar.default, {
     rmtHeading: rmtHeading,
     rmtSubHeading: rmtSubHeading,
     rmtHeaders: rmtHeaders,
@@ -152,6 +164,8 @@ const MyTable = props => {
     fullScreen: fullScreen,
     handleFullScreen: handleFullScreen,
     rmtCheckAll: rmtCheckAll,
+    rmtGlobalSearch: rmtGlobalSearch,
+    globalSearchValue: globalSearchValue,
     globalSearch: globalSearch,
     handleGlobalSearch: handleGlobalSearch,
     isActions: isActions,
@@ -160,8 +174,15 @@ const MyTable = props => {
     columnSearch: columnSearch,
     handleGlobalSearchValue: handleGlobalSearchValue,
     handleDarkMode: handleDarkMode,
-    darkMode: darkMode
-  }), /*#__PURE__*/_react.default.createElement("div", {
+    darkMode: darkMode,
+    rmtResetData: rmtResetData,
+    rmtFullScreenMode: rmtFullScreenMode,
+    rmtDarkTheme: rmtDarkTheme,
+    columnSearchValue: columnSearchValue,
+    handleColumnSearchValue: handleColumnSearchValue,
+    currentPage: currentPage,
+    setCurrentPage: setCurrentPage
+  }) : null, /*#__PURE__*/_react.default.createElement("div", {
     className: "rmtTableContainer"
   }, /*#__PURE__*/_react.default.createElement("table", {
     className: rmtClass,
@@ -210,7 +231,8 @@ const MyTable = props => {
     pagnetData: pagnetData,
     totalrecords: totalrecords,
     handleTotalRecords: handleTotalRecords,
-    handlePagnetData: handlePagnetData
+    handlePagnetData: handlePagnetData,
+    rmtServer: rmtServer
   })), /*#__PURE__*/_react.default.createElement("tfoot", null))), isPagination && /*#__PURE__*/_react.default.createElement(_Pagination.default, {
     rmtHeaders: rmtHeaders,
     rmtPaginateSelection: rmtPaginateSelection,

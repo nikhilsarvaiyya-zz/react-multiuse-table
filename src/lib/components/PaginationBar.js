@@ -1,9 +1,10 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 const PaginationBar = ({ rmtPageLimit, recordPerPage, rmtData, setCurrentPage, currentPage, totalrecords }) => {
 
     const pages = Math.round(totalrecords / Number(recordPerPage))
 
+    const [pageLimit] = useState(rmtPageLimit ? rmtPageLimit : 5)
 
     function goToNextPage() {
         setCurrentPage((page) => page + 1);
@@ -19,11 +20,11 @@ const PaginationBar = ({ rmtPageLimit, recordPerPage, rmtData, setCurrentPage, c
     }
 
     const getPaginationGroup = () => {
-        let start = Math.floor((currentPage - 1) / rmtPageLimit) * rmtPageLimit;
-        return new Array(rmtPageLimit).fill().map((_, idx) => start + idx + 1);
+        let start = Math.floor((currentPage - 1) / pageLimit) * pageLimit;
+        return new Array(pageLimit).fill().map((_, idx) => start + idx + 1);
     };
 
-    console.log(typeof (currentPage))
+
 
     return <div>
         <div className="rmtPagination">
@@ -31,7 +32,7 @@ const PaginationBar = ({ rmtPageLimit, recordPerPage, rmtData, setCurrentPage, c
                 onClick={goToPreviousPage}
                 className={`rmtPrev ${currentPage === 1 ? 'disabled' : ''}`}
             >
-                prev
+                &#8672;
             </button>
             {getPaginationGroup().map((item, index) => {
                 return < button
@@ -47,7 +48,7 @@ const PaginationBar = ({ rmtPageLimit, recordPerPage, rmtData, setCurrentPage, c
                 onClick={goToNextPage}
                 className={`rmtNext ${currentPage === pages ? 'disabled' : ''}`}
             >
-                next
+                &#8674;
             </button>
         </div>
     </div >

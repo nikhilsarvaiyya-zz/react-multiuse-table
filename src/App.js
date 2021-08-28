@@ -1,5 +1,7 @@
+import React, { useState, useEffect } from 'react'
 import ReactMultiuseTable from './lib/index';
-import TableJson from './table.json'
+import clientData from './client.json'
+
 
 const rmtHeaders = [
   { key: 'id', label: "Index" },
@@ -24,36 +26,112 @@ const actions = [
   { key: 'view', label: "View" },
 ]
 
-const handleSubmit = (data, { skip, limit, order, columnSearch, globalSearch }) => {
-  //console.log(JSON.stringify(data, null, 4))
-}
+//for server Data
+//json-server data_1000.json 
+//http://localhost:3000/users?_limit=3&_page=1&_sort=id&_order=DESC
 
-function App() {
-  return <ReactMultiuseTable
-    rmtHeaders={rmtHeaders}
-    rmtData={TableJson}
+const App = () => {
 
-    rmtHeading="Heading"
-    rmtSubHeading="SubHeading"
-    rmtClass="table"
+  const [serverData, handleServerData] = useState([])
+  const [params, queryParams] = useState()
 
-    rmtPagination={true}
-    rmtPaginateSelection={[5, 10, 100]}
-    rmtRecordPerPage={10}
-    rmtPageLimit={5}
+  useEffect(() => {
 
-    rmtColumnSearch={true}
-    rmtGlobalSearch={false}
+    let endpoint = "http://localhost:3000/users"
+    let limit = `_limit=${params && params.limit}`
+    let page = `_page=${params && ((params.skip / params.limit) + 1)}`
+    let order = `_order=${params && params.shortByOrder === 1 ? "ASC" : "DESC"}`
+    let sort = `_sort=${params && params.shortByKey ? params.shortByKey : "id"}`
+    let search = `q=${params && params.globalSearch ? params.globalSearch : ''}`
+    let query = `?${limit}&${page}&${order}&${sort}&${search}`
 
-    rmtCheckAll={true}
-    rmtActions={actions}
+    fetch(endpoint + query)
+      .then(response => response.json())
+      .then(data => {
+        handleServerData(data)
+      });
 
-    handleSubmit={handleSubmit}
+  }, [params])
 
 
 
+  return <div style={{ background: "#a3a3a3" }}>
+    <div style={{ display: "flex" }}>
+      <div style={{ width: "calc(50% - 30px)", padding: "15px" }}>
+        <ReactMultiuseTable
+          rmtHeaders={rmtHeaders}
+          rmtData={clientData}
+        />
+      </div>
+      <div style={{ width: "calc(50% - 30px)", padding: "15px" }}>
+        <ReactMultiuseTable
+          rmtHeaders={rmtHeaders}
+          rmtData={serverData}
 
-  />
+          rmtServer={true}
+          rmtTotalrecord={998}
+          rmtQueryParams={queryParams}
+        />
+      </div>
+
+    </div>
+    <div style={{ width: "calc(100% - 30px)", padding: "15px", display: "inline-block" }}>
+      <ReactMultiuseTable
+        rmtHeaders={rmtHeaders}
+        rmtData={clientData}
+
+        rmtHeading="Client Data"
+        rmtSubHeading="clientData"
+        rmtClass="table"
+
+        rmtPagination={true}
+        rmtPaginateSelection={[5, 10, 100]}
+        rmtRecordPerPage={10}
+        rmtPageLimit={5}
+
+        rmtToolbar={true}
+        rmtColumnSearch={true}
+        rmtGlobalSearch={true}
+        rmtResetData={false}
+        rmtDarkTheme={true}
+        rmtFullScreenMode={true}
+
+        rmtCheckAll={true}
+        rmtActions={actions}
+
+      />
+    </div>
+    <div style={{ width: "calc(100% - 30px)", padding: "15px", display: "inline-block" }}>
+      <ReactMultiuseTable
+        rmtHeaders={rmtHeaders}
+        rmtData={serverData}
+
+        rmtHeading="Server Data"
+        rmtSubHeading="serverData"
+        rmtClass="table"
+
+        rmtPagination={true}
+        rmtPaginateSelection={[5, 10, 100]}
+        rmtRecordPerPage={10}
+        rmtPageLimit={5}
+
+        rmtToolbar={true}
+        rmtColumnSearch={true}
+        rmtGlobalSearch={true}
+        rmtResetData={false}
+        rmtDarkTheme={true}
+        rmtFullScreenMode={true}
+
+        rmtCheckAll={true}
+        rmtActions={actions}
+
+        rmtServer={true}
+        rmtTotalrecord={998}
+        rmtQueryParams={queryParams}
+
+      />
+    </div>
+  </div>
 }
 
 export default App;
