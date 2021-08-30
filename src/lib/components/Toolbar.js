@@ -5,6 +5,7 @@ const Toolbar = (props) => {
 
     const {
         rmtHeading,
+        rmtHeaders,
         rmtSubHeading,
         openFullScreen,
         closeFullScreen,
@@ -23,10 +24,13 @@ const Toolbar = (props) => {
         columnSearchValue,
         handleColumnSearchValue,
         currentPage,
-        setCurrentPage
+        setCurrentPage,
+        rmtArrangeHead,
+        handleStateHeaders,
+        stateHeaders
     } = props
 
-    console.log(Object.keys(columnSearchValue).length)
+
 
     let isDataToReset = globalSearchValue.length !== 0 ||
         Object.keys(columnSearchValue).length !== 0 ||
@@ -69,6 +73,28 @@ const Toolbar = (props) => {
                                 onChange={(e) => { handleGlobalSearchValue(e.target.value) }} />
                         </li> : null
                 }
+                {rmtArrangeHead ?
+                    <li className="ml-01 cr-p">
+                        <div className="dropdown va-b">
+                            <button className="dropbtn">
+                                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAAu0lEQVQ4jdXSsUoDURAF0GNWEMkf2G0XtVdS+isWgWV/IB9gYWNvbWVjZZMfUDClXSDNQuoQSJMiEIt9D23ct6/TC8OFYe5l7jD8JRR4wShHdBz4Cg84xTLwDMNfdAfUmEeDBVa4wz7UNGHwmbNpb1Q4yxEcBS5xiwnOsZWO8IhmEBpFEFdYZ+38A4P0SLeoxI3vWL0Qhy/wjg2etfnHum/whl38g0s0eMW19pHuEwY15rFxgid8BIN/hC8H0iA3l+QHXwAAAABJRU5ErkJggg==" />
+                            </button>
+                            <div className="dropdown-content zi-100">
+                                {rmtHeaders.map((h, i) => {
+                                    return <div>
+                                        <input
+                                            type="checkbox"
+                                            defaultChecked={h.listed === true}
+                                            onChange={(e) => {
+                                                handleStateHeaders({ checked: e.target.checked, heads: h })
+                                            }}
+                                        /> {h.label}
+                                    </div>
+                                })}
+                            </div>
+                        </div>
+                    </li>
+                    : null}
 
                 {rmtResetData || isDataToReset ?
                     <li className="ml-01 cr-p">

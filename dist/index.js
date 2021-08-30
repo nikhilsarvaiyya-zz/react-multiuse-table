@@ -74,7 +74,9 @@ const MyTable = props => {
     rmtResetData,
     rmtFullScreenMode,
     rmtToolbar,
-    rmtDarkTheme
+    rmtDarkTheme,
+    rmtArrangeHead,
+    details
   } = props;
   let rpp = rmtRecordPerPage ? rmtRecordPerPage : 10;
   const [keyIndex, handleKeyIndex] = (0, _react.useState)(0);
@@ -97,9 +99,21 @@ const MyTable = props => {
   const [pagnetData, handlePagnetData] = (0, _react.useState)([]);
   const [recordPerPage, handleRecordPerPage] = (0, _react.useState)(rpp);
   const [loadData, handleLoadData] = (0, _react.useState)(rmtData);
+  const [stateHeaders, handleStateHeaders] = (0, _react.useState)({});
+  console.log({
+    stateHeaders,
+    rmtHeaders
+  });
   (0, _react.useEffect)(() => {
-    handleLoadData(rmtData);
-  }, [loadData]);
+    rmtHeaders.forEach(header => {
+      console.log(header, stateHeaders.heads);
+
+      if (stateHeaders && stateHeaders.heads && header.key === stateHeaders.heads.key) {
+        return header.listed = !header.listed;
+      }
+    });
+    handleStateHeaders(rmtHeaders);
+  }, [stateHeaders]);
   (0, _react.useEffect)(() => {
     let basic = {
       limit: Number(recordPerPage),
@@ -121,7 +135,6 @@ const MyTable = props => {
       checkAllAction: checkAllAction,
       checkSingleRow: checkSingleRow
     };
-    console.log(rmtQueryParams && rmtServer);
 
     if (rmtQueryParams && rmtServer) {
       rmtQueryParams(all, basic);
@@ -149,16 +162,17 @@ const MyTable = props => {
 
   if (isActions) {
     columnSpan = columnSpan + 1;
-  } // console.log(pagnetData)
+  }
 
-
-  console.log("State value");
   return /*#__PURE__*/_react.default.createElement("div", {
-    className: "rmtMainContainer"
+    className: "rmtMainContainer",
+    id: "rmtMainContainer"
   }, rmtToolbar ? /*#__PURE__*/_react.default.createElement(_Toolbar.default, {
     rmtHeading: rmtHeading,
     rmtSubHeading: rmtSubHeading,
     rmtHeaders: rmtHeaders,
+    handleStateHeaders: handleStateHeaders,
+    stateHeaders: stateHeaders,
     openFullScreen: openFullScreen,
     closeFullScreen: closeFullScreen,
     fullScreen: fullScreen,
@@ -181,7 +195,8 @@ const MyTable = props => {
     columnSearchValue: columnSearchValue,
     handleColumnSearchValue: handleColumnSearchValue,
     currentPage: currentPage,
-    setCurrentPage: setCurrentPage
+    setCurrentPage: setCurrentPage,
+    rmtArrangeHead: rmtArrangeHead
   }) : null, /*#__PURE__*/_react.default.createElement("div", {
     className: "rmtTableContainer"
   }, /*#__PURE__*/_react.default.createElement("table", {

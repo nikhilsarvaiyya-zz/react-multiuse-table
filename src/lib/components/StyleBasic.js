@@ -10,6 +10,7 @@ document.head.innerHTML += `
     color:#444444;
     background:white;
     font-size:13px;
+    position:relative;
   }
   .rmtTableContainer{
     width:100%;
@@ -37,6 +38,9 @@ document.head.innerHTML += `
   }
   th{
     background:#fafafa;    
+  }
+  tr:hover {
+   background:#fafafa
   }
   thead tr:nth-child(2) {
     position: sticky;
@@ -89,7 +93,8 @@ document.head.innerHTML += `
     
   }
   input[type="text" i],
-  input[type="search" i]{
+  input[type="search" i]
+  {
       width:100%;
       padding:5px;
       border:1px solid #cccccc
@@ -221,7 +226,7 @@ document.head.innerHTML += `
           top:0px;
           position: absolute;
           background-color: #f9f9f9;
-          min-width: 100px;
+          min-width: 150px;
           box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.2);
           z-index: 1;
           border-radius:2px
@@ -253,7 +258,9 @@ document.head.innerHTML += `
           float: left;
           width: calc(100% - 10px);
           padding: 5px;
-          background:#fafafa;  
+          background:#fafafa; 
+          position:relative;
+          z-index:9 
         }
         .rmtToolbar{ 
           border-right: 1px solid #efefef;
@@ -353,6 +360,9 @@ document.head.innerHTML += `
         .noDataAvaliable{
           color:#aaa
         }
+
+        .NA_text{ color:#ccc}
+        
 
   </style>`
 export default StyleSheet;

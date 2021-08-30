@@ -1,5 +1,48 @@
 import React from 'react';
 
+const dropdown = (h, handleColumnSearchValue, setCurrentPage) => {
+
+    return <select
+        className="w-100"
+        onChange={(e) => {
+            handleColumnSearchValue({
+                [h.key]: e.target.value
+            })
+            setCurrentPage(1)
+        }}
+    >
+        {h.options.map(s => {
+            return <option
+                key={s}
+                value={s}>
+                {s}
+            </option>
+        })}
+
+    </select>
+}
+
+const inputSearch = (h, columnSearchValue, handleColumnSearchValue, setCurrentPage) => {
+    let key = ''
+    if (typeof (h.key) === 'object') {
+        key = h.key[0]
+    } else {
+        key = h.key
+    }
+    return <input
+        type="search"
+        placeholder={` ${h.label}`}
+        value={
+            key === Object.keys(columnSearchValue)[0] ? Object.keys(columnSearchValue)[1] : ''}
+        onChange={(e) => {
+            console.log(e.target.value)
+            handleColumnSearchValue({
+                [key]: e.target.value
+            })
+            setCurrentPage(1)
+        }}
+    />
+}
 const ColumnSearch = (props) => {
 
     const { headers,
@@ -14,20 +57,15 @@ const ColumnSearch = (props) => {
     return <tr >
         {emptyTh}
         {headers.map((h, i) => {
-            console.log(h.key, Object.keys(columnSearchValue)[0])
-            return <th key={i}>
-                <input
-                    type="search"
-                    placeholder={` ${h.label}`}
-                    value={h.key === Object.keys(columnSearchValue)[0] ? Object.keys(columnSearchValue)[1] : ''}
-                    onChange={(e) => {
-                        handleColumnSearchValue({
-                            [h.key]: e.target.value
-                        })
-                        setCurrentPage(1)
-                    }}
-                />
-            </th>
+
+            return h.listed ?
+                <th key={i}>
+                    {h.options ?
+                        dropdown(h, handleColumnSearchValue, setCurrentPage)
+                        :
+                        inputSearch(h, columnSearchValue, handleColumnSearchValue, setCurrentPage)
+                    }
+                </th> : null
         })}
         {isActions &&
             <th className="tx-c p-s r-0" >

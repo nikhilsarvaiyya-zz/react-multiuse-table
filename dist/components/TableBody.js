@@ -15,6 +15,10 @@ require("core-js/modules/web.dom-collections.iterator.js");
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _TableCell = _interopRequireDefault(require("./TableCell"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -48,6 +52,7 @@ function sortFunction(arr, shortByKey, order, select, isPagination, globalSearch
   }
 
   if (columnSearchValue && Object.keys(columnSearchValue).length !== 0) {
+    console.log(columnSearchValue);
     sortData = sortData.filter((f, i) => {
       let ky = Object.entries(columnSearchValue);
       let key = ky[0][0];
@@ -62,15 +67,18 @@ function sortFunction(arr, shortByKey, order, select, isPagination, globalSearch
   }
 
   sortData.sort((a, b) => {
-    var nameA = a[shortByKey.key],
-        nameB = b[shortByKey.key];
+    var nameA, nameB;
+
+    if (typeof shortByKey.key === 'object') {
+      nameA = a[shortByKey.key[0]];
+      nameB = b[shortByKey.key[0]];
+    } else {
+      nameA = a[shortByKey.key];
+      nameB = b[shortByKey.key];
+    }
+
     return collator.compare(nameA, nameB);
   }).reverse();
-  sortData.sort((a, b) => {
-    var nameA = a[shortByKey.key],
-        nameB = b[shortByKey.key];
-    return collator.compare(nameA, nameB);
-  });
 
   if (order === 1) {
     sortData = sortData.reverse();
@@ -84,8 +92,33 @@ function sortFunction(arr, shortByKey, order, select, isPagination, globalSearch
   return sortData;
 }
 
+const detailsOfRow = (data, handleIsModalOpen, columnSpan) => {
+  let abc = /*#__PURE__*/_react.default.createElement("table", {
+    className: "pd-1 db",
+    style: {
+      background: "#fafafa"
+    }
+  }, Object.entries(data).map((key, value) => {
+    return /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, key[0]), /*#__PURE__*/_react.default.createElement("td", null, key[1]));
+  }));
+
+  return /*#__PURE__*/_react.default.createElement("td", {
+    colSpan: columnSpan
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "pd-1"
+  }, /*#__PURE__*/_react.default.createElement("button", {
+    className: "fr",
+    onClick: () => handleIsModalOpen({
+      open: false,
+      index: null
+    })
+  }, "Close")), abc);
+};
+
 const TableBody = props => {
   let sortedData = [];
+  const [isModalOpen, handleIsModalOpen] = (0, _react.useState)({});
+  const [selectedData, handleSelectedData] = (0, _react.useState)({});
   const {
     rmtCheckAll,
     rmtActions,
@@ -119,20 +152,17 @@ const TableBody = props => {
     }, "Loading...");
   }
 
-  const formateText = (text, index) => {
-    return /*#__PURE__*/_react.default.createElement("div", {
-      key: index,
-      className: "overflow-200"
-    }, text ? text : /*#__PURE__*/_react.default.createElement("span", {
-      style: {
-        opacity: "20%"
-      }
-    }, "NA"), " ");
-  };
-
   return sortedData.map((d, i1) => {
-    return /*#__PURE__*/_react.default.createElement("tr", {
-      key: i1
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("tr", {
+      key: i1,
+      className: "cr-p",
+      onClick: e => {
+        handleIsModalOpen({
+          open: isModalOpen.index === i1 ? !isModalOpen.open : true,
+          index: i1
+        });
+        handleSelectedData(d);
+      }
     }, rmtCheckAll && /*#__PURE__*/_react.default.createElement("th", {
       className: "tx-c p-s l-0",
       style: {
@@ -152,13 +182,11 @@ const TableBody = props => {
         }
       }
     }))), rmtHeaders.map((head, i2) => {
-      return /*#__PURE__*/_react.default.createElement("td", {
-        key: i2
-      }, Object.entries(d).map((k, i3) => {
-        if (k[0] === head.key) {
-          return formateText(k[1], i3);
-        }
-      }));
+      return head.listed && /*#__PURE__*/_react.default.createElement(_TableCell.default, {
+        headers: head,
+        key: i2,
+        cellData: d
+      });
     }), rmtActions && rmtActions.length !== 0 && /*#__PURE__*/_react.default.createElement("th", {
       className: "tx-c p-s r-0",
       style: {
@@ -178,7 +206,7 @@ const TableBody = props => {
         key: i,
         href: a.label
       }, a.label);
-    })))));
+    }))))), isModalOpen.open && isModalOpen.index === i1 && detailsOfRow(d, handleIsModalOpen, columnSpan));
   });
 };
 

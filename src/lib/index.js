@@ -27,6 +27,8 @@ function closeFullScreen() {
     }
 }
 
+
+
 const MyTable = (props) => {
 
     const {
@@ -49,7 +51,9 @@ const MyTable = (props) => {
         rmtResetData,
         rmtFullScreenMode,
         rmtToolbar,
-        rmtDarkTheme
+        rmtDarkTheme,
+        rmtArrangeHead,
+        details
     } = props
 
     let rpp = rmtRecordPerPage ? rmtRecordPerPage : 10
@@ -81,10 +85,20 @@ const MyTable = (props) => {
     const [recordPerPage, handleRecordPerPage] = useState(rpp);
     const [loadData, handleLoadData] = useState(rmtData);
 
+    const [stateHeaders, handleStateHeaders] = useState({})
+
+    console.log({ stateHeaders, rmtHeaders })
 
     useEffect(() => {
-        handleLoadData(rmtData)
-    }, [loadData])
+        rmtHeaders.forEach(header => {
+            console.log(header, stateHeaders.heads)
+            if (stateHeaders && stateHeaders.heads && header.key === stateHeaders.heads.key) {
+
+                return header.listed = !header.listed
+            }
+        });
+        handleStateHeaders(rmtHeaders)
+    }, [stateHeaders])
 
     useEffect(() => {
         let basic = {
@@ -108,9 +122,8 @@ const MyTable = (props) => {
             checkSingleRow: checkSingleRow,
 
         }
-        console.log(rmtQueryParams && rmtServer)
-        if (rmtQueryParams && rmtServer) {
 
+        if (rmtQueryParams && rmtServer) {
             rmtQueryParams(all, basic)
         }
 
@@ -139,14 +152,16 @@ const MyTable = (props) => {
         columnSpan = columnSpan + 1
     }
 
-    // console.log(pagnetData)
-    console.log("State value")
-    return <div className="rmtMainContainer">
+
+
+    return <div className="rmtMainContainer" id="rmtMainContainer">
         {rmtToolbar ?
             <Toolbar
                 rmtHeading={rmtHeading}
                 rmtSubHeading={rmtSubHeading}
                 rmtHeaders={rmtHeaders}
+                handleStateHeaders={handleStateHeaders}
+                stateHeaders={stateHeaders}
                 openFullScreen={openFullScreen}
                 closeFullScreen={closeFullScreen}
                 fullScreen={fullScreen}
@@ -170,6 +185,7 @@ const MyTable = (props) => {
                 handleColumnSearchValue={handleColumnSearchValue}
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}
+                rmtArrangeHead={rmtArrangeHead}
             /> :
             null}
         <div className="rmtTableContainer">

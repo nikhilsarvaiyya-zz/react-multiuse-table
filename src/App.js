@@ -4,20 +4,65 @@ import clientData from './client.json'
 
 
 const rmtHeaders = [
-  { key: 'id', label: "Index" },
-  { key: 'first_name', label: "First Name" },
-  { key: 'last_name', label: "Last Name" },
+  {
+    key: 'id',
+    label: "Index",
+    listed: false,
+    // cellStyle: { color: "gray", textAlign: "right" }
+  },
+  // {
+  //   key: 'is_active', label: "Active",
+  //   displayValue: ["yeppy", "Nathi"],
+  //   listed: true,
+  //   cellStyle: {}
+  // },
+  // {
+  //   key: 'is_valid', label: "Valid",
+  //   listed: true,
+  //   cellStyle: {}
+  // },
+  {
+    key: 'first_name', label: "First Name",
+    listed: true,
+    // cellStyle: { textTransform: "uppercase", color: "red", fontSize: "15px" }
+  },
+  {
+    key: 'last_name', label: "Last Name",
+    listed: true,
+    cellStyle: {}
+  },
+  {
+    key: ['first_name', 'last_name'],
+    listed: true,
+    label: "Full name"
+  },
+  {
+    key: ['country', 'state', 'city'],
+    label: "Place",
+    seprator: "-",
+    listed: true,
+    cellStyle: {}
+  },
+  {
+    key: ['category', 'sub_category'],
+    label: "Categories tree",
+    seprator: "-",
+    listed: true,
+    cellStyle: {}
+  },
+
+
   { key: 'email', label: "Email" },
   { key: 'phone', label: "Phone" },
-  { key: 'gender', label: "Gender" },
+  {
+    key: 'gender', label: "Gender",
+    listed: true,
+    options: ["Male", "Female"]
+  },
   { key: 'ip_address', label: "IP Address" },
-  { key: 'country', label: "country" },
-  { key: 'state', label: "state" },
-  { key: 'city', label: "City" },
-  { key: 'category', label: "category" },
-  { key: 'sub_category', label: "Sub Category" },
-
 ]
+
+
 
 const actions = [
   { key: 'add', label: "Add" },
@@ -53,85 +98,36 @@ const App = () => {
 
   }, [params])
 
+  return <ReactMultiuseTable
+    rmtHeaders={rmtHeaders}
+    rmtData={clientData}
+
+    rmtHeading="Client Data"
+    rmtSubHeading="staticData"
+    rmtClass="table"
+
+    rmtPagination={true}
+    rmtPaginateSelection={[5, 10, 100]}
+    rmtRecordPerPage={10}
+    rmtPageLimit={5}
+
+    rmtToolbar={true}
+    rmtColumnSearch={true}
+    rmtGlobalSearch={true}
+    rmtResetData={false}
+    rmtDarkTheme={true}
+    rmtFullScreenMode={true}
+    rmtArrangeHead={true}
+
+    rmtCheckAll={true}
+    rmtActions={actions}
+
+  // rmtServer={true}
+  // rmtTotalrecord={998}
+  // rmtQueryParams={queryParams}
+  />
 
 
-  return <div style={{ background: "#a3a3a3" }}>
-    <div style={{ display: "flex" }}>
-      <div style={{ width: "calc(50% - 30px)", padding: "15px" }}>
-        <ReactMultiuseTable
-          rmtHeaders={rmtHeaders}
-          rmtData={clientData}
-        />
-      </div>
-      <div style={{ width: "calc(50% - 30px)", padding: "15px" }}>
-        <ReactMultiuseTable
-          rmtHeaders={rmtHeaders}
-          rmtData={serverData}
-
-          rmtServer={true}
-          rmtTotalrecord={998}
-          rmtQueryParams={queryParams}
-        />
-      </div>
-
-    </div>
-    <div style={{ width: "calc(100% - 30px)", padding: "15px", display: "inline-block" }}>
-      <ReactMultiuseTable
-        rmtHeaders={rmtHeaders}
-        rmtData={clientData}
-
-        rmtHeading="Client Data"
-        rmtSubHeading="clientData"
-        rmtClass="table"
-
-        rmtPagination={true}
-        rmtPaginateSelection={[5, 10, 100]}
-        rmtRecordPerPage={10}
-        rmtPageLimit={5}
-
-        rmtToolbar={true}
-        rmtColumnSearch={true}
-        rmtGlobalSearch={true}
-        rmtResetData={false}
-        rmtDarkTheme={true}
-        rmtFullScreenMode={true}
-
-        rmtCheckAll={true}
-        rmtActions={actions}
-
-      />
-    </div>
-    <div style={{ width: "calc(100% - 30px)", padding: "15px", display: "inline-block" }}>
-      <ReactMultiuseTable
-        rmtHeaders={rmtHeaders}
-        rmtData={serverData}
-
-        rmtHeading="Server Data"
-        rmtSubHeading="serverData"
-        rmtClass="table"
-
-        rmtPagination={true}
-        rmtPaginateSelection={[5, 10, 100]}
-        rmtRecordPerPage={10}
-        rmtPageLimit={5}
-
-        rmtToolbar={true}
-        rmtColumnSearch={true}
-        rmtGlobalSearch={true}
-        rmtResetData={false}
-        rmtDarkTheme={true}
-        rmtFullScreenMode={true}
-
-        rmtCheckAll={true}
-        rmtActions={actions}
-
-        rmtServer={true}
-        rmtTotalrecord={998}
-        rmtQueryParams={queryParams}
-
-      />
-    </div>
-  </div>
 }
 
 export default App;

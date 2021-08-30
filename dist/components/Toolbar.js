@@ -12,6 +12,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 const Toolbar = props => {
   const {
     rmtHeading,
+    rmtHeaders,
     rmtSubHeading,
     openFullScreen,
     closeFullScreen,
@@ -30,9 +31,11 @@ const Toolbar = props => {
     columnSearchValue,
     handleColumnSearchValue,
     currentPage,
-    setCurrentPage
+    setCurrentPage,
+    rmtArrangeHead,
+    handleStateHeaders,
+    stateHeaders
   } = props;
-  console.log(Object.keys(columnSearchValue).length);
   let isDataToReset = globalSearchValue.length !== 0 || Object.keys(columnSearchValue).length !== 0 || currentPage !== 1;
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "rmtToolbar"
@@ -80,7 +83,28 @@ const Toolbar = props => {
     onChange: e => {
       handleGlobalSearchValue(e.target.value);
     }
-  })) : null, rmtResetData || isDataToReset ? /*#__PURE__*/_react.default.createElement("li", {
+  })) : null, rmtArrangeHead ? /*#__PURE__*/_react.default.createElement("li", {
+    className: "ml-01 cr-p"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "dropdown va-b"
+  }, /*#__PURE__*/_react.default.createElement("button", {
+    className: "dropbtn"
+  }, /*#__PURE__*/_react.default.createElement("img", {
+    src: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAAu0lEQVQ4jdXSsUoDURAF0GNWEMkf2G0XtVdS+isWgWV/IB9gYWNvbWVjZZMfUDClXSDNQuoQSJMiEIt9D23ct6/TC8OFYe5l7jD8JRR4wShHdBz4Cg84xTLwDMNfdAfUmEeDBVa4wz7UNGHwmbNpb1Q4yxEcBS5xiwnOsZWO8IhmEBpFEFdYZ+38A4P0SLeoxI3vWL0Qhy/wjg2etfnHum/whl38g0s0eMW19pHuEwY15rFxgid8BIN/hC8H0iA3l+QHXwAAAABJRU5ErkJggg=="
+  })), /*#__PURE__*/_react.default.createElement("div", {
+    className: "dropdown-content zi-100"
+  }, rmtHeaders.map((h, i) => {
+    return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("input", {
+      type: "checkbox",
+      defaultChecked: h.listed === true,
+      onChange: e => {
+        handleStateHeaders({
+          checked: e.target.checked,
+          heads: h
+        });
+      }
+    }), " ", h.label);
+  })))) : null, rmtResetData || isDataToReset ? /*#__PURE__*/_react.default.createElement("li", {
     className: "ml-01 cr-p"
   }, /*#__PURE__*/_react.default.createElement("img", {
     onClick: () => {

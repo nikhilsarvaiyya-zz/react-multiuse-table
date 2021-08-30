@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
+import TableCell from './TableCell'
 function sortFunction(arr,
     shortByKey,
     order,
@@ -43,6 +44,7 @@ function sortFunction(arr,
     }
 
     if (columnSearchValue && Object.keys(columnSearchValue).length !== 0) {
+        console.log(columnSearchValue)
         sortData = sortData.filter((f, i) => {
             let ky = Object.entries(columnSearchValue);
             let key = ky[0][0];
@@ -56,14 +58,16 @@ function sortFunction(arr,
     }
 
     sortData.sort((a, b) => {
-        var nameA = a[shortByKey.key], nameB = b[shortByKey.key];
+        var nameA, nameB;
+        if (typeof (shortByKey.key) === 'object') {
+            nameA = a[shortByKey.key[0]];
+            nameB = b[shortByKey.key[0]];
+        } else {
+            nameA = a[shortByKey.key];
+            nameB = b[shortByKey.key];
+        }
         return collator.compare(nameA, nameB)
     }).reverse();
-
-    sortData.sort((a, b) => {
-        var nameA = a[shortByKey.key], nameB = b[shortByKey.key];
-        return collator.compare(nameA, nameB)
-    })
 
     if (order === 1) {
         sortData = sortData.reverse();
@@ -78,9 +82,32 @@ function sortFunction(arr,
 
 }
 
+const detailsOfRow = (data, handleIsModalOpen, columnSpan) => {
+    let abc = <table className="pd-1 db" style={{ background: "#fafafa" }}>
+        {Object.entries(data).map((key, value) => {
+            return <tr>
+                <td>{key[0]}</td><td>{key[1]}</td>
+            </tr>
+        })}
+    </table>
+    return <td colSpan={columnSpan}>
+        <div className="pd-1">
+            <button
+                className="fr"
+                onClick={
+                    () => handleIsModalOpen({ open: false, index: null })
+                }>Close
+            </button>
+        </div>
+        {abc}
+    </td>
+}
+
+
 const TableBody = (props) => {
     let sortedData = [];
-
+    const [isModalOpen, handleIsModalOpen] = useState({})
+    const [selectedData, handleSelectedData] = useState({})
 
     const { rmtCheckAll, rmtActions,
         rmtHeaders,
@@ -123,61 +150,77 @@ const TableBody = (props) => {
     }
 
 
-    const formateText = (text, index) => {
-        return <div key={index} className="overflow-200">{text ? text : <span style={{ opacity: "20%" }}>NA</span>} </div>
-    }
-
     return sortedData.map((d, i1) => {
-        return <tr key={i1} >
-            {rmtCheckAll &&
-                <th
-                    className="tx-c p-s l-0"
-                    style={{ boxShadow: "rgb(0 0 0) -1px 0px 8px -8px inset" }}>
-                    <div>
-                        <input
-                            value={i1}
-                            type="checkbox"
-                            defaultChecked={d.isChecked}
-                            onChange={(e) => {
-                                if (e.target.checked) {
-                                    handleCheckSingleRow([...checkSingleRow, d])
-                                } else {
-                                    let findIndex = checkSingleRow.findIndex(x => x.rowKey === i1);
-                                    checkSingleRow.splice(findIndex, 1)
-                                    handleCheckSingleRow([...checkSingleRow])
-                                }
-                            }} />
-                    </div>
-                </th>}
+        return <React.Fragment>
+            <tr
+                key={i1}
+                className="cr-p"
+                onClick={(e) => {
+                    handleIsModalOpen({
+                        open: isModalOpen.index === i1 ? !isModalOpen.open : true,
+                        index: i1
+                    })
+                    handleSelectedData(d)
+                }} >
 
-            {rmtHeaders.map((head, i2) => {
-                return <td key={i2} >
-                    {Object.entries(d).map((k, i3) => {
-                        if (k[0] === head.key) {
-                            return formateText(k[1], i3)
-                        }
-                    })}
-                </td>
-            })}
-            {rmtActions && rmtActions.length !== 0 &&
-                <th className="tx-c p-s r-0"
-                    style={{ boxShadow: "rgb(0 0 0) 1px 0px 8px -8px inset" }}>
-                    {
-                        <div className="dropdown">
-                            <button className="dropbtn">
-                                <img
-                                    alt="Dropdown Menu"
-                                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAAiElEQVQ4jc2SwQ1AQBREX5BogiJQgxroRA1utEMPbq4uqnAQDjaxlz8JBzHJJD/5s7OZ2YU/IwVGx+SNQQscjq0lCoTBZMyPUAC5EkRiFwMlV4QZ2J7e3nB30Fgi1YGPw1qoCJ13uLdEoTDYuXIvwCp0JmruDipLpDrIvFk+pYUEGBxffeVvcAIAMhhp+VgEPQAAAABJRU5ErkJggg==" /></button>
-                            <div className="dropdown-content">
-                                {rmtActions.map((a, i) => {
-                                    return <a key={i} href={a.label}>{a.label}</a>
-                                })}
-                            </div>
+                {
+                    rmtCheckAll &&
+                    <th
+                        className="tx-c p-s l-0"
+                        style={{ boxShadow: "rgb(0 0 0) -1px 0px 8px -8px inset" }}>
+                        <div>
+                            <input
+                                value={i1}
+                                type="checkbox"
+                                defaultChecked={d.isChecked}
+                                onChange={(e) => {
+                                    if (e.target.checked) {
+                                        handleCheckSingleRow([...checkSingleRow, d])
+                                    } else {
+                                        let findIndex = checkSingleRow.findIndex(x => x.rowKey === i1);
+                                        checkSingleRow.splice(findIndex, 1)
+                                        handleCheckSingleRow([...checkSingleRow])
+                                    }
+                                }} />
                         </div>
-                    }
-                </th>
+                    </th>
+                }
+
+                {
+                    rmtHeaders.map((head, i2) => {
+                        return head.listed && <TableCell
+                            headers={head}
+                            key={i2}
+                            cellData={d} />
+                    })
+                }
+
+                {
+                    rmtActions && rmtActions.length !== 0 &&
+                    <th className="tx-c p-s r-0"
+                        style={{ boxShadow: "rgb(0 0 0) 1px 0px 8px -8px inset" }}>
+                        {
+                            <div className="dropdown">
+                                <button className="dropbtn">
+                                    <img
+                                        alt="Dropdown Menu"
+                                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAAiElEQVQ4jc2SwQ1AQBREX5BogiJQgxroRA1utEMPbq4uqnAQDjaxlz8JBzHJJD/5s7OZ2YU/IwVGx+SNQQscjq0lCoTBZMyPUAC5EkRiFwMlV4QZ2J7e3nB30Fgi1YGPw1qoCJ13uLdEoTDYuXIvwCp0JmruDipLpDrIvFk+pYUEGBxffeVvcAIAMhhp+VgEPQAAAABJRU5ErkJggg==" /></button>
+                                <div className="dropdown-content">
+                                    {rmtActions.map((a, i) => {
+                                        return <a key={i} href={a.label}>{a.label}</a>
+                                    })}
+                                </div>
+                            </div>
+                        }
+                    </th>
+                }
+
+            </tr >
+            {
+                isModalOpen.open && isModalOpen.index === i1 &&
+                detailsOfRow(d, handleIsModalOpen, columnSpan)
             }
-        </tr >
+        </React.Fragment>
     })
 
 }
