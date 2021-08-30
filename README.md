@@ -3,23 +3,23 @@
 ```bash
 $ npm install react-multiuse-table
 ```
-## Usage
+## Basic Usage
 
 ```js
 
 import ReactMultiuseTable from 'react-multiuse-table'; 
 
 const headers = [
-  { key: 'name', label: "Full Name" },
-  { key: 'mobile', label: "Phone" },
+  { key: 'first_name', label: "Full Name", listed: true },
+  { key: 'mobile', label: "Phone", listed: true }
 ]
 
 const data = [
-    { age: 28,  gender: "Male",  mobile: "234546673453",  name: "john", email: "john@gmail.com"    },
-    { age: 56,  gender: "Female",  mobile: "346724354564",  name: "Suzen",  email: "suzen@hotmail.com"    },
-    { age: 34,  gender: "Male",  mobile: "345567345678",  name: "Ricky",  email: "ricky@rediff.com"    },
-    { age: 23,  gender: "Male",  mobile: "443567656766",  name: "Messi",  email: "messi@gmail.com"    },
-    { age: 45,  gender: "Female",  mobile: "978954364563",  name: "Arial",  email: "arial@gmail.com"    }
+  { age: 28, gender: "Male", mobile: "234546673453", first_name: "john", last_name: 'snow', email: "john@gmail.com" },
+  { age: 56, gender: "Female", mobile: "346724354564", first_name: "Suzen", last_name: 'parker', email: "suzen@hotmail.com" },
+  { age: 34, gender: "Male", mobile: "345567345678", first_name: "Ricky", last_name: 'sen', email: "ricky@rediff.com" },
+  { age: 23, gender: "Male", mobile: "443567656766", first_name: "Messi", last_name: 'lobo', email: "messi@gmail.com" },
+  { age: 45, gender: "Female", mobile: "978954364563", first_name: "Arial", last_name: 'oscorb', email: "arial@gmail.com" }
 ]
 
 <ReactMultiuseTable
@@ -29,24 +29,50 @@ const data = [
 />
 ```
 
-## Name and Sub text for table
+## Advance Header
 
 ```js
+const headers = [
+  {
+    key: ['first_name', 'last_name'],
+    label: "Full Name",
+    cellStyle: { textTransform: "capitalize" },
+    listed: true,
+  },
+  {
+    key: 'mobile',
+    label: "Phone",
+    listed: true,
+    cellStyle: { textAlign: "right", display: "block", color: "#aaa", fontSize: "10px" }
+  },
+  {
+    key: 'gender',
+    label: "Gender",
+    listed: true,
+    options: ["Male", "Female"]
+  },
+  {
+    key: 'age',
+    label: "Age",
+    listed: true,
+    cellStyle: { textAlign: "right", display: "block", color: "#666" }
+  },
+  {
+    key: 'email',
+    label: "Mail Id",
+    listed: true,
+    cellStyle: { color: "blue" }
+  },
+  {
+    key: ['age', 'gender'],
+    label: "Seprator",
+    listed: true,
+    seprator: "-"
+  }
+]
 
-<ReactMultiuseTable
-   rmtHeading="Heading"
-   rmtSubHeading="SubHeading"
-/>
 ```
 
-## Column search or Global search
-```js
-
-<ReactMultiuseTable
-    rmtColumnSearch={true}
-    rmtGlobalSearch={false}
-/>
-```
 ## Pagination
 
 ```js
@@ -57,16 +83,37 @@ const data = [
     rmtPageLimit={5}
   />
 ```
-## Collect Params for Serverside  
+
+## Server side Data
+
+You need to specify total number of records. Make sure the rmtServer flag is true.
 
 ```js
 
-const handleSubmit = ({ skip, limit, order, columnSearch, globalSearch }) => {
-  console.log({ skip, limit, order, columnSearch, globalSearch })
-}
+<ReactMultiuseTable
+   rmtServer={true}
+   rmtTotalrecord={100}
+   rmtQueryParams={queryParams}
+/>
+
+```
+
+## Props
+
+```js
 
 <ReactMultiuseTable
-    handleSubmit={handleSubmit}
+    rmtHeading="Heading"
+    rmtSubHeading="SubHeading"
+    rmtToolbar={true}
+    rmtColumnSearch={true}
+    rmtGlobalSearch={true}
+    rmtResetData={false}
+    rmtFullScreenMode={true}
+    rmtArrangeHead={true}
 />
 ```
+
+
+
 
