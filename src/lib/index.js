@@ -87,11 +87,11 @@ const MyTable = (props) => {
 
     const [stateHeaders, handleStateHeaders] = useState({})
 
-    console.log({ stateHeaders, rmtHeaders })
+
 
     useEffect(() => {
         rmtHeaders.forEach(header => {
-            console.log(header, stateHeaders.heads)
+
             if (stateHeaders && stateHeaders.heads && header.key === stateHeaders.heads.key) {
 
                 return header.listed = !header.listed
@@ -152,7 +152,7 @@ const MyTable = (props) => {
         columnSpan = columnSpan + 1
     }
 
-
+    console.log(isActions)
 
     return <div className="rmtMainContainer" id="rmtMainContainer">
         {rmtToolbar ?

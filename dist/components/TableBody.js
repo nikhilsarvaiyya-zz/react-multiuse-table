@@ -15,6 +15,8 @@ require("core-js/modules/web.dom-collections.iterator.js");
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _RowDetail = _interopRequireDefault(require("./RowDetail"));
+
 var _TableCell = _interopRequireDefault(require("./TableCell"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -52,14 +54,15 @@ function sortFunction(arr, shortByKey, order, select, isPagination, globalSearch
   }
 
   if (columnSearchValue && Object.keys(columnSearchValue).length !== 0) {
-    console.log(columnSearchValue);
     sortData = sortData.filter((f, i) => {
       let ky = Object.entries(columnSearchValue);
       let key = ky[0][0];
-      let value = ky[0][1].toLowerCase();
+      let value = ky[0][1];
 
-      if (typeof f[key] !== "number") {
-        return f && f[key] && f[key].toLowerCase().includes(value);
+      if (typeof f[key] === "boolean") {
+        return f && f[key] === value;
+      } else if (typeof f[key] === "string") {
+        return f && f[key] && f[key].toLowerCase().includes(value.toLowerCase());
       } else {
         return f && f[key] === value;
       }
@@ -91,29 +94,6 @@ function sortFunction(arr, shortByKey, order, select, isPagination, globalSearch
 
   return sortData;
 }
-
-const detailsOfRow = (data, handleIsModalOpen, columnSpan) => {
-  let abc = /*#__PURE__*/_react.default.createElement("table", {
-    className: "pd-1 db",
-    style: {
-      background: "#fafafa"
-    }
-  }, Object.entries(data).map((key, value) => {
-    return /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, key[0]), /*#__PURE__*/_react.default.createElement("td", null, key[1]));
-  }));
-
-  return /*#__PURE__*/_react.default.createElement("td", {
-    colSpan: columnSpan
-  }, /*#__PURE__*/_react.default.createElement("div", {
-    className: "pd-1"
-  }, /*#__PURE__*/_react.default.createElement("button", {
-    className: "fr",
-    onClick: () => handleIsModalOpen({
-      open: false,
-      index: null
-    })
-  }, "Close")), abc);
-};
 
 const TableBody = props => {
   let sortedData = [];
@@ -162,7 +142,8 @@ const TableBody = props => {
           index: i1
         });
         handleSelectedData(d);
-      }
+      },
+      style: d.rowStyle
     }, rmtCheckAll && /*#__PURE__*/_react.default.createElement("th", {
       className: "tx-c p-s l-0",
       style: {
@@ -206,7 +187,7 @@ const TableBody = props => {
         key: i,
         href: a.label
       }, a.label);
-    }))))), isModalOpen.open && isModalOpen.index === i1 && detailsOfRow(d, handleIsModalOpen, columnSpan));
+    }))))), isModalOpen.open && isModalOpen.index === i1 && (0, _RowDetail.default)(d, handleIsModalOpen, columnSpan));
   });
 };
 

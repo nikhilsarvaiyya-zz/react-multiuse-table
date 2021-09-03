@@ -1,81 +1,18 @@
 import React, { useState, useEffect } from 'react'
 import ReactMultiuseTable from './lib/index';
+import headers from './headers.json'
 import clientData from './client.json'
-
-
-const rmtHeaders = [
-  {
-    key: 'id',
-    label: "Index",
-    listed: false,
-    // cellStyle: { color: "gray", textAlign: "right" }
-  },
-  // {
-  //   key: 'is_active', label: "Active",
-  //   displayValue: ["yeppy", "Nathi"],
-  //   listed: true,
-  //   cellStyle: {}
-  // },
-  // {
-  //   key: 'is_valid', label: "Valid",
-  //   listed: true,
-  //   cellStyle: {}
-  // },
-  {
-    key: 'first_name', label: "First Name",
-    listed: true,
-    // cellStyle: { textTransform: "uppercase", color: "red", fontSize: "15px" }
-  },
-  {
-    key: 'last_name', label: "Last Name",
-    listed: true,
-    cellStyle: {}
-  },
-  {
-    key: ['first_name', 'last_name'],
-    listed: true,
-    label: "Full name"
-  },
-  {
-    key: ['country', 'state', 'city'],
-    label: "Place",
-    seprator: "-",
-    listed: true,
-    cellStyle: {}
-  },
-  {
-    key: ['category', 'sub_category'],
-    label: "Categories tree",
-    seprator: "-",
-    listed: true,
-    cellStyle: {}
-  },
-
-
-  { key: 'email', label: "Email" },
-  { key: 'phone', label: "Phone" },
-  {
-    key: 'gender', label: "Gender",
-    listed: true,
-    options: ["Male", "Female"]
-  },
-  { key: 'ip_address', label: "IP Address" },
-]
-
-
-
-const actions = [
-  { key: 'add', label: "Add" },
-  { key: 'edit', label: "Edit" },
-  { key: 'delete', label: "Delete" },
-  { key: 'view', label: "View" },
-]
+import Actions from './lib/components/Actions';
 
 //for server Data
 //json-server data_1000.json 
 //http://localhost:3000/users?_limit=3&_page=1&_sort=id&_order=DESC
 
 const App = () => {
+
+  var color1 = ["F8DE7F", "FADA5F", "D2B45A", "C49102", "FEE103", "FDA50F", "FEFEDA", "FFBE00", "EFDB82", "FFDDAF", "FFFFFF", "FEFCCF"];
+  var color2 = ["ccc"];
+  var color3 = ["000"];
 
   const [serverData, handleServerData] = useState([])
   const [params, queryParams] = useState()
@@ -93,14 +30,20 @@ const App = () => {
     fetch(endpoint + query)
       .then(response => response.json())
       .then(data => {
+        data.map(item => {
+          item.rowStyle = item.is_valid ? { background: "#edfee9" } : { background: "#fff3f3" }
+          item.cellStyle = { background: "#" + color1[Math.floor(Math.random() * color1.length)] }
+          return item
+        })
+
         handleServerData(data)
       });
 
   }, [params])
 
   return <ReactMultiuseTable
-    rmtHeaders={rmtHeaders}
-    rmtData={clientData}
+    rmtHeaders={headers}
+    rmtData={serverData}
 
     rmtHeading="Client Data"
     rmtSubHeading="staticData"
@@ -120,14 +63,82 @@ const App = () => {
     rmtArrangeHead={true}
 
     rmtCheckAll={true}
-    rmtActions={actions}
+    rmtActions={Actions}
 
-  // rmtServer={true}
-  // rmtTotalrecord={998}
-  // rmtQueryParams={queryParams}
+    rmtServer={true}
+    rmtTotalrecord={40}
+    rmtQueryParams={queryParams}
   />
 
 
 }
 
 export default App;
+
+
+
+// const rmtHeaders = [
+//   {
+//     key: 'id',
+//     label: "Index",
+//     listed: false,
+//     columnStyle: { color: "gray", textAlign: "right" }
+//   },
+//   {
+//     key: 'is_active', label: "Active",
+//     alternateOptions: ["Yes", "No"],
+//     listed: true,
+//     columnStyle: {}
+//   },
+//   {
+//     key: 'is_valid', label: "Valid",
+//     listed: true,
+//     alternateOptions: ["Enabled", "Disabled"],
+//     columnStyle: {}
+//   },
+//   {
+//     key: 'gender', label: "Gender",
+//     listed: true,
+//     selectOptions: ["Male", "Female"]
+//   },
+//   {
+//     key: 'first_name', label: "First Name",
+//     listed: true,
+//     columnStyle: { textTransform: "uppercase", color: "red", fontSize: "15px" }
+//   },
+//   {
+//     key: 'last_name', label: "Last Name",
+//     listed: true,
+//     columnStyle: {}
+//   },
+//   {
+//     key: ['first_name', 'last_name'],
+//     listed: true,
+//     label: "Full name"
+//   },
+//   {
+//     key: ['country', 'state', 'city'],
+//     label: "Place",
+//     seprator: " > ",
+//     listed: true,
+//     columnStyle: {}
+//   },
+//   {
+//     key: ['category', 'sub_category'],
+//     label: "Categories tree",
+//     seprator: "-",
+//     listed: true,
+//     columnStyle: {}
+//   },
+//   {
+//     key: "date",
+//     label: "Created Date",
+//     listed: true
+//   },
+
+
+//   { key: 'email', label: "Email" },
+//   { key: 'phone', label: "Phone" },
+
+//   { key: 'ip_address', label: "IP Address" },
+// ]

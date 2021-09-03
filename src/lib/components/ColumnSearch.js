@@ -5,13 +5,33 @@ const dropdown = (h, handleColumnSearchValue, setCurrentPage) => {
     return <select
         className="w-100"
         onChange={(e) => {
+            let val;
+
+            if (e.target.value === "true") {
+                val = true
+            } else if (e.target.value === "false") {
+                val = false
+            } else {
+                val = e.target.value
+            }
+
+
             handleColumnSearchValue({
-                [h.key]: e.target.value
+                [h.key]: val
             })
             setCurrentPage(1)
         }}
     >
-        {h.options.map(s => {
+        <option value={null}> Select</option>
+        {h && h.alternateOptions && h.alternateOptions.map((s, i) => {
+            return <option
+                key={s}
+                value={i === 0 ? Boolean(true) : Boolean(false)}>
+                {s}
+            </option>
+        })}
+
+        {h && h.selectOptions && h.selectOptions.map((s) => {
             return <option
                 key={s}
                 value={s}>
@@ -32,10 +52,9 @@ const inputSearch = (h, columnSearchValue, handleColumnSearchValue, setCurrentPa
     return <input
         type="search"
         placeholder={` ${h.label}`}
-        value={
-            key === Object.keys(columnSearchValue)[0] ? Object.keys(columnSearchValue)[1] : ''}
+        value={key === Object.keys(columnSearchValue)[0] ? Object.keys(columnSearchValue)[1] : ''}
         onChange={(e) => {
-            console.log(e.target.value)
+
             handleColumnSearchValue({
                 [key]: e.target.value
             })
@@ -57,10 +76,9 @@ const ColumnSearch = (props) => {
     return <tr >
         {emptyTh}
         {headers.map((h, i) => {
-
             return h.listed ?
                 <th key={i}>
-                    {h.options ?
+                    {h.selectOptions || h.alternateOptions ?
                         dropdown(h, handleColumnSearchValue, setCurrentPage)
                         :
                         inputSearch(h, columnSearchValue, handleColumnSearchValue, setCurrentPage)

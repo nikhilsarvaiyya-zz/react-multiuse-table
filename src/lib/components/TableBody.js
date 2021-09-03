@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import RowDetail from './RowDetail'
 
 import TableCell from './TableCell'
 function sortFunction(arr,
@@ -44,13 +45,16 @@ function sortFunction(arr,
     }
 
     if (columnSearchValue && Object.keys(columnSearchValue).length !== 0) {
-        console.log(columnSearchValue)
         sortData = sortData.filter((f, i) => {
             let ky = Object.entries(columnSearchValue);
             let key = ky[0][0];
-            let value = ky[0][1].toLowerCase()
-            if (typeof f[key] !== "number") {
-                return f && f[key] && f[key].toLowerCase().includes(value)
+            let value = ky[0][1];
+
+            if (typeof f[key] === "boolean") {
+                return f && f[key] === value
+            }
+            else if (typeof f[key] === "string") {
+                return f && f[key] && f[key].toLowerCase().includes(value.toLowerCase())
             } else {
                 return f && f[key] === value
             }
@@ -82,26 +86,7 @@ function sortFunction(arr,
 
 }
 
-const detailsOfRow = (data, handleIsModalOpen, columnSpan) => {
-    let abc = <table className="pd-1 db" style={{ background: "#fafafa" }}>
-        {Object.entries(data).map((key, value) => {
-            return <tr>
-                <td>{key[0]}</td><td>{key[1]}</td>
-            </tr>
-        })}
-    </table>
-    return <td colSpan={columnSpan}>
-        <div className="pd-1">
-            <button
-                className="fr"
-                onClick={
-                    () => handleIsModalOpen({ open: false, index: null })
-                }>Close
-            </button>
-        </div>
-        {abc}
-    </td>
-}
+
 
 
 const TableBody = (props) => {
@@ -151,6 +136,7 @@ const TableBody = (props) => {
 
 
     return sortedData.map((d, i1) => {
+
         return <React.Fragment>
             <tr
                 key={i1}
@@ -161,8 +147,8 @@ const TableBody = (props) => {
                         index: i1
                     })
                     handleSelectedData(d)
-                }} >
-
+                }}
+                style={d.rowStyle}>
                 {
                     rmtCheckAll &&
                     <th
@@ -218,7 +204,7 @@ const TableBody = (props) => {
             </tr >
             {
                 isModalOpen.open && isModalOpen.index === i1 &&
-                detailsOfRow(d, handleIsModalOpen, columnSpan)
+                RowDetail(d, handleIsModalOpen, columnSpan)
             }
         </React.Fragment>
     })

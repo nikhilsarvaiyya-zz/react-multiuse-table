@@ -13,12 +13,29 @@ const dropdown = (h, handleColumnSearchValue, setCurrentPage) => {
   return /*#__PURE__*/_react.default.createElement("select", {
     className: "w-100",
     onChange: e => {
+      let val;
+
+      if (e.target.value === "true") {
+        val = true;
+      } else if (e.target.value === "false") {
+        val = false;
+      } else {
+        val = e.target.value;
+      }
+
       handleColumnSearchValue({
-        [h.key]: e.target.value
+        [h.key]: val
       });
       setCurrentPage(1);
     }
-  }, h.options.map(s => {
+  }, /*#__PURE__*/_react.default.createElement("option", {
+    value: null
+  }, " Select"), h && h.alternateOptions && h.alternateOptions.map((s, i) => {
+    return /*#__PURE__*/_react.default.createElement("option", {
+      key: s,
+      value: i === 0 ? Boolean(true) : Boolean(false)
+    }, s);
+  }), h && h.selectOptions && h.selectOptions.map(s => {
     return /*#__PURE__*/_react.default.createElement("option", {
       key: s,
       value: s
@@ -40,7 +57,6 @@ const inputSearch = (h, columnSearchValue, handleColumnSearchValue, setCurrentPa
     placeholder: " ".concat(h.label),
     value: key === Object.keys(columnSearchValue)[0] ? Object.keys(columnSearchValue)[1] : '',
     onChange: e => {
-      console.log(e.target.value);
       handleColumnSearchValue({
         [key]: e.target.value
       });
@@ -66,7 +82,7 @@ const ColumnSearch = props => {
   return /*#__PURE__*/_react.default.createElement("tr", null, emptyTh, headers.map((h, i) => {
     return h.listed ? /*#__PURE__*/_react.default.createElement("th", {
       key: i
-    }, h.options ? dropdown(h, handleColumnSearchValue, setCurrentPage) : inputSearch(h, columnSearchValue, handleColumnSearchValue, setCurrentPage)) : null;
+    }, h.selectOptions || h.alternateOptions ? dropdown(h, handleColumnSearchValue, setCurrentPage) : inputSearch(h, columnSearchValue, handleColumnSearchValue, setCurrentPage)) : null;
   }), isActions && /*#__PURE__*/_react.default.createElement("th", {
     className: "tx-c p-s r-0"
   }, /*#__PURE__*/_react.default.createElement("img", {

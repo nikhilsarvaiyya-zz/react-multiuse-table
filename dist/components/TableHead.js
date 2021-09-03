@@ -28,6 +28,18 @@ const TableHead = props => {
     return "Loading...";
   }
 
+  let mapHeaders = headers;
+
+  if (headers && headers.filter(f => {
+    return f.listed;
+  }).length !== 0) {
+    mapHeaders = headers.filter(f => {
+      return f.listed;
+    });
+  } else {
+    mapHeaders = headers;
+  }
+
   return /*#__PURE__*/_react.default.createElement("tr", null, rmtCheckAll && /*#__PURE__*/_react.default.createElement("th", {
     className: "tx-c p-s l-0",
     style: {
@@ -38,10 +50,8 @@ const TableHead = props => {
     onChange: e => {
       handleCheckAllAction(e.target.checked);
     }
-  }))), headers && headers.filter(f => {
-    return f.listed;
-  }) && headers.map((h, i) => {
-    return h.listed && /*#__PURE__*/_react.default.createElement("th", {
+  }))), mapHeaders && mapHeaders.map((h, i) => {
+    return /*#__PURE__*/_react.default.createElement("th", {
       className: "cr-p",
       onClick: () => {
         handleName(h);

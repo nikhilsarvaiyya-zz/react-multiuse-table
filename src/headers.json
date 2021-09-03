@@ -1,0 +1,138 @@
+[
+    {
+        "key": "id",
+        "label": "Index",
+        "listed": true,
+        "columnStyle": {}
+    },
+    {
+        "key": "is_active",
+        "label": "Active",
+        "listed": true,
+        "alternateOptions": [
+            "Enabled",
+            "Disabled"
+        ],
+        "columnStyle": {
+            "background": "#e9fefb"
+        }
+    },
+    {
+        "key": "is_valid",
+        "label": "Valid",
+        "listed": true,
+        "alternateOptions": [
+            "Yes",
+            "No"
+        ],
+        "columnStyle": {}
+    },
+    {
+        "key": "username",
+        "label": "User Name",
+        "listed": true,
+        "columnStyle": {
+            "color": "#a3a3a3"
+        }
+    },
+    {
+        "key": [
+            "profile",
+            "title",
+            "first_name",
+            "last_name"
+        ],
+        "label": "Full Name",
+        "listed": true,
+        "columnStyle": {
+            "textTransform": "uppercase"
+        }
+    },
+    {
+        "key": "domain",
+        "label": "Doamin",
+        "listed": true,
+        "columnStyle": {}
+    },
+    {
+        "key": "url",
+        "label": "Website Url",
+        "listed": true,
+        "columnStyle": {}
+    },
+    {
+        "key": "currency",
+        "label": "Currency",
+        "listed": true,
+        "columnStyle": {},
+        "cellStyle": true
+    },
+    {
+        "key": "gender",
+        "label": "Gender",
+        "listed": true,
+        "selectOptions": [
+            "Male",
+            "Female"
+        ],
+        "columnStyle": {}
+    },
+    {
+        "key": "email",
+        "label": "Email Id",
+        "listed": true,
+        "columnStyle": {
+            "color": "#0583D2"
+        }
+    },
+    {
+        "key": "date",
+        "label": "Date",
+        "listed": true,
+        "columnStyle": {}
+    },
+    {
+        "key": "time",
+        "label": "Time",
+        "listed": true,
+        "columnStyle": {}
+    },
+    {
+        "key": "country_code",
+        "label": "Country Code",
+        "listed": true,
+        "columnStyle": {}
+    },
+    {
+        "key": "animals",
+        "label": "Animals List",
+        "listed": true,
+        "columnStyle": {}
+    },
+    {
+        "key": "zone",
+        "label": "Zone",
+        "listed": true,
+        "columnStyle": {}
+    },
+    {
+        "key": "language",
+        "label": "Language",
+        "listed": true,
+        "columnStyle": {}
+    },
+    {
+        "key": "job_title",
+        "label": "Job Title",
+        "listed": true,
+        "columnStyle": {
+            "textTransform": "uppercase"
+        }
+    },
+    {
+        "key": "description",
+        "label": "Description",
+        "listed": true,
+        "columnStyle": {}
+    }
+]

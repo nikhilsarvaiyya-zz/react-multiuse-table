@@ -49,7 +49,7 @@ const headers = [
     key: 'gender',
     label: "Gender",
     listed: true,
-    options: ["Male", "Female"]
+    selectOptions: ["Male", "Female"]
   },
   {
     key: 'age',

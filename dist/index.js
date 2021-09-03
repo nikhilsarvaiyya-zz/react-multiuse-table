@@ -100,14 +100,8 @@ const MyTable = props => {
   const [recordPerPage, handleRecordPerPage] = (0, _react.useState)(rpp);
   const [loadData, handleLoadData] = (0, _react.useState)(rmtData);
   const [stateHeaders, handleStateHeaders] = (0, _react.useState)({});
-  console.log({
-    stateHeaders,
-    rmtHeaders
-  });
   (0, _react.useEffect)(() => {
     rmtHeaders.forEach(header => {
-      console.log(header, stateHeaders.heads);
-
       if (stateHeaders && stateHeaders.heads && header.key === stateHeaders.heads.key) {
         return header.listed = !header.listed;
       }
@@ -164,6 +158,7 @@ const MyTable = props => {
     columnSpan = columnSpan + 1;
   }
 
+  console.log(isActions);
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "rmtMainContainer",
     id: "rmtMainContainer"

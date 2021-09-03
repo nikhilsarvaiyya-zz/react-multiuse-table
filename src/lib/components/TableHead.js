@@ -18,6 +18,14 @@ const TableHead = (props) => {
         return "Loading..."
     }
 
+    let mapHeaders = headers;
+    if (headers && headers.filter(f => { return f.listed }).length !== 0) {
+
+        mapHeaders = headers.filter(f => { return f.listed })
+    } else {
+
+        mapHeaders = headers
+    }
 
     return <tr >
         {rmtCheckAll &&
@@ -29,9 +37,8 @@ const TableHead = (props) => {
                     />
                 </div>
             </th>}
-        {headers && headers.filter(f => { return f.listed }) && headers.map((h, i) => {
-
-            return h.listed && <th
+        {mapHeaders && mapHeaders.map((h, i) => {
+            return <th
                 className="cr-p"
                 onClick={() => {
                     handleName(h);

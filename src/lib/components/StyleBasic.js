@@ -35,6 +35,7 @@ document.head.innerHTML += `
     border: 1px solid #efefef;
     text-align: left;
     padding: 8px;
+    white-space: nowrap;
   }
   th{
     background:#fafafa;    
