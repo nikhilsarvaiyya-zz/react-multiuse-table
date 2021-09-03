@@ -100,7 +100,7 @@ const customChanges = (data) => {
         return year + '-' + month + '-' + dt
     } else if (validUrl(data)) {
         let url = data.indexOf('://') === -1 ? 'http://' + data : data;
-        return <a onClick="event.preventDefault()" target="_blank" style={{ color: "#0583D2" }} href={url} >
+        return <a onClick="event.preventDefault()" target="_blank" href={url} >
             {subStr(url)}
         </a>
     } else {

@@ -11,8 +11,7 @@ import Actions from './lib/components/Actions';
 const App = () => {
 
   var color1 = ["F8DE7F", "FADA5F", "D2B45A", "C49102", "FEE103", "FDA50F", "FEFEDA", "FFBE00", "EFDB82", "FFDDAF", "FFFFFF", "FEFCCF"];
-  var color2 = ["ccc"];
-  var color3 = ["000"];
+
 
   const [serverData, handleServerData] = useState([])
   const [params, queryParams] = useState()
@@ -31,8 +30,8 @@ const App = () => {
       .then(response => response.json())
       .then(data => {
         data.map(item => {
-          item.rowStyle = item.is_valid ? { background: "#edfee9" } : { background: "#fff3f3" }
-          item.cellStyle = { background: "#" + color1[Math.floor(Math.random() * color1.length)] }
+          item.rowStyle = item.is_valid ? { background: "#edfee9", color: "black" } : { background: "#fff3f3", color: "black" }
+          item.cellStyle = { background: "#" + color1[Math.floor(Math.random() * color1.length)], color: "black" }
           return item
         })
 

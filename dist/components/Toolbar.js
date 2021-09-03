@@ -58,6 +58,7 @@ const Toolbar = props => {
   }, /*#__PURE__*/_react.default.createElement("ul", null, rmtGlobalSearch ? globalSearch ? /*#__PURE__*/_react.default.createElement("li", {
     className: "ml-01 cr-p"
   }, /*#__PURE__*/_react.default.createElement("img", {
+    className: " rmtIcon",
     alt: "",
     onClick: () => {
       handleGlobalSearch(false);
@@ -70,13 +71,14 @@ const Toolbar = props => {
     onClick: () => {
       handleGlobalSearch(true);
     },
-    className: "p-a searchBox",
+    className: "p-a searchBox rmtIcon",
     style: {
       left: "-26px",
       background: "white"
     },
     src: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAAV0lEQVQ4jWNgGExgOgMDgzQR6qShajGAOAMDw0YChkgQUoPPEIKa8RlCtGZsGkjWDAPSDAwMW6EYp2YmUk0lFlDkBWwaiDYEn0KChhBjC97ERnFSHhgAAP3XEqdC/dYtAAAAAElFTkSuQmCC"
   }), /*#__PURE__*/_react.default.createElement("input", {
+    className: " rmtIcon",
     type: "search",
     placeHolder: "search",
     value: globalSearchValue,
@@ -90,6 +92,7 @@ const Toolbar = props => {
   }, /*#__PURE__*/_react.default.createElement("button", {
     className: "dropbtn"
   }, /*#__PURE__*/_react.default.createElement("img", {
+    className: " rmtIcon",
     src: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAAu0lEQVQ4jdXSsUoDURAF0GNWEMkf2G0XtVdS+isWgWV/IB9gYWNvbWVjZZMfUDClXSDNQuoQSJMiEIt9D23ct6/TC8OFYe5l7jD8JRR4wShHdBz4Cg84xTLwDMNfdAfUmEeDBVa4wz7UNGHwmbNpb1Q4yxEcBS5xiwnOsZWO8IhmEBpFEFdYZ+38A4P0SLeoxI3vWL0Qhy/wjg2etfnHum/whl38g0s0eMW19pHuEwY15rFxgid8BIN/hC8H0iA3l+QHXwAAAABJRU5ErkJggg=="
   })), /*#__PURE__*/_react.default.createElement("div", {
     className: "dropdown-content zi-100"
@@ -107,6 +110,7 @@ const Toolbar = props => {
   })))) : null, rmtResetData || isDataToReset ? /*#__PURE__*/_react.default.createElement("li", {
     className: "ml-01 cr-p"
   }, /*#__PURE__*/_react.default.createElement("img", {
+    className: " rmtIcon",
     onClick: () => {
       handleGlobalSearchValue('');
       handleColumnSearchValue('');
@@ -120,6 +124,7 @@ const Toolbar = props => {
       handleDarkMode(darkMode ? false : true);
     }
   }, /*#__PURE__*/_react.default.createElement("img", {
+    className: " rmtIcon",
     alt: "",
     src: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAA40lEQVQ4jaXTMU4DMRCF4Y8VLcsN6IICBVcBcRpElVyAOwSh1IgCrkFoghBtApdgQ2EvMsYOKxhpCo/nnxk/2/zTdirxY5ziMK5fcIvlbwX3MUeHTeYdbtBug58KYO6LWpH5APgKK1yXzlwaO/VJzD2LueO0wOVAGBqscQG7MTiqCRPhabLuBB1GfTWxyxA4nWKTFngtJE23wCc5c+S7iJOf3Jed40MmIuGR9FdVswNBwFlpsxXEWQlX1SR7Tey8xiP2ah1a4ZF0eMM9HvAex57lcO0zjYXP1J9ziTs81zr/2T4BZ2RR+NbR+GoAAAAASUVORK5CYII="
   })) : null, rmtFullScreenMode && !fullScreen ? /*#__PURE__*/_react.default.createElement("li", {
@@ -129,11 +134,13 @@ const Toolbar = props => {
       handleFullScreen(true);
     }
   }, /*#__PURE__*/_react.default.createElement("img", {
+    className: " rmtIcon",
     alt: "",
     src: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAAa0lEQVQ4jc2SQQ6AIAwEJ/5HDspnxP/f6As0gYNN5ICBhmjcY3eyNGXhT9oBARJwAK7wnM6SMqEWIMDS8dAKxJqR+pe92akYnoaAKjsbAizsh/Kj7PARh79RuErSkuehSEGNVpUjsBm2fVkZh9sa61aJuakAAAAASUVORK5CYII="
   })) : null, rmtFullScreenMode && fullScreen ? /*#__PURE__*/_react.default.createElement("li", {
     className: "ml-01 cr-p"
   }, /*#__PURE__*/_react.default.createElement("img", {
+    className: " rmtIcon",
     alt: "",
     onClick: () => {
       closeFullScreen();

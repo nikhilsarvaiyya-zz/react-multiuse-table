@@ -151,9 +151,7 @@ const TableBody = (props) => {
                 style={d.rowStyle}>
                 {
                     rmtCheckAll &&
-                    <th
-                        className="tx-c p-s l-0"
-                        style={{ boxShadow: "rgb(0 0 0) -1px 0px 8px -8px inset" }}>
+                    <th className="tx-c p-s l-0" >
                         <div>
                             <input
                                 value={i1}
@@ -183,13 +181,13 @@ const TableBody = (props) => {
 
                 {
                     rmtActions && rmtActions.length !== 0 &&
-                    <th className="tx-c p-s r-0"
-                        style={{ boxShadow: "rgb(0 0 0) 1px 0px 8px -8px inset" }}>
+                    <th className="tx-c p-s r-0 dropdown" >
                         {
-                            <div className="dropdown">
+                            <div >
                                 <button className="dropbtn">
                                     <img
                                         alt="Dropdown Menu"
+                                        className="cr-p rmtIcon"
                                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAAiElEQVQ4jc2SwQ1AQBREX5BogiJQgxroRA1utEMPbq4uqnAQDjaxlz8JBzHJJD/5s7OZ2YU/IwVGx+SNQQscjq0lCoTBZMyPUAC5EkRiFwMlV4QZ2J7e3nB30Fgi1YGPw1qoCJ13uLdEoTDYuXIvwCp0JmruDipLpDrIvFk+pYUEGBxffeVvcAIAMhhp+VgEPQAAAABJRU5ErkJggg==" /></button>
                                 <div className="dropdown-content">
                                     {rmtActions.map((a, i) => {
@@ -206,7 +204,7 @@ const TableBody = (props) => {
                 isModalOpen.open && isModalOpen.index === i1 &&
                 RowDetail(d, handleIsModalOpen, columnSpan)
             }
-        </React.Fragment>
+        </React.Fragment >
     })
 
 }

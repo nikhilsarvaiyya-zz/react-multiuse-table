@@ -53,6 +53,7 @@ const Toolbar = (props) => {
                     globalSearch ?
                         <li className="ml-01 cr-p">
                             <img
+                                className=" rmtIcon"
                                 alt=""
                                 onClick={() => { handleGlobalSearch(false) }}
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAA4ElEQVQ4jaXSMUpDQRSF4S/RZ7ALSSnYCRbBwi1YuQAjxMLGRlJrZekWAkEEKwutDK7ApaSzsEkTUREs3iTImDcjyWmGuXfOP4c7Q7Xqid5ctWjfwiW28Yki1G/wkoPt4AmdqL6Ja1ykzAVGaCbOXOGwqtlDN5OwwGNcnA3qAM8ZwBfeRClngA28ZwACoLUIMEH7H4AtvC4CjHCSMTeVSadVB+6xW9Gr4w57uRsecIrGr3pHOf1vnMem+CfWcKR87zV8YIwBjsPaxzCVJKWzkKS/LOAPZH0JwG3w7a+SYq4fo1AfZnFyNMQAAAAASUVORK5CYII=" />
@@ -61,12 +62,14 @@ const Toolbar = (props) => {
                             <img
                                 alt=""
                                 onClick={() => { handleGlobalSearch(true) }}
-                                className="p-a searchBox" style={{
+                                className="p-a searchBox rmtIcon"
+                                style={{
                                     left: "-26px",
                                     background: "white"
                                 }}
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAAV0lEQVQ4jWNgGExgOgMDgzQR6qShajGAOAMDw0YChkgQUoPPEIKa8RlCtGZsGkjWDAPSDAwMW6EYp2YmUk0lFlDkBWwaiDYEn0KChhBjC97ERnFSHhgAAP3XEqdC/dYtAAAAAElFTkSuQmCC" />
                             <input
+                                className=" rmtIcon"
                                 type="search"
                                 placeHolder="search"
                                 value={globalSearchValue}
@@ -77,7 +80,9 @@ const Toolbar = (props) => {
                     <li className="ml-01 cr-p">
                         <div className="dropdown va-b">
                             <button className="dropbtn">
-                                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAAu0lEQVQ4jdXSsUoDURAF0GNWEMkf2G0XtVdS+isWgWV/IB9gYWNvbWVjZZMfUDClXSDNQuoQSJMiEIt9D23ct6/TC8OFYe5l7jD8JRR4wShHdBz4Cg84xTLwDMNfdAfUmEeDBVa4wz7UNGHwmbNpb1Q4yxEcBS5xiwnOsZWO8IhmEBpFEFdYZ+38A4P0SLeoxI3vWL0Qhy/wjg2etfnHum/whl38g0s0eMW19pHuEwY15rFxgid8BIN/hC8H0iA3l+QHXwAAAABJRU5ErkJggg==" />
+                                <img
+                                    className=" rmtIcon"
+                                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAAu0lEQVQ4jdXSsUoDURAF0GNWEMkf2G0XtVdS+isWgWV/IB9gYWNvbWVjZZMfUDClXSDNQuoQSJMiEIt9D23ct6/TC8OFYe5l7jD8JRR4wShHdBz4Cg84xTLwDMNfdAfUmEeDBVa4wz7UNGHwmbNpb1Q4yxEcBS5xiwnOsZWO8IhmEBpFEFdYZ+38A4P0SLeoxI3vWL0Qhy/wjg2etfnHum/whl38g0s0eMW19pHuEwY15rFxgid8BIN/hC8H0iA3l+QHXwAAAABJRU5ErkJggg==" />
                             </button>
                             <div className="dropdown-content zi-100">
                                 {rmtHeaders.map((h, i) => {
@@ -99,6 +104,7 @@ const Toolbar = (props) => {
                 {rmtResetData || isDataToReset ?
                     <li className="ml-01 cr-p">
                         <img
+                            className=" rmtIcon"
                             onClick={() => {
                                 handleGlobalSearchValue('')
                                 handleColumnSearchValue('')
@@ -112,6 +118,7 @@ const Toolbar = (props) => {
                         className="ml-01 cr-p"
                         onClick={() => { handleDarkMode(darkMode ? false : true) }}>
                         <img
+                            className=" rmtIcon"
                             alt=""
                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAA40lEQVQ4jaXTMU4DMRCF4Y8VLcsN6IICBVcBcRpElVyAOwSh1IgCrkFoghBtApdgQ2EvMsYOKxhpCo/nnxk/2/zTdirxY5ziMK5fcIvlbwX3MUeHTeYdbtBug58KYO6LWpH5APgKK1yXzlwaO/VJzD2LueO0wOVAGBqscQG7MTiqCRPhabLuBB1GfTWxyxA4nWKTFngtJE23wCc5c+S7iJOf3Jed40MmIuGR9FdVswNBwFlpsxXEWQlX1SR7Tey8xiP2ah1a4ZF0eMM9HvAex57lcO0zjYXP1J9ziTs81zr/2T4BZ2RR+NbR+GoAAAAASUVORK5CYII=" />
                     </li> : null}
@@ -122,12 +129,14 @@ const Toolbar = (props) => {
                         onClick={() => { openFullScreen(); handleFullScreen(true) }}
                     >
                         <img
+                            className=" rmtIcon"
                             alt=""
                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAAa0lEQVQ4jc2SQQ6AIAwEJ/5HDspnxP/f6As0gYNN5ICBhmjcY3eyNGXhT9oBARJwAK7wnM6SMqEWIMDS8dAKxJqR+pe92akYnoaAKjsbAizsh/Kj7PARh79RuErSkuehSEGNVpUjsBm2fVkZh9sa61aJuakAAAAASUVORK5CYII=" />
                     </li> : null}
                 {rmtFullScreenMode && fullScreen ?
                     <li className="ml-01 cr-p" >
                         <img
+                            className=" rmtIcon"
                             alt=""
                             onClick={() => { closeFullScreen(); handleFullScreen(false) }}
                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAApElEQVQ4jb2SXQrCMBCEP3/yXqWXEHxoyS2qDzlAb+1F9AC2vmx12SYrBHQgLJmZLLNh4QfYAZcMfxXtKzpgBg6KOwrXWfO2kEBX7Vsl2EsNwFmMJyfdoj2Bm1QAkkTUp1UP24w+AGyUqTH3uxgXX6O0CXg4Sf+I2hFm0d+o+cSkGwSgByIwOg1G8fR8VmCF6DSI1pzbxMnUEldEwMwnSDixq/EC9+wq3CrMRXcAAAAASUVORK5CYII=" />

@@ -127,9 +127,6 @@ const customChanges = data => {
     return /*#__PURE__*/_react.default.createElement("a", {
       onClick: "event.preventDefault()",
       target: "_blank",
-      style: {
-        color: "#0583D2"
-      },
       href: url
     }, subStr(url));
   } else {
