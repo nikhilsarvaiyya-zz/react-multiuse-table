@@ -152,8 +152,9 @@ const TableBody = (props) => {
                 {
                     rmtCheckAll &&
                     <th className="tx-c p-s l-0" >
-                        <div>
+                        <div style={{ minWidth: "27px" }}>
                             <input
+                                className="m-0"
                                 value={i1}
                                 type="checkbox"
                                 defaultChecked={d.isChecked}
@@ -182,20 +183,16 @@ const TableBody = (props) => {
                 {
                     rmtActions && rmtActions.length !== 0 &&
                     <th className="tx-c p-s r-0 dropdown" >
-                        {
-                            <div >
-                                <button className="dropbtn">
-                                    <img
-                                        alt="Dropdown Menu"
-                                        className="cr-p rmtIcon"
-                                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAAiElEQVQ4jc2SwQ1AQBREX5BogiJQgxroRA1utEMPbq4uqnAQDjaxlz8JBzHJJD/5s7OZ2YU/IwVGx+SNQQscjq0lCoTBZMyPUAC5EkRiFwMlV4QZ2J7e3nB30Fgi1YGPw1qoCJ13uLdEoTDYuXIvwCp0JmruDipLpDrIvFk+pYUEGBxffeVvcAIAMhhp+VgEPQAAAABJRU5ErkJggg==" /></button>
-                                <div className="dropdown-content">
-                                    {rmtActions.map((a, i) => {
-                                        return <a key={i} href={a.label}>{a.label}</a>
-                                    })}
-                                </div>
-                            </div>
-                        }
+                        <button className="dropbtn">
+                            <img
+                                alt="Dropdown Menu"
+                                className="cr-p rmtIcon"
+                                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAAiElEQVQ4jc2SwQ1AQBREX5BogiJQgxroRA1utEMPbq4uqnAQDjaxlz8JBzHJJD/5s7OZ2YU/IwVGx+SNQQscjq0lCoTBZMyPUAC5EkRiFwMlV4QZ2J7e3nB30Fgi1YGPw1qoCJ13uLdEoTDYuXIvwCp0JmruDipLpDrIvFk+pYUEGBxffeVvcAIAMhhp+VgEPQAAAABJRU5ErkJggg==" /></button>
+                        <div className="dropdown-content" style={{ right: "36px" }}>
+                            {rmtActions.map((a, i) => {
+                                return <a key={i} href={a.label}>{a.label}</a>
+                            })}
+                        </div>
                     </th>
                 }
 

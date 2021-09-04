@@ -43,10 +43,11 @@ const TableHead = props => {
   return /*#__PURE__*/_react.default.createElement("tr", null, rmtCheckAll && /*#__PURE__*/_react.default.createElement("th", {
     className: "tx-c p-s l-0",
     style: {
-      width: "24px"
+      width: "27px"
     }
   }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("input", {
     type: "checkbox",
+    className: "m-0",
     onChange: e => {
       handleCheckAllAction(e.target.checked);
     }

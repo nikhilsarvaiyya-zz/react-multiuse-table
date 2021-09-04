@@ -57,7 +57,7 @@ const App = () => {
     rmtColumnSearch={true}
     rmtGlobalSearch={true}
     rmtResetData={false}
-    rmtDarkTheme={true}
+    rmtTheme="blue"
     rmtFullScreenMode={true}
     rmtArrangeHead={true}
 

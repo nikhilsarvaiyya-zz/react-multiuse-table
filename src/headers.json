@@ -28,6 +28,13 @@
         "columnStyle": {}
     },
     {
+        "key": "date",
+        "label": "Date",
+        "dateFilter": true,
+        "listed": true,
+        "columnStyle": {}
+    },
+    {
         "key": "username",
         "label": "User Name",
         "listed": true,
@@ -86,14 +93,9 @@
         }
     },
     {
-        "key": "date",
-        "label": "Date",
-        "listed": true,
-        "columnStyle": {}
-    },
-    {
         "key": "time",
         "label": "Time",
+        "timeFilter": true,
         "listed": true,
         "columnStyle": {}
     },

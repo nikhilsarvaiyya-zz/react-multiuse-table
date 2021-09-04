@@ -74,7 +74,7 @@ const MyTable = props => {
     rmtResetData,
     rmtFullScreenMode,
     rmtToolbar,
-    rmtDarkTheme,
+    rmtTheme,
     rmtArrangeHead,
     details
   } = props;
@@ -89,7 +89,7 @@ const MyTable = props => {
 
   const [globalSearch, handleGlobalSearch] = (0, _react.useState)(rmtGlobalSearch);
   const [globalSearchValue, handleGlobalSearchValue] = (0, _react.useState)('');
-  const [darkMode, handleDarkMode] = (0, _react.useState)(false); // Need to Work
+  const [theme, handleTheme] = (0, _react.useState)(rmtTheme ? rmtTheme : "light"); // Need to Work
   //const [isActions, handleisActions] = useState(rmtActions && rmtActions.length !== 0);
 
   const [isActions] = (0, _react.useState)(rmtActions && rmtActions.length !== 0);
@@ -100,6 +100,10 @@ const MyTable = props => {
   const [recordPerPage, handleRecordPerPage] = (0, _react.useState)(rpp);
   const [loadData, handleLoadData] = (0, _react.useState)(rmtData);
   const [stateHeaders, handleStateHeaders] = (0, _react.useState)({});
+  console.log(theme);
+  (0, _react.useEffect)(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+  }, [theme]);
   (0, _react.useEffect)(() => {
     rmtHeaders.forEach(header => {
       if (stateHeaders && stateHeaders.heads && header.key === stateHeaders.heads.key) {
@@ -124,7 +128,7 @@ const MyTable = props => {
       columnSearch: columnSearchValue,
       globalSearch: globalSearchValue,
       fullScreen: fullScreen,
-      darkMode: darkMode,
+      theme: theme,
       isActions: isActions,
       checkAllAction: checkAllAction,
       checkSingleRow: checkSingleRow
@@ -158,7 +162,6 @@ const MyTable = props => {
     columnSpan = columnSpan + 1;
   }
 
-  console.log(isActions);
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "rmtMainContainer",
     id: "rmtMainContainer"
@@ -182,11 +185,12 @@ const MyTable = props => {
     handleColumnSearch: handleColumnSearch,
     columnSearch: columnSearch,
     handleGlobalSearchValue: handleGlobalSearchValue,
-    handleDarkMode: handleDarkMode,
-    darkMode: darkMode,
+    handleTheme: handleTheme,
+    theme: theme,
+    rmtTheme: rmtTheme,
     rmtResetData: rmtResetData,
-    rmtFullScreenMode: rmtFullScreenMode,
-    rmtDarkTheme: rmtDarkTheme,
+    rmtFullScreenMode: rmtFullScreenMode // rmtDarkTheme={rmtDarkTheme}
+    ,
     columnSearchValue: columnSearchValue,
     handleColumnSearchValue: handleColumnSearchValue,
     currentPage: currentPage,

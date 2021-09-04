@@ -3,7 +3,7 @@ import React from 'react';
 const dropdown = (h, handleColumnSearchValue, setCurrentPage) => {
 
     return <select
-        className="w-100"
+        className="input-select"
         onChange={(e) => {
             let val;
 
@@ -50,7 +50,8 @@ const inputSearch = (h, columnSearchValue, handleColumnSearchValue, setCurrentPa
         key = h.key
     }
     return <input
-        type="search"
+
+        className="input-search"
         placeholder={` ${h.label}`}
         value={key === Object.keys(columnSearchValue)[0] ? Object.keys(columnSearchValue)[1] : ''}
         onChange={(e) => {
@@ -59,6 +60,30 @@ const inputSearch = (h, columnSearchValue, handleColumnSearchValue, setCurrentPa
                 [key]: e.target.value
             })
             setCurrentPage(1)
+        }}
+    />
+}
+
+const dateFilter = (h, columnSearchValue, handleColumnSearchValue, setCurrentPage) => {
+
+    let filterType = "date"
+
+    if (h.timeFilter) {
+        filterType = "time"
+    }
+
+
+    return <input
+        className="input-date"
+        type={filterType}
+        placeholder={` ${h.label}`}
+        value={h.key === Object.keys(columnSearchValue)[0] ? Object.keys(columnSearchValue)[1] : ''}
+        onChange={(object) => {
+            console.log(object)
+            // handleColumnSearchValue({
+            //     [key]: e.target.value
+            // })
+            // setCurrentPage(1)
         }}
     />
 }
@@ -77,11 +102,13 @@ const ColumnSearch = (props) => {
         {emptyTh}
         {headers.map((h, i) => {
             return h.listed ?
-                <th key={i}>
+                <th key={i} className="pd-0 m-0">
                     {h.selectOptions || h.alternateOptions ?
-                        dropdown(h, handleColumnSearchValue, setCurrentPage)
-                        :
-                        inputSearch(h, columnSearchValue, handleColumnSearchValue, setCurrentPage)
+                        dropdown(h, handleColumnSearchValue, setCurrentPage) :
+                        h.dateFilter || h.timeFilter ?
+                            dateFilter(h, handleColumnSearchValue, setCurrentPage)
+                            :
+                            inputSearch(h, columnSearchValue, handleColumnSearchValue, setCurrentPage)
                     }
                 </th> : null
         })}

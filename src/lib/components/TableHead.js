@@ -29,10 +29,11 @@ const TableHead = (props) => {
 
     return <tr >
         {rmtCheckAll &&
-            <th className="tx-c p-s l-0" style={{ width: "24px" }}>
+            <th className="tx-c p-s l-0" style={{ width: "27px" }}>
                 <div>
                     <input
                         type="checkbox"
+                        className="m-0"
                         onChange={(e) => { handleCheckAllAction(e.target.checked) }}
                     />
                 </div>

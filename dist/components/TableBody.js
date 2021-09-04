@@ -146,7 +146,12 @@ const TableBody = props => {
       style: d.rowStyle
     }, rmtCheckAll && /*#__PURE__*/_react.default.createElement("th", {
       className: "tx-c p-s l-0"
-    }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("input", {
+    }, /*#__PURE__*/_react.default.createElement("div", {
+      style: {
+        minWidth: "27px"
+      }
+    }, /*#__PURE__*/_react.default.createElement("input", {
+      className: "m-0",
       value: i1,
       type: "checkbox",
       defaultChecked: d.isChecked,
@@ -167,20 +172,23 @@ const TableBody = props => {
       });
     }), rmtActions && rmtActions.length !== 0 && /*#__PURE__*/_react.default.createElement("th", {
       className: "tx-c p-s r-0 dropdown"
-    }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("button", {
+    }, /*#__PURE__*/_react.default.createElement("button", {
       className: "dropbtn"
     }, /*#__PURE__*/_react.default.createElement("img", {
       alt: "Dropdown Menu",
       className: "cr-p rmtIcon",
       src: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAAiElEQVQ4jc2SwQ1AQBREX5BogiJQgxroRA1utEMPbq4uqnAQDjaxlz8JBzHJJD/5s7OZ2YU/IwVGx+SNQQscjq0lCoTBZMyPUAC5EkRiFwMlV4QZ2J7e3nB30Fgi1YGPw1qoCJ13uLdEoTDYuXIvwCp0JmruDipLpDrIvFk+pYUEGBxffeVvcAIAMhhp+VgEPQAAAABJRU5ErkJggg=="
     })), /*#__PURE__*/_react.default.createElement("div", {
-      className: "dropdown-content"
+      className: "dropdown-content",
+      style: {
+        right: "36px"
+      }
     }, rmtActions.map((a, i) => {
       return /*#__PURE__*/_react.default.createElement("a", {
         key: i,
         href: a.label
       }, a.label);
-    }))))), isModalOpen.open && isModalOpen.index === i1 && (0, _RowDetail.default)(d, handleIsModalOpen, columnSpan));
+    })))), isModalOpen.open && isModalOpen.index === i1 && (0, _RowDetail.default)(d, handleIsModalOpen, columnSpan));
   });
 };
 

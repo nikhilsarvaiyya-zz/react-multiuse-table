@@ -1,6 +1,7 @@
 import React from 'react';
 
 
+
 const Toolbar = (props) => {
 
     const {
@@ -17,10 +18,11 @@ const Toolbar = (props) => {
         handleGlobalSearchValue,
         globalSearchValue,
         darkMode,
-        handleDarkMode,
+        handleTheme,
         rmtResetData,
         rmtFullScreenMode,
-        rmtDarkTheme,
+        theme,
+        rmtTheme,
         columnSearchValue,
         handleColumnSearchValue,
         currentPage,
@@ -84,9 +86,9 @@ const Toolbar = (props) => {
                                     className=" rmtIcon"
                                     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAAu0lEQVQ4jdXSsUoDURAF0GNWEMkf2G0XtVdS+isWgWV/IB9gYWNvbWVjZZMfUDClXSDNQuoQSJMiEIt9D23ct6/TC8OFYe5l7jD8JRR4wShHdBz4Cg84xTLwDMNfdAfUmEeDBVa4wz7UNGHwmbNpb1Q4yxEcBS5xiwnOsZWO8IhmEBpFEFdYZ+38A4P0SLeoxI3vWL0Qhy/wjg2etfnHum/whl38g0s0eMW19pHuEwY15rFxgid8BIN/hC8H0iA3l+QHXwAAAABJRU5ErkJggg==" />
                             </button>
-                            <div className="dropdown-content zi-100">
+                            <div className="dropdown-content " style={{ right: "28px" }}>
                                 {rmtHeaders.map((h, i) => {
-                                    return <div>
+                                    return <a>
                                         <input
                                             type="checkbox"
                                             defaultChecked={h.listed === true}
@@ -94,7 +96,7 @@ const Toolbar = (props) => {
                                                 handleStateHeaders({ checked: e.target.checked, heads: h })
                                             }}
                                         /> {h.label}
-                                    </div>
+                                    </a>
                                 })}
                             </div>
                         </div>
@@ -113,10 +115,12 @@ const Toolbar = (props) => {
                             alt=""
                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAAuElEQVQ4jdXSMWqCMQDF8Z9WcSjFwd7CKyhIceomegDBsYfQimfQW7jqWEpxaMHZM6gIinS1g/nKN3wRR/3DgyQv75GEcIsU0cMXtjhggbfg1YIyecYPZmiignIYz7HEBIOscB7feL9wuiFO6YJCymzjiH4kfLpQ/M/TNZvun+g1B84PlSjGBzrJJB8pykXCI5QwTRYeUmYDK7yghTV2eEQdY1Txit+s9mZQ0fnbLrDHBp/oBu/G+ANI2SCkCXAwFQAAAABJRU5ErkJggg==" />
                     </li> : null}
-                {rmtDarkTheme ?
+                {rmtTheme ?
                     < li
                         className="ml-01 cr-p"
-                        onClick={() => { handleDarkMode(darkMode ? false : true) }}>
+                        onClick={() => {
+                            handleTheme(theme === 'light' ? rmtTheme : "light");
+                        }}>
                         <img
                             className=" rmtIcon"
                             alt=""
