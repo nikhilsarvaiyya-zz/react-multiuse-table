@@ -75,8 +75,7 @@ const MyTable = props => {
     rmtFullScreenMode,
     rmtToolbar,
     rmtTheme,
-    rmtArrangeHead,
-    details
+    rmtArrangeHead
   } = props;
   let rpp = rmtRecordPerPage ? rmtRecordPerPage : 10;
   const [keyIndex, handleKeyIndex] = (0, _react.useState)(0);
@@ -97,8 +96,8 @@ const MyTable = props => {
   const [checkSingleRow, handleCheckSingleRow] = (0, _react.useState)([]);
   const [currentPage, setCurrentPage] = (0, _react.useState)(1);
   const [pagnetData, handlePagnetData] = (0, _react.useState)([]);
-  const [recordPerPage, handleRecordPerPage] = (0, _react.useState)(rpp);
-  const [loadData, handleLoadData] = (0, _react.useState)(rmtData);
+  const [recordPerPage, handleRecordPerPage] = (0, _react.useState)(rpp); // const [loadData, handleLoadData] = useState(rmtData);
+
   const [stateHeaders, handleStateHeaders] = (0, _react.useState)({});
   console.log(theme);
   (0, _react.useEffect)(() => {

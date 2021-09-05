@@ -29,7 +29,7 @@ const SelectPagination = props => {
   }, "Total Records: ", /*#__PURE__*/_react.default.createElement("b", null, totalrecords)), /*#__PURE__*/_react.default.createElement("div", {
     className: "fl mr-1"
   }, "Records per page \xA0", /*#__PURE__*/_react.default.createElement("select", {
-    defaultValue: recordPerPage,
+    defaultValue: recordPerPage ? recordPerPage : 0,
     onChange: e => {
       handleRecordPerPage(e.target.value);
       setCurrentPage(1);
@@ -42,13 +42,14 @@ const SelectPagination = props => {
   }))), /*#__PURE__*/_react.default.createElement("div", {
     className: "fl mr-1"
   }, "Go to page\xA0", /*#__PURE__*/_react.default.createElement("select", {
+    defaultValue: 1,
     onChange: e => {
       setCurrentPage(Number(e.target.value));
     }
   }, allPages.map(p => {
     return /*#__PURE__*/_react.default.createElement("option", {
       key: p,
-      selected: currentPage === p + 1,
+      defaultValue: currentPage === p + 1,
       value: p + 1
     }, p + 1);
   }))));

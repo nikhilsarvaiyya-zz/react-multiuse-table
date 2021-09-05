@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import RowDetail from './RowDetail'
 
 import TableCell from './TableCell'
@@ -92,7 +92,7 @@ function sortFunction(arr,
 const TableBody = (props) => {
     let sortedData = [];
     const [isModalOpen, handleIsModalOpen] = useState({})
-    const [selectedData, handleSelectedData] = useState({})
+    // const [selectedData, handleSelectedData] = useState({})
 
     const { rmtCheckAll, rmtActions,
         rmtHeaders,
@@ -109,7 +109,7 @@ const TableBody = (props) => {
         columnSearchValue,
         pagnetData,
         handleTotalRecords,
-        rmtServer
+        rmtServer,
 
     } = props;
 
@@ -146,7 +146,7 @@ const TableBody = (props) => {
                         open: isModalOpen.index === i1 ? !isModalOpen.open : true,
                         index: i1
                     })
-                    handleSelectedData(d)
+                    // handleSelectedData(d)
                 }}
                 style={d.rowStyle}>
                 {

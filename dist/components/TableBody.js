@@ -97,8 +97,8 @@ function sortFunction(arr, shortByKey, order, select, isPagination, globalSearch
 
 const TableBody = props => {
   let sortedData = [];
-  const [isModalOpen, handleIsModalOpen] = (0, _react.useState)({});
-  const [selectedData, handleSelectedData] = (0, _react.useState)({});
+  const [isModalOpen, handleIsModalOpen] = (0, _react.useState)({}); // const [selectedData, handleSelectedData] = useState({})
+
   const {
     rmtCheckAll,
     rmtActions,
@@ -140,8 +140,7 @@ const TableBody = props => {
         handleIsModalOpen({
           open: isModalOpen.index === i1 ? !isModalOpen.open : true,
           index: i1
-        });
-        handleSelectedData(d);
+        }); // handleSelectedData(d)
       },
       style: d.rowStyle
     }, rmtCheckAll && /*#__PURE__*/_react.default.createElement("th", {

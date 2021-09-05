@@ -395,9 +395,9 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
 
 .rmtMainContainer .dropdown .dropbtn {
     background: none;
-    border: none;
-    border-radius: 4px;
-    padding: 2px;
+border: none;
+border-radius: 4px;
+padding: 2px;
 }
 
 .rmtMainContainer .dropdown .dropbtn img {
@@ -423,7 +423,8 @@ cursor: pointer; */
     max-height: 300px
 }
 
-.rmtMainContainer .dropdown-content a {
+.rmtMainContainer .dropdown-content a,
+.rmtMainContainer .dropdown-content span {
     color: var(--color);
     padding: 8px 5px;
     text-decoration: none;

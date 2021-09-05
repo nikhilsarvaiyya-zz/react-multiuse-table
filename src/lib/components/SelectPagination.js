@@ -22,7 +22,7 @@ const SelectPagination = (props) => {
         <div className="fl mr-1">
             Records per page &nbsp;
             <select
-                defaultValue={recordPerPage}
+                defaultValue={recordPerPage ? recordPerPage : 0}
                 onChange={(e) => {
                     handleRecordPerPage(e.target.value)
                     setCurrentPage(1)
@@ -36,11 +36,13 @@ const SelectPagination = (props) => {
 
         <div className="fl mr-1">
             Go to page&nbsp;
-            <select onChange={(e) => {
-                setCurrentPage(Number(e.target.value))
-            }}>
+            <select
+                defaultValue={1}
+                onChange={(e) => {
+                    setCurrentPage(Number(e.target.value))
+                }}>
                 {allPages.map(p => {
-                    return <option key={p} selected={currentPage === p + 1} value={p + 1} >{p + 1}</option>
+                    return <option key={p} defaultValue={currentPage === p + 1} value={p + 1} >{p + 1}</option>
                 })}
 
             </select>

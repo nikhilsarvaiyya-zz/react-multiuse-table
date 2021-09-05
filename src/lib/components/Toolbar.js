@@ -17,7 +17,6 @@ const Toolbar = (props) => {
         handleGlobalSearch,
         handleGlobalSearchValue,
         globalSearchValue,
-        darkMode,
         handleTheme,
         rmtResetData,
         rmtFullScreenMode,
@@ -28,8 +27,8 @@ const Toolbar = (props) => {
         currentPage,
         setCurrentPage,
         rmtArrangeHead,
-        handleStateHeaders,
-        stateHeaders
+        handleStateHeaders
+
     } = props
 
 
@@ -83,12 +82,13 @@ const Toolbar = (props) => {
                         <div className="dropdown va-b">
                             <button className="dropbtn">
                                 <img
+                                    alt="dropdown-menu"
                                     className=" rmtIcon"
                                     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAAu0lEQVQ4jdXSsUoDURAF0GNWEMkf2G0XtVdS+isWgWV/IB9gYWNvbWVjZZMfUDClXSDNQuoQSJMiEIt9D23ct6/TC8OFYe5l7jD8JRR4wShHdBz4Cg84xTLwDMNfdAfUmEeDBVa4wz7UNGHwmbNpb1Q4yxEcBS5xiwnOsZWO8IhmEBpFEFdYZ+38A4P0SLeoxI3vWL0Qhy/wjg2etfnHum/whl38g0s0eMW19pHuEwY15rFxgid8BIN/hC8H0iA3l+QHXwAAAABJRU5ErkJggg==" />
                             </button>
                             <div className="dropdown-content " style={{ right: "28px" }}>
                                 {rmtHeaders.map((h, i) => {
-                                    return <a>
+                                    return <span key={i}>
                                         <input
                                             type="checkbox"
                                             defaultChecked={h.listed === true}
@@ -96,7 +96,7 @@ const Toolbar = (props) => {
                                                 handleStateHeaders({ checked: e.target.checked, heads: h })
                                             }}
                                         /> {h.label}
-                                    </a>
+                                    </span>
                                 })}
                             </div>
                         </div>

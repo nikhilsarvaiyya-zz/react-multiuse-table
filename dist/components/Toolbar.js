@@ -23,7 +23,6 @@ const Toolbar = props => {
     handleGlobalSearch,
     handleGlobalSearchValue,
     globalSearchValue,
-    darkMode,
     handleTheme,
     rmtResetData,
     rmtFullScreenMode,
@@ -34,8 +33,7 @@ const Toolbar = props => {
     currentPage,
     setCurrentPage,
     rmtArrangeHead,
-    handleStateHeaders,
-    stateHeaders
+    handleStateHeaders
   } = props;
   let isDataToReset = globalSearchValue.length !== 0 || Object.keys(columnSearchValue).length !== 0 || currentPage !== 1;
   return /*#__PURE__*/_react.default.createElement("div", {
@@ -93,6 +91,7 @@ const Toolbar = props => {
   }, /*#__PURE__*/_react.default.createElement("button", {
     className: "dropbtn"
   }, /*#__PURE__*/_react.default.createElement("img", {
+    alt: "dropdown-menu",
     className: " rmtIcon",
     src: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAAu0lEQVQ4jdXSsUoDURAF0GNWEMkf2G0XtVdS+isWgWV/IB9gYWNvbWVjZZMfUDClXSDNQuoQSJMiEIt9D23ct6/TC8OFYe5l7jD8JRR4wShHdBz4Cg84xTLwDMNfdAfUmEeDBVa4wz7UNGHwmbNpb1Q4yxEcBS5xiwnOsZWO8IhmEBpFEFdYZ+38A4P0SLeoxI3vWL0Qhy/wjg2etfnHum/whl38g0s0eMW19pHuEwY15rFxgid8BIN/hC8H0iA3l+QHXwAAAABJRU5ErkJggg=="
   })), /*#__PURE__*/_react.default.createElement("div", {
@@ -101,7 +100,9 @@ const Toolbar = props => {
       right: "28px"
     }
   }, rmtHeaders.map((h, i) => {
-    return /*#__PURE__*/_react.default.createElement("a", null, /*#__PURE__*/_react.default.createElement("input", {
+    return /*#__PURE__*/_react.default.createElement("span", {
+      key: i
+    }, /*#__PURE__*/_react.default.createElement("input", {
       type: "checkbox",
       defaultChecked: h.listed === true,
       onChange: e => {

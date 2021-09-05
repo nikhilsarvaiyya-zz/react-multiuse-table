@@ -5,16 +5,16 @@ const na = () => {
 }
 
 const subStr = (text) => {
-    return <span>
+    return <span key={text}>
         {text.substring(0, 40)}
         {text && text.length > 40 ? "..." : ''}
     </span>
 
 }
 
-const strEllipsis = (text) => {
+const strEllipsis = (text, headers, index) => {
 
-    return <div>
+    return <div key={index}>
         <div className="fl ws-nr" title={text}>
             {customChanges(text)}
         </div>
@@ -22,17 +22,17 @@ const strEllipsis = (text) => {
     </div>
 }
 
-const arrEllipsis = (text) => {
-    return <ul>
+const arrEllipsis = (text, header, index) => {
+    return <ul key={index}>
         {text && Array.isArray(text) && text.map((m, i) => {
-            return i < 3 && < li title={m}> {i !== 0 ? "," : null} {m}</li>
+            return i < 3 && <li key={m + i} title={m}> {i !== 0 ? "," : null} {m}</li>
         })}
         {text && text.length > 4 ? " ..." : null}
     </ul>
 }
 
 
-const keyIsString = (text, headers) => {
+const keyIsString = (text, headers, index) => {
     if (text === "null" || text === null) {
         return na()
     }
@@ -44,13 +44,13 @@ const keyIsString = (text, headers) => {
         }
     }
     if (typeof (text) === 'string') {
-        return strEllipsis(text)
+        return strEllipsis(text, headers, index)
     }
     if (typeof (text) === 'number') {
         return text
     }
     if (typeof (text) === 'object') {
-        return arrEllipsis(text)
+        return arrEllipsis(text, headers, index)
     }
 }
 
@@ -76,8 +76,17 @@ const validUrl = (data) => {
 
 const customChanges = (data) => {
 
+
+
     if (validImageUrl(data)) {
+
+
+
         return <img
+            // onError={(event) => {
+            //     fallback(true)
+            // }}
+            alt="image"
             className="va-m"
             src={data}
             height="30" style={{
@@ -100,7 +109,7 @@ const customChanges = (data) => {
         return year + '-' + month + '-' + dt
     } else if (validUrl(data)) {
         let url = data.indexOf('://') === -1 ? 'http://' + data : data;
-        return <a onClick="event.preventDefault()" target="_blank" href={url} >
+        return <a rel="noreferrer" onClick={(e) => e.preventDefault()} target="_blank" href={url} >
             {subStr(url)}
         </a>
     } else {
@@ -109,20 +118,20 @@ const customChanges = (data) => {
 }
 
 
-const keyIsObject = (data, headers) => {
+const keyIsObject = (data, headers, index) => {
     return headers.key && headers.key.map((item, i) => {
         if (data[0] === item) {
             if (!data[1]) {
                 return na()
             } else {
                 if (typeof (data[1]) === 'object') {
-                    return arrEllipsis(data[1])
+                    return arrEllipsis(data[1], item, index)
                 } else {
 
                     if (headers.seprator && i !== (headers.key.length - 1)) {
-                        return <span >{customChanges(data[1])}&nbsp;{headers.seprator}&nbsp; </span>
+                        return <span >{customChanges(data[1], item, index)}&nbsp;{headers.seprator}&nbsp; </span>
                     } else {
-                        return <span>{customChanges(data[1])}&nbsp; </span>
+                        return <span>{customChanges(data[1], item, index)}&nbsp; </span>
                     }
                 }
             }
@@ -138,10 +147,10 @@ const TableCell = (props) => {
     return <td style={{ ...cellStyle, ...columnStyle }}>
         {Object.entries(cellData).map((k, i3) => {
             if (typeof (headers.key) === 'object') {
-                return keyIsObject(k, headers)
+                return keyIsObject(k, headers, i3)
             } else if (typeof (headers.key) === 'string') {
                 if (k[0] === headers.key) {
-                    return keyIsString(k[1], headers)
+                    return keyIsString(k[1], headers, i3)
                 }
             }
         })}

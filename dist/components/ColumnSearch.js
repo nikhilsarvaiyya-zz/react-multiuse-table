@@ -11,6 +11,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 const dropdown = (h, handleColumnSearchValue, setCurrentPage) => {
   return /*#__PURE__*/_react.default.createElement("select", {
+    defaultValue: null,
     className: "input-select",
     onChange: e => {
       let val;
@@ -91,7 +92,6 @@ const ColumnSearch = props => {
     headers,
     rmtCheckAll,
     handleColumnSearch,
-    columnSearch,
     handleColumnSearchValue,
     columnSearchValue,
     setCurrentPage,

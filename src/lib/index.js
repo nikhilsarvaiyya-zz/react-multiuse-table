@@ -52,8 +52,7 @@ const MyTable = (props) => {
         rmtFullScreenMode,
         rmtToolbar,
         rmtTheme,
-        rmtArrangeHead,
-        details
+        rmtArrangeHead
     } = props
 
     let rpp = rmtRecordPerPage ? rmtRecordPerPage : 10
@@ -83,7 +82,7 @@ const MyTable = (props) => {
     const [pagnetData, handlePagnetData] = useState([]);
 
     const [recordPerPage, handleRecordPerPage] = useState(rpp);
-    const [loadData, handleLoadData] = useState(rmtData);
+    // const [loadData, handleLoadData] = useState(rmtData);
 
     const [stateHeaders, handleStateHeaders] = useState({})
 
@@ -96,9 +95,7 @@ const MyTable = (props) => {
 
     useEffect(() => {
         rmtHeaders.forEach(header => {
-
             if (stateHeaders && stateHeaders.heads && header.key === stateHeaders.heads.key) {
-
                 return header.listed = !header.listed
             }
         });

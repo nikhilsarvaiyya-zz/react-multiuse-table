@@ -3,6 +3,7 @@ import React from 'react';
 const dropdown = (h, handleColumnSearchValue, setCurrentPage) => {
 
     return <select
+        defaultValue={null}
         className="input-select"
         onChange={(e) => {
             let val;
@@ -92,7 +93,7 @@ const ColumnSearch = (props) => {
     const { headers,
         rmtCheckAll,
         handleColumnSearch,
-        columnSearch,
+
         handleColumnSearchValue,
         columnSearchValue,
         setCurrentPage,

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import ReactMultiuseTable from './lib/index';
 import headers from './headers.json'
-import clientData from './client.json'
+// import clientData from './client.json'
 import Actions from './lib/components/Actions';
 
 //for server Data
@@ -10,13 +10,15 @@ import Actions from './lib/components/Actions';
 
 const App = () => {
 
-  var color1 = ["F8DE7F", "FADA5F", "D2B45A", "C49102", "FEE103", "FDA50F", "FEFEDA", "FFBE00", "EFDB82", "FFDDAF", "FFFFFF", "FEFCCF"];
+
 
 
   const [serverData, handleServerData] = useState([])
   const [params, queryParams] = useState()
 
   useEffect(() => {
+
+    const color1 = ["F8DE7F", "FADA5F", "D2B45A", "C49102", "FEE103", "FDA50F", "FEFEDA", "FFBE00", "EFDB82", "FFDDAF", "FFFFFF", "FEFCCF"];
 
     let endpoint = "http://localhost:3000/users"
     let limit = `_limit=${params && params.limit}`
@@ -29,7 +31,7 @@ const App = () => {
     fetch(endpoint + query)
       .then(response => response.json())
       .then(data => {
-        data.map(item => {
+        data.map((item, i) => {
           item.rowStyle = item.is_valid ? { background: "#edfee9", color: "black" } : { background: "#fff3f3", color: "black" }
           item.cellStyle = { background: "#" + color1[Math.floor(Math.random() * color1.length)], color: "black" }
           return item

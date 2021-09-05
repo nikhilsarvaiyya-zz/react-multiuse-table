@@ -31,25 +31,32 @@ const na = () => {
 };
 
 const subStr = text => {
-  return /*#__PURE__*/_react.default.createElement("span", null, text.substring(0, 40), text && text.length > 40 ? "..." : '');
+  return /*#__PURE__*/_react.default.createElement("span", {
+    key: text
+  }, text.substring(0, 40), text && text.length > 40 ? "..." : '');
 };
 
-const strEllipsis = text => {
-  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", {
+const strEllipsis = (text, headers, index) => {
+  return /*#__PURE__*/_react.default.createElement("div", {
+    key: index
+  }, /*#__PURE__*/_react.default.createElement("div", {
     className: "fl ws-nr",
     title: text
   }, customChanges(text)));
 };
 
-const arrEllipsis = text => {
-  return /*#__PURE__*/_react.default.createElement("ul", null, text && Array.isArray(text) && text.map((m, i) => {
+const arrEllipsis = (text, header, index) => {
+  return /*#__PURE__*/_react.default.createElement("ul", {
+    key: index
+  }, text && Array.isArray(text) && text.map((m, i) => {
     return i < 3 && /*#__PURE__*/_react.default.createElement("li", {
+      key: m + i,
       title: m
     }, " ", i !== 0 ? "," : null, " ", m);
   }), text && text.length > 4 ? " ..." : null);
 };
 
-const keyIsString = (text, headers) => {
+const keyIsString = (text, headers, index) => {
   if (text === "null" || text === null) {
     return na();
   }
@@ -63,7 +70,7 @@ const keyIsString = (text, headers) => {
   }
 
   if (typeof text === 'string') {
-    return strEllipsis(text);
+    return strEllipsis(text, headers, index);
   }
 
   if (typeof text === 'number') {
@@ -71,7 +78,7 @@ const keyIsString = (text, headers) => {
   }
 
   if (typeof text === 'object') {
-    return arrEllipsis(text);
+    return arrEllipsis(text, headers, index);
   }
 };
 
@@ -97,6 +104,10 @@ const validUrl = data => {
 const customChanges = data => {
   if (validImageUrl(data)) {
     return /*#__PURE__*/_react.default.createElement("img", {
+      // onError={(event) => {
+      //     fallback(true)
+      // }}
+      alt: "image",
       className: "va-m",
       src: data,
       height: "30",
@@ -125,7 +136,8 @@ const customChanges = data => {
   } else if (validUrl(data)) {
     let url = data.indexOf('://') === -1 ? 'http://' + data : data;
     return /*#__PURE__*/_react.default.createElement("a", {
-      onClick: "event.preventDefault()",
+      rel: "noreferrer",
+      onClick: e => e.preventDefault(),
       target: "_blank",
       href: url
     }, subStr(url));
@@ -134,19 +146,19 @@ const customChanges = data => {
   }
 };
 
-const keyIsObject = (data, headers) => {
+const keyIsObject = (data, headers, index) => {
   return headers.key && headers.key.map((item, i) => {
     if (data[0] === item) {
       if (!data[1]) {
         return na();
       } else {
         if (typeof data[1] === 'object') {
-          return arrEllipsis(data[1]);
+          return arrEllipsis(data[1], item, index);
         } else {
           if (headers.seprator && i !== headers.key.length - 1) {
-            return /*#__PURE__*/_react.default.createElement("span", null, customChanges(data[1]), "\xA0", headers.seprator, "\xA0 ");
+            return /*#__PURE__*/_react.default.createElement("span", null, customChanges(data[1], item, index), "\xA0", headers.seprator, "\xA0 ");
           } else {
-            return /*#__PURE__*/_react.default.createElement("span", null, customChanges(data[1]), "\xA0 ");
+            return /*#__PURE__*/_react.default.createElement("span", null, customChanges(data[1], item, index), "\xA0 ");
           }
         }
       }
@@ -165,10 +177,10 @@ const TableCell = props => {
     style: _objectSpread(_objectSpread({}, cellStyle), columnStyle)
   }, Object.entries(cellData).map((k, i3) => {
     if (typeof headers.key === 'object') {
-      return keyIsObject(k, headers);
+      return keyIsObject(k, headers, i3);
     } else if (typeof headers.key === 'string') {
       if (k[0] === headers.key) {
-        return keyIsString(k[1], headers);
+        return keyIsString(k[1], headers, i3);
       }
     }
   }));
