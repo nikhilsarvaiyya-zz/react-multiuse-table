@@ -1,4 +1,4 @@
-:root {
+document.head.innerHTML += `<style>:root {
     --color-light: #999999;
     --color: #555555;
     --color-dark: #111111;
@@ -395,9 +395,9 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
 
 .rmtMainContainer .dropdown .dropbtn {
     background: none;
-border: none;
-border-radius: 4px;
-padding: 2px;
+    border: none;
+    border-radius: 4px;
+    padding: 2px;
 }
 
 .rmtMainContainer .dropdown .dropbtn img {
@@ -548,3 +548,5 @@ cursor: pointer; */
 .rmtMainContainer .NA_text {
     color: var(--color-light);
 }
+
+<style>`
