@@ -23,6 +23,14 @@ document.head.innerHTML += `
   --image-filter: 1;
 }
 
+
+[data-theme="red"]  {
+    --color-light: #FEFEFE;       --color: #FCFCFC;       --color-dark: #FAFAFA;
+    --background-light: #fc4646;  --background: #fa3030;  --background-dark: #ff2020;
+    --border-light: #666666;      --border: #555555;      --border-dark: #444444;
+    --image-filter: 1;
+  }
+
 input[type="date"]::-webkit-calendar-picker-indicator ,
 input[type="time"]::-webkit-calendar-picker-indicator{
   cursor: pointer;
