@@ -3,7 +3,7 @@ import TableHead from './components/TableHead.js'
 import TableBody from './components/TableBody.js'
 import Pagination from './components/Pagination.js';
 import ColumnSearch from './components/ColumnSearch.js';
-import './components/StyleBasic';
+import './react-multiust-table-style.css';
 import Toolbar from './components/Toolbar.js';
 
 var elem = document.documentElement;

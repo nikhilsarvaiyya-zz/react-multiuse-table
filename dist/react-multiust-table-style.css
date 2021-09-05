@@ -1,43 +1,63 @@
-
-document.head.innerHTML += `
-  <style>
-
 :root {
-    --color-light: #999999;       --color: #555555;       --color-dark: #111111;
-    --background-light: #FEFEFE;  --background: #FCFCFC;  --background-dark: #FAFAFA;
-    --border-light: #D2D0CE;      --border: #C8C6C4;      --border-dark: #BDBBB8;
+    --color-light: #999999;
+    --color: #555555;
+    --color-dark: #111111;
+    --background-light: #FEFEFE;
+    --background: #FCFCFC;
+    --background-dark: #FAFAFA;
+    --border-light: #D2D0CE;
+    --border: #C8C6C4;
+    --border-dark: #BDBBB8;
     --image-filter: 0;
 }
 
 [data-theme="dark"] {
-    --background-light: #333333;   --background: #222222; --background-dark: #111111;
-    --color-light: #FEFEFE;        --color:#FCFCFC;       --color-dark: #FAFAFA;
-    --border-light: #666666;       --border: #555555;     --border-dark: #444444;
+    --background-light: #333333;
+    --background: #222222;
+    --background-dark: #111111;
+    --color-light: #FEFEFE;
+    --color: #FCFCFC;
+    --color-dark: #FAFAFA;
+    --border-light: #666666;
+    --border: #555555;
+    --border-dark: #444444;
     --image-filter: 1;
 }
 
-[data-theme="blue"]  {
-  --color-light: #FEFEFE;       --color: #FCFCFC;       --color-dark: #FAFAFA;
-  --background-light: #3ba4f6;  --background: #2098f6;  --background-dark: #0a8aee;
-  --border-light: #666666;      --border: #555555;      --border-dark: #444444;
-  --image-filter: 1;
+[data-theme="blue"] {
+    --color-light: #FEFEFE;
+    --color: #FCFCFC;
+    --color-dark: #FAFAFA;
+    --background-light: #3ba4f6;
+    --background: #2098f6;
+    --background-dark: #0a8aee;
+    --border-light: #666666;
+    --border: #555555;
+    --border-dark: #444444;
+    --image-filter: 1;
 }
 
 
-[data-theme="red"]  {
-    --color-light: #FEFEFE;       --color: #FCFCFC;       --color-dark: #FAFAFA;
-    --background-light: #fc4646;  --background: #fa3030;  --background-dark: #ff2020;
-    --border-light: #666666;      --border: #555555;      --border-dark: #444444;
+[data-theme="red"] {
+    --color-light: #FEFEFE;
+    --color: #FCFCFC;
+    --color-dark: #FAFAFA;
+    --background-light: #fc4646;
+    --background: #fa3030;
+    --background-dark: #ff2020;
+    --border-light: #666666;
+    --border: #555555;
+    --border-dark: #444444;
     --image-filter: 1;
-  }
+}
 
-input[type="date"]::-webkit-calendar-picker-indicator ,
-input[type="time"]::-webkit-calendar-picker-indicator{
-  cursor: pointer;
-  border-radius: 4px;
-  margin-right: 2px;
-  opacity: 0.7;
-  filter: invert(var(--image-filter));
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    border-radius: 4px;
+    margin-right: 2px;
+    opacity: 0.7;
+    filter: invert(var(--image-filter));
 }
 
 
@@ -45,10 +65,12 @@ input[type="time"]::-webkit-calendar-picker-indicator{
     opacity: 0.7;
     filter: invert(var(--image-filter))
 }
+
 .rmtMainContainer img.rmtIcon:hover {
-  opacity: 0.7;
-  filter: var(--image-filter)
+    opacity: 0.7;
+    filter: var(--image-filter)
 }
+
 a {
     color: inherit
 }
@@ -100,7 +122,7 @@ a {
 }
 
 .rmtMainContainer ul li {
-  position: relative;
+    position: relative;
     display: inline-block
 }
 
@@ -135,8 +157,8 @@ a {
     padding: 4px
 }
 
-.rmtMainContainer input[type="date"i] ,
-.rmtMainContainer input[type="time"i]{
+.rmtMainContainer input[type="date"i],
+.rmtMainContainer input[type="time"i] {
     padding: 0 4px;
 }
 
@@ -147,32 +169,32 @@ a {
 
 .rmtMainContainer .input-search,
 .rmtMainContainer .input-select,
-.rmtMainContainer .input-date{
-  border:none;
-  color: var(--color-dark);
-  background: var(--background-light);
-  padding:0 10px;
+.rmtMainContainer .input-date {
+    border: none;
+    color: var(--color-dark);
+    background: var(--background-light);
+    padding: 0 10px;
 }
 
-.rmtMainContainer .input-search{
-  width: calc(100% - 20px);
-  min-height:32px
+.rmtMainContainer .input-search {
+    width: calc(100% - 20px);
+    min-height: 32px
 }
 
-.rmtMainContainer .input-select{
-  width: calc(100% - 0px);
-  min-height:36px
+.rmtMainContainer .input-select {
+    width: calc(100% - 0px);
+    min-height: 36px
 }
 
-.rmtMainContainer .input-date{
-  width: calc(100% - 10px);
-  min-height:34px
+.rmtMainContainer .input-date {
+    width: calc(100% - 10px);
+    min-height: 34px
 }
 
 
 
 input[type="date"]::-webkit-calendar-picker-indicator:hover {
-  opacity: 1
+    opacity: 1
 }
 
 ::-webkit-input-placeholder {
@@ -267,7 +289,7 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
 }
 
 .rmtMainContainer .pd-0 {
-  padding: 0
+    padding: 0
 }
 
 .rmtMainContainer .pd-05 {
@@ -298,9 +320,7 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
     cursor: pointer
 }
 
-.rmtMainContainer .cr-p:hover {
-    
-}
+.rmtMainContainer .cr-p:hover {}
 
 .rmtMainContainer .tx-c {
     text-align: center
@@ -342,7 +362,7 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
     right: 0px
 }
 
-.rmtMainContainer  .searchBox {
+.rmtMainContainer .searchBox {
     -webkit-transition: all .5s ease;
     -moz-transition: all .5s ease;
     -o-transition: all .5s ease;
@@ -358,7 +378,7 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
     position: relative;
 }
 
-.rmtMainContainer  .rmtTableContainer {
+.rmtMainContainer .rmtTableContainer {
     width: 100%;
     margin: 0;
     padding: 0;
@@ -368,8 +388,8 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
 }
 
 .rmtMainContainer .dropdown {
-    //  position: relative;
-    //  display: inline-block;
+    /* position: relative;
+      display: inline-block; */
 }
 
 
@@ -381,17 +401,17 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
 }
 
 .rmtMainContainer .dropdown .dropbtn img {
-    // vertical-align: middle
+    /* vertical-align: middle */
 }
 
 .rmtMainContainer .dropdown:hover .dropbtn {
-    // background: var(--background);
-    // cursor: pointer;
+    /* background: var(--background);
+cursor: pointer; */
 }
 
 .rmtMainContainer .dropdown-content {
     display: none;
-   
+
     top: 0px;
     position: absolute;
     background-color: var(--background-light);
@@ -399,8 +419,8 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
     border: 1px solid var(--border-light);
     z-index: 1;
     border-radius: 2px;
-    overflow:auto;
-    max-height:300px
+    overflow: auto;
+    max-height: 300px
 }
 
 .rmtMainContainer .dropdown-content a {
@@ -435,7 +455,7 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
     padding: 5px;
     background: var(--background-light);
     position: relative;
-    
+
 }
 
 .rmtMainContainer .rmtToolbar {
@@ -443,7 +463,7 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
     border-left: 1px solid var(--border-light);
     border-top: 1px solid var(--border-light);
     z-index: 9;
-    position:relative
+    position: relative
 }
 
 .rmtMainContainer .rmtPagnation {
@@ -451,7 +471,7 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
     border-left: 1px solid var(--border-light);
     border-bottom: 1px solid var(--border-light);
     z-index: 1;
-    position:relative
+    position: relative
 }
 
 
@@ -492,8 +512,8 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
 .rmtMainContainer .rmtPrev:hover,
 .rmtMainContainer .rmtNext:hover {
     background: var(--background-dark);
-    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(var(--background-dark); ), to(var(--background-dark); ));
-    background: -moz-linear-gradient(0% 0% 270deg, var(--background-dark); , var(--background-dark); );
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(var(--background-dark)), to(var(--background-dark)));
+    background: -moz-linear-gradient(0% 0% 270deg, var(--background-dark), var(--background-dark));
 }
 
 .rmtMainContainer .rmtPaginationItem.active {
@@ -527,7 +547,3 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
 .rmtMainContainer .NA_text {
     color: var(--color-light);
 }
-        
-  </style>`
-
-

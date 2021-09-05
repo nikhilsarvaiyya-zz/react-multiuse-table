@@ -17,7 +17,7 @@ var _Pagination = _interopRequireDefault(require("./components/Pagination.js"));
 
 var _ColumnSearch = _interopRequireDefault(require("./components/ColumnSearch.js"));
 
-require("./components/StyleBasic");
+require("./react-multiust-table-style.css");
 
 var _Toolbar = _interopRequireDefault(require("./components/Toolbar.js"));
 
