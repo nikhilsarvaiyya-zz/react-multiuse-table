@@ -29,7 +29,7 @@ function closeFullScreen() {
 
 
 
-const MyTable = (props) => {
+const ReactMultiuseTable = (props) => {
 
     const {
         rmtData,
@@ -274,5 +274,5 @@ const MyTable = (props) => {
 
 
 
-export default MyTable;
+export default ReactMultiuseTable;
 

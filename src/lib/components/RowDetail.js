@@ -1,3 +1,5 @@
+import React from 'react';
+
 const RowDetail = (data, handleIsModalOpen, columnSpan) => {
     let abc = <table className="pd-1 db" style={{ background: "#fafafa" }}>
         {Object.entries(data).map((key, value) => {

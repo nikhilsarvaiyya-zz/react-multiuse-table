@@ -53,7 +53,7 @@ function closeFullScreen() {
   }
 }
 
-const MyTable = props => {
+const ReactMultiuseTable = props => {
   const {
     rmtData,
     rmtHeaders,
@@ -265,5 +265,5 @@ const MyTable = props => {
   }));
 };
 
-var _default = MyTable;
+var _default = ReactMultiuseTable;
 exports.default = _default;

@@ -45,7 +45,7 @@ const App = () => {
     rmtData={serverData}
 
     rmtHeading="Client Data"
-    rmtSubHeading="staticData"
+    rmtSubHeading="clientData"
     rmtClass="table"
 
     rmtPagination={true}
@@ -64,9 +64,7 @@ const App = () => {
     rmtCheckAll={true}
     rmtActions={Actions}
 
-    rmtServer={true}
-    rmtTotalrecord={40}
-    rmtQueryParams={queryParams}
+
   />
 
 
